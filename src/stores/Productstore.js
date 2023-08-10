@@ -5,23 +5,23 @@ export const useProductStore = defineStore("productStore", {
     // variabler stores osv
     allProducts: null,
     allCategories: null,
-    newestProducts: [],
+    newestProducts: null,
   }),
   actions: {
     async getNewestProducts() {
-      try {
-        console.log("trying to fetch data");
-        const apiCall = await fetch(
-          "https://fakestoreapi.com/products?sort=dec&limit=3"
-        );
-        const response = await apiCall.json();
-        console.log("data fethed", response);
-        this.newestProducts = response;
-
-        console.log("etter push inn i newestproducts", this.newestProducts);
-      } catch (error) {
-        console.error("api call failed", error);
-      }
+      return new Promise(async (resolve, reject) => {
+        try {
+          const apiCall = await fetch(
+            "https://fakestoreapi.com/products?sort=dec&limit=3"
+          );
+          const response = await apiCall.json();
+          this.newestProducts = response;
+          resolve(this.newestProducts);
+        } catch (error) {
+          console.error("API call failed", error);
+          reject(error);
+        }
+      });
     },
   },
   getters: {},
