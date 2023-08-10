@@ -1,13 +1,18 @@
 # hovedoppgave-fakestore
+
 [opggaveark](./oppgaveark.md)
 
 ## Librarys used
+
 - [Tailwind](https://tailwindcss.com/)
 - [DaisyUI](https://daisyui.com/)
 - [PiniaStore](https://pinia.vuejs.org/)
 - [Vue Router](https://router.vuejs.org/)
 - [yup](https://www.npmjs.com/package/yup)
 - api: [fakestoreapi.com](https://fakestoreapi.com/)
+  - `fetch('https://fakestoreapi.com/users')
+      .then(res=>res.json())
+      .then(json=>console.log(json))`
 - MOBILE FIRST
 
 #### [globalt]
@@ -19,7 +24,7 @@
 
 ### HomeView.vue - Hjemmeside
 
-- [ ] - [ ] vis frem 3 nyeste produkter med dialog klikk
+- [ ] vis frem 3 nyeste produkter med dialog klikk
 
 ### ProductView.vue - Produktside
 
