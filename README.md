@@ -11,12 +11,29 @@
 - [yup](https://www.npmjs.com/package/yup)
 
 - api: [fakestoreapi.com](https://fakestoreapi.com/)
-    - all users
-  `fetch('https://fakestoreapi.com/users').then(res=>res.json()).then(json=>console.log(json))`
-  single user
-    - `fetch('https://fakestoreapi.com/users/1')
-          .then(res=>res.json())
-          .then(json=>console.log(json))`
+
+  - all users
+    `fetch('https://fakestoreapi.com/users').then(res=>res.json()).then(json=>console.log(json))`
+  - single user
+    `fetch('https://fakestoreapi.com/users/1')
+        .then(res=>res.json())
+        .then(json=>console.log(json))`
+  - get all categories
+    `fetch('https://fakestoreapi.com/products/categories')
+        .then(res=>res.json())
+        .then(json=>console.log(json))`
+  - get single category
+    `fetch('https://fakestoreapi.com/products/category/jewelery')
+        .then(res=>res.json())
+        .then(json=>console.log(json))`
+  - get all products
+    `fetch('https://fakestoreapi.com/products')
+        .then(res=>res.json())
+        .then(json=>console.log(json))`
+  - get single product
+    `fetch('https://fakestoreapi.com/products/1')
+        .then(res=>res.json())
+        .then(json=>console.log(json))`
 
 - MOBILE FIRST
 
