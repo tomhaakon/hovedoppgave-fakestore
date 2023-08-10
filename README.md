@@ -1,6 +1,6 @@
 # hovedoppgave-fakestore
 
-[opggaveark](./Nivå%202%20-%20Hoved%20Oppgave.docx)
+[opggaveark](./oppgaveark.md)
 
 - [Tailwind](https://tailwindcss.com/)
 - [DaisyUI](https://daisyui.com/)
