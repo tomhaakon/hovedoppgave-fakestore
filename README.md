@@ -1,7 +1,7 @@
 # hovedoppgave-fakestore
-
 [opggaveark](./oppgaveark.md)
 
+## Librarys used
 - [Tailwind](https://tailwindcss.com/)
 - [DaisyUI](https://daisyui.com/)
 - [PiniaStore](https://pinia.vuejs.org/)
