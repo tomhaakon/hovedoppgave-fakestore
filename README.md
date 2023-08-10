@@ -11,7 +11,7 @@
 - [yup](https://www.npmjs.com/package/yup)
 
 - api: [fakestoreapi.com](https://fakestoreapi.com/)
-    fetch('https://fakestoreapi.com/users').then(res=>res.json()).then(json=>console.log(json))`
+  `fetch('https://fakestoreapi.com/users').then(res=>res.json()).then(json=>console.log(json))`
 
 - MOBILE FIRST
 
