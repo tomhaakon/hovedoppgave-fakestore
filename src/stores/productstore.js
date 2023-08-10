@@ -1,15 +1,23 @@
 import { defineStore } from "pinia";
 
-// const Token = import.meta.env.VITE_TOKEN;
-// get all categories https://fakestoreapi.com/products/categories
-// get single category https://fakestoreapi.com/products/category/electronics
-// get 
-export const useProductStore = defineStore("product", {
+export const useProductStore = defineStore("productStore", {
   state: () => ({
     // variabler stores osv
+    allProducts: null,
   }),
   actions: {
-    // async selectSingeUser(user { try catch })
+    async getAllProducts() {
+      try {
+        console.log("trying to fetch data");
+        const apiCall = await fetch("https://fakestoreapi.com/products");
+        const response = await apiCall.json();
+        console.log("data fethed", response);
+        this.allProducts = response;
+        console.log(this.allProducts);
+      } catch (error) {
+        console.error("api call failed", error);
+      }
+    },
   },
   getters: {},
 });

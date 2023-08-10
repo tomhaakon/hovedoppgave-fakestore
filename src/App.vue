@@ -21,7 +21,7 @@
             </svg>
           </label>
         </div>
-        <div class="flex-1 px-2 mx-2">Navbar Title</div>
+        <div class="flex-1 px-2 mx-2">Bjørgs EL-Shappe</div>
         <div class="flex-none hidden lg:block">
           <ul class="menu menu-horizontal">
             <!-- Navbar menu content here -->

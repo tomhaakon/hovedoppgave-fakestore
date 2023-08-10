@@ -4,11 +4,11 @@
 
 ## Librarys used
 
-  - [Tailwind](https://tailwindcss.com/)
-  - [DaisyUI](https://daisyui.com/) 
-  - [PiniaStore](https://pinia.vuejs.org/)
-  - [Vue Router](https://router.vuejs.org/)
-  - [yup](https://www.npmjs.com/package/yup)
+- [Tailwind](https://tailwindcss.com/)
+- [DaisyUI](https://daisyui.com/)
+- [PiniaStore](https://pinia.vuejs.org/)
+- [Vue Router](https://router.vuejs.org/)
+- [yup](https://www.npmjs.com/package/yup)
 
 - api: [fakestoreapi.com](https://fakestoreapi.com/)
 
