@@ -7,6 +7,7 @@ export const useProductStore = defineStore("productStore", {
     allCategories: null,
     newestProducts: null,
     showDialog: false,
+    showProduct: null,
   }),
   actions: {
     async getNewestProducts() {
@@ -26,12 +27,16 @@ export const useProductStore = defineStore("productStore", {
     },
     openDialog(item) {
       this.showDialog = true;
+      this.showProduct = item;
       console.log("dialog open", item);
       console.log("showDialog:", this.showDialog);
     },
     closeDialog() {
       this.showDialog = false;
       console.log("dialog closed");
+    },
+    addToCart(item) {
+      console.log("Added item ", item, " to cart");
     },
   },
   getters: {},
