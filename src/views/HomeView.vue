@@ -4,7 +4,7 @@
       <p>Check out our 3 newest items!</p>
     </div>
     <div v-for="product in products" class="px-5 pb-5">
-      <div class="card w-full bg-base-200 shadow-xl">
+      <div class="card w-full bg-base-200 shadow-md">
         <figure class="px-10 pt-10">
           <img
             :alt="product.category"

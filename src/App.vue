@@ -21,24 +21,42 @@
             </svg>
           </label>
         </div>
-        <div class="flex-1 px-2 mx-2">Bjørgs EL-Shappe</div>
+        <div class="flex-1 px-2 mx-2">
+          <span class="px-2"><RouterLink to="/">L0G0</RouterLink> </span>
+          Bjørgs EL-Shappe
+        </div>
         <div class="flex-none hidden lg:block">
           <ul class="menu menu-horizontal">
             <!-- Navbar menu content here -->
-            <li><a>Navbar Item 1</a></li>
-            <li><a>Navbar Item 2</a></li>
+            <li><a>Products</a></li>
+            <li><a>About us</a></li>
+            <li><a>My page</a></li>
           </ul>
         </div>
       </div>
       <!-- Page content here -->
       <RouterView />
+      <div class="text-center py-5">
+        <div>
+          <p class="text-sm text-slate-400">
+            this is a footer <br />
+            follow us on sosial media!
+          </p>
+        </div>
+        <div class="py-5">
+          <a href="#" class="fa fa-facebook px-3"></a>
+          <a href="#" class="fa fa-twitter px-3"></a>
+          <a href="#" class="fa fa-instagram px-3"></a>
+        </div>
+      </div>
     </div>
     <div class="drawer-side">
       <label for="my-drawer-3" class="drawer-overlay"></label>
       <ul class="menu p-4 w-80 h-full bg-base-200">
         <!-- Sidebar content here -->
-        <li><a>Sidebar Item 1</a></li>
-        <li><a>Sidebar Item 2</a></li>
+        <li><RouterLink to="/product">Products</RouterLink></li>
+        <li><RouterLink to="/about">About us</RouterLink></li>
+        <li><RouterLink to="/mypage">My page</RouterLink></li>
       </ul>
     </div>
   </div>
@@ -47,3 +65,28 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 </script>
+<style>
+/* Style all font awesome icons */
+.fa {
+  font-size: 25px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+}
+/* Add a hover effect if you want */
+.fa:hover {
+  opacity: 0.7;
+}
+/* Set a specific color for each brand */
+/* Facebook */
+.fa-facebook {
+  color: white;
+}
+/* Twitter */
+.fa-twitter {
+  color: white;
+}
+.fa-instagram {
+  color: white;
+}
+</style>
