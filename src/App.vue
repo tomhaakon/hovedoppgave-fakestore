@@ -38,14 +38,14 @@
       <div class="p-5">
         <RouterView />
       </div>
-      <div class="text-center">
+      <div class="text-center  pb-28">
         <div>
           <p class="text-sm text-slate-400">
             this is a footer <br />
             follow us on sosial media!
           </p>
         </div>
-        <div class="py-5">
+        <div class="pt-5">
           <a href="#" class="fa fa-facebook px-3"></a>
           <a href="#" class="fa fa-twitter px-3"></a>
           <a href="#" class="fa fa-instagram px-3"></a>
