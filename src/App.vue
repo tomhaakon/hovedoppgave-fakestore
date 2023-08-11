@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ overlay: blurBg }" class="z-40"></div>
+  <div :class="{ overlay: blurBg }" class="z-40 backdrop-blur-sm"></div>
   <ProductDialog />
   <div>
     <div class="drawer">

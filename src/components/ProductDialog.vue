@@ -1,7 +1,7 @@
 <template>
   <section
     v-if="isOpen"
-    class="bg-base-100 w-full px-2 top-10 fixed shadow-xl z-50"
+    class="bg-white w-full px-2 top-10 fixed shadow-xl z-50"
   >
     <div class="flex pt-3">
       <div class="w-5/6">
