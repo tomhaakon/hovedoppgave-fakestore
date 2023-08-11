@@ -1,5 +1,5 @@
 <template>
-  <main class="">
+  <div class="z-0">
     <section class="p-5">
       <p class="text-md">Check out our newest items!</p>
     </section>
@@ -9,24 +9,21 @@
           <img
             :alt="product.category"
             :src="product.image"
-            class="rounded-none h-80 cursor-pointer"
+            class="rounded-none h-80 cursor-pointer -z-50"
             @click="productStore.openDialog(product)"
           />
         </div>
-
         <div class="p-3">
           <div class="cursor-pointer" @click="productStore.openDialog(product)">
             <p class="">
               {{ product.title }}
             </p>
           </div>
-
           <div>
             <p class="text-red-700 text-2xl font-bold py-2">
               {{ product.price * 10 }},- kr
             </p>
           </div>
-
           <p class="text-sm">Fri frakt</p>
         </div>
         <div>
@@ -39,7 +36,7 @@
         </div>
       </div>
     </section>
-  </main>
+  </div>
 </template>
 <script setup>
 import { useProductStore } from "@/stores/Productstore.js";

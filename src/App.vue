@@ -36,8 +36,8 @@
       </div>
       <!-- Page content here -->
       <div class="p-5 flex justify-center">
-        <ProductDialog class="z-20 w-full top-16 bg-red-500 fixed shadow-xl" />
-        <RouterView />
+        <ProductDialog class="z-30 w-full top-16 bg-red-500 fixed shadow-xl" />
+        <RouterView :class="{ 'modal-mask': blurBg }" />
       </div>
       <div class="text-center pb-28">
         <div>
@@ -106,19 +106,15 @@ console.log("blurBg=", blurBg);
 .fa-instagram {
   color: white;
 }
-.dialog-overlay {
-  position: sticky;
-  top: 0px;
-  place-self: stretch;
-  cursor: pointer;
-  background-color: transparent;
-  transition-property: color, background-color, border-color,
-    text-decoration-color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  transition-duration: 200ms;
-  cursor: default;
-  background-color: transparent;
-  background-color: hsl(0 0% 0%/0.4);
+.modal-mask {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: table;
+  transition: opacity 0.3s ease;
 }
 </style>
