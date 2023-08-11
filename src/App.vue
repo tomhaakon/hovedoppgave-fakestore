@@ -36,7 +36,7 @@
       </div>
       <!-- Page content here -->
       <div class="p-5 flex justify-center">
-        <ProductDialog class="z-30 w-full top-16 bg-red-500 fixed shadow-xl" />
+        <ProductDialog class="z-30 w-full top-16 fixed shadow-xl" />
         <RouterView :class="{ 'modal-mask': blurBg }" />
       </div>
       <div class="text-center pb-28">
