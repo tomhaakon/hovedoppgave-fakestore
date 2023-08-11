@@ -35,8 +35,10 @@
         </div>
       </div>
       <!-- Page content here -->
-      <RouterView />
-      <div class="text-center py-5">
+      <div class="p-5">
+        <RouterView />
+      </div>
+      <div class="text-center">
         <div>
           <p class="text-sm text-slate-400">
             this is a footer <br />
@@ -52,11 +54,18 @@
     </div>
     <div class="drawer-side">
       <label for="my-drawer-3" class="drawer-overlay"></label>
-      <ul class="menu p-4 w-80 h-full bg-base-200">
+
+      <ul class="pl-10 space-y-2 p-4 w-80 h-full bg-base-200">
         <!-- Sidebar content here -->
-        <li><RouterLink to="/product">Products</RouterLink></li>
-        <li><RouterLink to="/about">About us</RouterLink></li>
-        <li><RouterLink to="/mypage">My page</RouterLink></li>
+        <li class="py-5 rounded-none bg-transparent">
+          <RouterLink to="/">LOGO</RouterLink>
+        </li>
+        <li class="text-2xl"><RouterLink to="/">Home</RouterLink></li>
+        <li class="text-2xl">
+          <RouterLink to="/product">Products</RouterLink>
+        </li>
+        <li class="text-2xl"><RouterLink to="/about">About us</RouterLink></li>
+        <li class="pt-10"><RouterLink to="/mypage">My page</RouterLink></li>
       </ul>
     </div>
   </div>

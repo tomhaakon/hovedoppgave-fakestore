@@ -1,23 +1,33 @@
 <template>
   <div class="">
     <div class="p-5 text-xl font-bold">
-      <p>Check out our 3 newest items!</p>
+      <p>Check out newest items</p>
     </div>
-    <div v-for="product in products" class="px-5 pb-5">
-      <div class="card w-full bg-base-200 shadow-md">
-        <figure class="px-10 pt-10">
+    <div v-for="product in products" class="px-5 pb-16">
+      <div class="card bg-base-200 shadow-md rounded-none">
+        <div class="h-full w-full">
           <img
             :alt="product.category"
             :src="product.image"
-            class="rounded-xl w-32 bg-blend-multiply"
+            class="rounded-none h-full w-full"
           />
-        </figure>
-        <div class="card-body items-center text-center">
-          <h2 class="card-title">{{ product.title }}</h2>
-          <p class="pb-3">Price: {{ product.price }}</p>
-          <div class="card-actions">
-            <button class="btn btn-primary">Buy Now</button>
-          </div>
+        </div>
+
+        <div class="py-3">
+          <p class="">{{ product.title }}</p>
+
+          <p class="text-red-600 text-xl font-bold pt-5">
+            {{ product.price * 10 }} kr
+          </p>
+
+          <p class="text-sm">Fri frakt</p>
+        </div>
+        <div>
+          <button
+            class="btn-primary drop-shadow-md absolute right-5 bottom-3 h-8 w-20 rounded-lg text-black border-0 font-bold"
+          >
+            + Kjøp
+          </button>
         </div>
       </div>
     </div>
