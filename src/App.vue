@@ -36,8 +36,8 @@
       </div>
       <!-- Page content here -->
       <div class="p-5">
+        <ProductDialog class="z-10 w-80 h-96 place fixed bg-secondary p-5" />
         <RouterView />
-        <ProductDialog />
       </div>
       <div class="text-center pb-28">
         <div>
@@ -53,7 +53,7 @@
         </div>
       </div>
     </div>
-    <div class="drawer-side">
+    <div class="drawer-side z-20">
       <label for="my-drawer-3" class="drawer-overlay"></label>
 
       <ul class="pl-10 space-y-2 p-4 w-80 h-full bg-base-200">

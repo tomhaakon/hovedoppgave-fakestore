@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div>
     <div class="p-5 text-xl font-bold">
       <p>Check out newest items</p>
     </div>
@@ -25,6 +25,7 @@
         <div>
           <button
             class="btn-primary drop-shadow-md absolute right-5 bottom-3 h-8 w-20 rounded-lg text-black border-0 font-bold"
+            @click="productStore.openDialog(product.id)"
           >
             + Kjøp
           </button>
