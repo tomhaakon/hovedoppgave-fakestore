@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <div class="p-5">
+  <main class="snap snap-y snap-mandatory">
+    <section class="p-5">
       <p class="text-md">Check out our newest items!</p>
-    </div>
-    <div
+    </section>
+    <section
       v-for="product in products"
-      class="cursor-pointer mb-10"
+      class="cursor-pointer mb-10 snap-start"
       @click="productStore.openDialog(product.id)"
     >
       <div class="w-full card rounded-none shadow-lg">
@@ -34,8 +34,8 @@
           </button>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 </template>
 <script setup>
 import { useProductStore } from "@/stores/Productstore.js";
