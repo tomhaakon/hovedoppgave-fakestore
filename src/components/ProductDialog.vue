@@ -1,5 +1,8 @@
 <template>
-  <section v-if="isOpen" class="bg-base-100 w-full px-2">
+  <section
+    v-if="isOpen"
+    class="bg-base-100 w-full px-2 top-10 fixed shadow-xl z-50"
+  >
     <div class="flex pt-3">
       <div class="w-5/6">
         <p class="pb-2">{{ productStore.showProduct.category }}</p>

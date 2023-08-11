@@ -1,5 +1,6 @@
 <template>
-  <div :class="{ overlay: blurBg }" class="z-20"></div>
+  <div :class="{ overlay: blurBg }" class="z-40"></div>
+  <ProductDialog />
   <div>
     <div class="drawer">
       <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
@@ -37,8 +38,7 @@
           </div>
         </div>
         <!-- Page content here -->
-        <div class="flex justify-center">
-          <ProductDialog class="w-full top-16 fixed shadow-xl z-30" />
+        <div class="flex justify-center" :class="{ fixed: blurBg }">
           <RouterView />
         </div>
         <div class="text-center pb-28">
