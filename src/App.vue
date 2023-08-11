@@ -37,8 +37,9 @@
       <!-- Page content here -->
       <div class="p-5">
         <RouterView />
+        <ProductDialog />
       </div>
-      <div class="text-center  pb-28">
+      <div class="text-center pb-28">
         <div>
           <p class="text-sm text-slate-400">
             this is a footer <br />
@@ -73,6 +74,7 @@
 
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
+import ProductDialog from "./components/ProductDialog.vue";
 </script>
 <style>
 /* Style all font awesome icons */
