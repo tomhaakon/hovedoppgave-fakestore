@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isOpen" class="">
+  <div v-if="isOpen" class="bg-white">
     Dialog fra helvette
     <button @click="productStore.closeDialog()" class="btn btn-primary">
       close

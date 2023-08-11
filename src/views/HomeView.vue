@@ -1,19 +1,23 @@
 <template>
   <div>
-    <div class="p-5 text-xl font-bold">
-      <p>Check out newest items</p>
+    <div class="p-5">
+      <p class="text-md">Check out our newest items!</p>
     </div>
-    <div v-for="product in products" class="px-5 pb-16">
-      <div class="card bg-base-200 shadow-md rounded-none">
-        <div class="h-full w-full">
+    <div
+      v-for="product in products"
+      class="cursor-pointer mb-10"
+      @click="productStore.openDialog(product.id)"
+    >
+      <div class="w-full card rounded-none shadow-lg">
+        <div class="w-full flex justify-center">
           <img
             :alt="product.category"
             :src="product.image"
-            class="rounded-none h-full w-full"
+            class="rounded-none h-80 bg-green-50"
           />
         </div>
 
-        <div class="py-3">
+        <div class="p-3">
           <p class="">{{ product.title }}</p>
 
           <p class="text-red-700 text-xl font-bold pt-5">
@@ -24,8 +28,7 @@
         </div>
         <div>
           <button
-            class="btn-primary drop-shadow-md absolute right-5 bottom-3 h-8 w-20 rounded-lg text-black border-0 font-bold"
-            @click="productStore.openDialog(product.id)"
+            class="btn-primary drop-shadow-md absolute right-5 bottom-3 h-8 w-20 rounded-lg border-0"
           >
             + Kjøp
           </button>

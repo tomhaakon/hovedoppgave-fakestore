@@ -3,7 +3,7 @@
     <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
     <div class="drawer-content flex flex-col">
       <!-- Navbar -->
-      <div class="w-full navbar bg-base-300">
+      <div class="w-full navbar bg-base-100">
         <div class="flex-none lg:hidden">
           <label for="my-drawer-3" class="btn btn-square btn-ghost">
             <svg
@@ -23,7 +23,7 @@
         </div>
         <div class="flex-1 px-2 mx-2">
           <span class="px-2"><RouterLink to="/">L0G0</RouterLink> </span>
-          Bjørgs EL-Shappe
+          <p class="font-bold">Bjørgs EL-Shappe</p>
         </div>
         <div class="flex-none hidden lg:block">
           <ul class="menu menu-horizontal">
@@ -36,12 +36,12 @@
       </div>
       <!-- Page content here -->
       <div class="p-5">
-        <ProductDialog class="z-10 w-80 h-96 place fixed bg-secondary p-5" />
+        <ProductDialog class="z-10 w-80 h-96 fixed shadow-xl px-10" />
         <RouterView />
       </div>
       <div class="text-center pb-28">
         <div>
-          <p class="text-sm text-slate-400">
+          <p class="text-sm black">
             this is a footer <br />
             follow us on sosial media!
           </p>
