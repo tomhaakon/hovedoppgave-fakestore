@@ -35,7 +35,7 @@
         </div>
 
         <div class="w-1/2">
-          <div class="h-full space-y-8">
+          <div class="h-full space-y-4">
             <div class="pl-5">
               <div class="w-full">
                 <p class="text-2xl text-red-700 font-bold pt-5">
@@ -54,7 +54,7 @@
 
               <button
                 @click="productStore.closeDialog()"
-                class="btn btn-sm btn-secondary w-full rounded-none"
+                class="btn btn-sm w-full rounded-none"
               >
                 Avbryt
               </button>
@@ -62,7 +62,7 @@
           </div>
         </div>
       </div>
-      <div><p class="italic">(click on image to enlarge)</p></div>
+      <div><p class="italic pt-5">(click on image to enlarge)</p></div>
     </div>
 
     <div class="w-full pb-5"></div>

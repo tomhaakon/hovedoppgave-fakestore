@@ -1,15 +1,15 @@
-<template>
-  <div class="z-0">
-    <section class="p-5">
+<template class="">
+  <div class="">
+    <div class="p-5">
       <p class="text-md">Check out our newest items!</p>
-    </section>
-    <section v-for="product in products" class="mb-10">
+    </div>
+    <div v-for="product in products" class="mb-10">
       <div class="w-full card rounded-none shadow-lg">
         <div class="w-full flex justify-center">
           <img
             :alt="product.category"
             :src="product.image"
-            class="rounded-none h-80 cursor-pointer -z-50"
+            class="rounded-none h-80 cursor-pointer"
             @click="productStore.openDialog(product)"
           />
         </div>
@@ -35,7 +35,7 @@
           </button>
         </div>
       </div>
-    </section>
+    </div>
   </div>
 </template>
 <script setup>
