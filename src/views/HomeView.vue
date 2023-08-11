@@ -16,7 +16,7 @@
         <div class="py-3">
           <p class="">{{ product.title }}</p>
 
-          <p class="text-red-600 text-xl font-bold pt-5">
+          <p class="text-red-700 text-xl font-bold pt-5">
             {{ product.price * 10 }} kr
           </p>
 
