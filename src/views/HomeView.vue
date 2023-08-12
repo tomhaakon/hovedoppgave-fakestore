@@ -10,19 +10,13 @@
 import { useProductStore } from "@/stores/Productstore.js";
 import { ref, onMounted } from "vue";
 import Product from "@/components/Product.vue";
-
 // store
 const productStore = useProductStore();
-
+productStore.viewProducts("new-products");
+console.log("Hjemmesiden loaded");
 // refs
 const products = ref([]);
-
-// Fetch products when the component is mounted
-onMounted(async () => {
-  products.value = await productStore.getNewestProducts();
-});
-
-console.log("ProductView.vue LOG", products);
+//onMounted(() => {});
 
 // functions
 </script>

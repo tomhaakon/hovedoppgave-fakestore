@@ -18,7 +18,7 @@
         <div class="flex pb-5">
           <div class="w-3/5">
             <p class="text-red-700 text-2xl font-bold py-2">
-              {{ product.price * 10 }},- kr
+              {{ Math.round(product.price * 10) }},- kr
             </p>
             <p class="text-sm">Fri frakt</p>
           </div>
@@ -47,10 +47,8 @@ const products = ref([]);
 
 // Fetch products when the component is mounted
 onMounted(async () => {
-  products.value = await productStore.getNewestProducts();
+  products.value = await productStore.getProducts();
 });
-
-console.log("ProductView.vue LOG", products);
 
 // functions
 </script>

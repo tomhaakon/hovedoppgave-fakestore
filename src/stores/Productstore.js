@@ -5,20 +5,38 @@ export const useProductStore = defineStore("productStore", {
     // variabler stores osv
     allProducts: null,
     allCategories: null,
-    newestProducts: null,
     showDialog: false,
-    showProduct: null,
+    showSingleProduct: null,
+    showProducts: null,
+    apiLink: null,
   }),
   actions: {
-    async getNewestProducts() {
+    viewProducts(page) {
+      // new products
+
+      console.log("viewProducts triggered");
+      if (page === "new-products") {
+        this.apiLink = "https://fakestoreapi.com/products?sort=desc&limit=3";
+      }
+      // all products
+      else if (page === "all-products") {
+        this.apiLink = "https://fakestoreapi.com/products";
+      } else if (page === "categories") {
+        this.apiLink = "https://fakestoreapi.com/products/categories";
+      } else if (page === "category") {
+        this.apiLink =
+          "https://fakestoreapi.com/products/category/" + "placeholder";
+      }
+      console.log("page variabel:", page);
+    },
+    async getProducts() {
       return new Promise(async (resolve, reject) => {
         try {
-          const apiCall = await fetch(
-            "https://fakestoreapi.com/products?sort=dec&limit=3"
-          );
+          const apiCall = await fetch(this.apiLink);
+          //console.log("her:", this.showProducts);
           const response = await apiCall.json();
-          this.newestProducts = response;
-          resolve(this.newestProducts);
+          this.allProducts = response;
+          resolve(this.allProducts);
         } catch (error) {
           console.error("API call failed", error);
           reject(error);
@@ -27,13 +45,13 @@ export const useProductStore = defineStore("productStore", {
     },
     openDialog(item) {
       this.showDialog = true;
-      this.showProduct = item;
-      console.log("dialog open", item);
-      console.log("showDialog:", this.showDialog);
+      this.showSingleProduct = item;
+      // console.log("dialog open", item);
+      //console.log("showDialog:", this.showDialog);
     },
     closeDialog() {
       this.showDialog = false;
-      console.log("dialog closed");
+      // console.log("dialog closed");
     },
     addToCart(item) {
       console.log("Added item ", item, " to cart");

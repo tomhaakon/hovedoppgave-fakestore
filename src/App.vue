@@ -84,7 +84,7 @@ import { useProductStore } from "./stores/Productstore";
 
 const productStore = useProductStore();
 const blurBg = computed(() => productStore.showDialog);
-console.log("blurBg=", blurBg);
+//console.log("blurBg=", blurBg);
 </script>
 <style scoped>
 /* Style all font awesome icons */

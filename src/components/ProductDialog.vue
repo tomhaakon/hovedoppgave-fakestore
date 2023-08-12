@@ -11,7 +11,7 @@
           >
           >
           <RouterLink to="/product">{{
-            productStore.showProduct.category
+            productStore.showSingleProduct.category
           }}</RouterLink>
         </p>
       </div>
@@ -27,19 +27,19 @@
     <div class="w-full pb-5">
       <div>
         <p class="font-bold text-xl pb-5">
-          {{ productStore.showProduct.title }}
+          {{ productStore.showSingleProduct.title }}
         </p>
       </div>
       <div class="pb-5">
-        <p class="text-sm">{{ productStore.showProduct.description }}</p>
+        <p class="text-sm">{{ productStore.showSingleProduct.description }}</p>
       </div>
       <div class="flex w-full justify-center">
         <div class="flex justify-center w-1/2">
           <div class="flex-row">
-            <a :href="productStore.showProduct.image" target="_blank">
+            <a :href="productStore.showSingleProduct.image" target="_blank">
               <img
-                :src="productStore.showProduct.image"
-                :alt="productStore.showProduct.title"
+                :src="productStore.showSingleProduct.image"
+                :alt="productStore.showSingleProduct.title"
                 class="h-48"
             /></a>
           </div>
@@ -50,7 +50,8 @@
             <div class="pl-5">
               <div class="w-full">
                 <p class="text-2xl text-red-700 font-bold pt-5">
-                  {{ productStore.showProduct.price * 10 }},- Kr
+                  {{ Math.round(productStore.showSingleProduct.price * 10) }},-
+                  Kr
                 </p>
               </div>
               <div class="h-1/3"><p>fri frakt!</p></div>
@@ -86,5 +87,5 @@ import { useProductStore } from "../stores/Productstore";
 
 const productStore = useProductStore();
 const isOpen = computed(() => productStore.showDialog);
-console.log("productdialog: productstore.showDialog=", isOpen);
+//console.log("productdialog: productstore.showDialog=", isOpen);
 </script>
