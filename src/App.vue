@@ -26,7 +26,7 @@
           </div>
           <div class="flex-1 px-2 mx-2">
             <span class="px-2"><RouterLink to="/">L0G0</RouterLink> </span>
-            <p class="font-bold">Bjørgs EL-Shappe</p>
+            <p class="font-bold">NETTBUTIKK</p>
           </div>
           <div class="flex-none hidden lg:block">
             <ul class="menu menu-horizontal">

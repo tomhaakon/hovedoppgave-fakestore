@@ -11,23 +11,33 @@ export const useProductStore = defineStore("productStore", {
     apiLink: null,
   }),
   actions: {
+    getCategories() {
+      return new Promise(async (resolve, reject) => {
+        try {
+          const apiCall = await fetch(
+            "https://fakestoreapi.com/products/categories"
+          );
+          const response = await apiCall.json();
+          this.allCategories = response;
+          resolve(this.allCategories);
+        } catch (error) {
+          console.error("API call failed", error);
+          reject(error);
+        }
+      });
+    },
     viewProducts(page) {
       // new products
 
-      console.log("viewProducts triggered");
+      //console.log("viewProducts triggered");
       if (page === "new-products") {
         this.apiLink = "https://fakestoreapi.com/products?sort=desc&limit=3";
       }
       // all products
       else if (page === "all-products") {
         this.apiLink = "https://fakestoreapi.com/products";
-      } else if (page === "categories") {
-        this.apiLink = "https://fakestoreapi.com/products/categories";
-      } else if (page === "category") {
-        this.apiLink =
-          "https://fakestoreapi.com/products/category/" + "placeholder";
       }
-      console.log("page variabel:", page);
+      //  console.log("page variabel:", page);
     },
     async getProducts() {
       return new Promise(async (resolve, reject) => {
