@@ -4,7 +4,7 @@
       <div class="columns-2 text-center bg-yellow-300 space-y-5">
         <div
           v-for="category in categories"
-          class="bg-green-500 h-20 w-48 pt-5 bg-[url('')]"
+          class="bg-green-500 h-20 w-40 pt-5 bg-[url('')]"
         >
           <p class="font-bold text-lg">{{ category }}</p>
         </div>
