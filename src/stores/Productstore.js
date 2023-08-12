@@ -42,31 +42,30 @@ export const useProductStore = defineStore("productStore", {
       console.log("viewProducts(", page, ")");
       // new products
       if (page === "new-products") {
-        this.apiLink = "products?sort=desc&limit=3";
-        this.getProducts();
+        const apiLink = "products?sort=desc&limit=3";
+        console.log("loading new-products");
+        this.getProducts(apiLink);
       }
       // all products
       else if (page === "products") {
-        this.apiLink = page;
-        this.getProducts();
+        const apiLink = page;
+        this.getProducts(apiLink);
+        // category jewlery
       } else if (page === "jewelery") {
         this.apiLink = "products/category/" + page;
         this.getProducts();
       }
-      //  console.log("page variabel:", page);
     },
-    getProducts() {
+    getProducts(link) {
       return new Promise(async (resolve, reject) => {
         try {
-          console.log("apilink:", this.apiLink);
-          const apiCall = await fetch(
-            "https://fakestoreapi.com/" + this.apiLink + "/"
-          );
-          //console.log("her:", this.showProducts);
+          //console.log("apilink:", this.apiLink);
+          const apiCall = await fetch("https://fakestoreapi.com/" + link);
+          console.log("data fetched");
           const response = await apiCall.json();
-
-          this.allProducts = response;
-          resolve(this.allProducts);
+          this.showProducts = response;
+          resolve(this.showProducts);
+          console.log("oppdaterte this.ShowProducts:", this.showProducts);
         } catch (error) {
           console.error("API call failed", error);
           reject(error);

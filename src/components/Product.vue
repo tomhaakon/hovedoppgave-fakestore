@@ -34,21 +34,33 @@
       </div>
     </div>
   </div>
+
+
 </template>
 <script setup>
 import { useProductStore } from "@/stores/Productstore.js";
-import { ref, onMounted, computed } from "vue";
+import { ref, watch, onMounted, computed } from "vue";
 
 // store
 const productStore = useProductStore();
 
 // refs
-const products = ref([]);
+const products = ref();
+//products.value = productStore.showProducts;
+//products.value = computed(() => productStore.showProducts);
+watch(
+  () => productStore.showProducts,
+  (newValue) => {
+    products.value = newValue;
+  }
+);
+//const isTriggered = computed(() => triggerStore.state.triggered);
 
 // Fetch products when the component is mounted
-onMounted(async () => {
-  products.value = await productStore.getProducts();
-});
+// onMounted(async () => {
+//   await productStore.showProducts;
+//   products.value = productStore.showProducts;
+// });
 
 // functions
 </script>

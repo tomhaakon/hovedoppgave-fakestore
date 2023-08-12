@@ -37,10 +37,10 @@ const products = ref();
 const getImg = ref();
 
 //funksjoner
-onMounted(async () => {
-  categories.value = await productStore.getCategories();
-  products.value = await productStore.viewProducts("products");
-});
+// onMounted(async () => {
+//   categories.value = await productStore.getCategories();
+//   products.value = await productStore.viewProducts("products");
+// });
 
 const getCategoryImage = () => {
   console.log("getCategoryImage triggered");
@@ -57,6 +57,7 @@ const showProducts = ref(true);
 const showCategories = ref(true);
 
 //onMounted(() => {});
+//const isTriggered = computed(() => triggerStore.state.triggered);
 
 // functions
 </script>
