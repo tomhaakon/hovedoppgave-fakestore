@@ -41,7 +41,7 @@
         <div class="flex justify-center" :class="{ fixed: blurBg }">
           <RouterView />
         </div>
-        <div class="text-center pb-28">
+        <div class="text-center pb-28 pt-14">
           <div>
             <p class="text-sm black">
               this is a footer <br />
@@ -49,9 +49,9 @@
             </p>
           </div>
           <div class="pt-5">
-            <a href="#" class="fa fa-facebook px-3"></a>
-            <a href="#" class="fa fa-twitter px-3"></a>
-            <a href="#" class="fa fa-instagram px-3"></a>
+            <a href="#" class="fa fa-facebook invert px-3"></a>
+            <a href="#" class="fa fa-twitter invert px-3"></a>
+            <a href="#" class="fa fa-instagram invert px-3"></a>
           </div>
         </div>
       </div>
