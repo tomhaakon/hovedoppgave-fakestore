@@ -37,7 +37,7 @@
 </template>
 <script setup>
 import { useProductStore } from "@/stores/Productstore.js";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 
 // store
 const productStore = useProductStore();

@@ -5,6 +5,7 @@
         <div
           v-for="category in categories"
           class="bg-green-500 h-20 w-40 pt-5 bg-[url('')]"
+          @click="productStore.viewProducts(category)"
         >
           <p class="font-bold text-lg">{{ category }}</p>
         </div>
@@ -28,7 +29,7 @@ import Product from "@/components/Product.vue";
 console.log("Productpage loaded");
 // store
 const productStore = useProductStore();
-productStore.viewProducts("all-products");
+productStore.viewProducts("products");
 productStore.getCategories();
 //variabler
 const categories = ref();
@@ -38,12 +39,12 @@ const getImg = ref();
 //funksjoner
 onMounted(async () => {
   categories.value = await productStore.getCategories();
-  products.value = await productStore.viewProducts("all-products");
+  products.value = await productStore.viewProducts("products");
 });
 
 const getCategoryImage = () => {
   console.log("getCategoryImage triggered");
-  console.log(products.value);
+
   let productData = null;
   for (productData in getImg.value) {
     console.log("s");
@@ -52,7 +53,7 @@ const getCategoryImage = () => {
 getCategoryImage();
 
 // refs
-const showProducts = ref(false);
+const showProducts = ref(true);
 const showCategories = ref(true);
 
 //onMounted(() => {});
