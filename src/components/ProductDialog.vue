@@ -4,8 +4,16 @@
     class="bg-white w-full px-2 top-10 fixed shadow-xl z-50"
   >
     <div class="flex pt-3">
-      <div class="w-5/6">
-        <p class="pb-2">{{ productStore.showProduct.category }}</p>
+      <div class="w-5/6 pb-2">
+        <p>
+          <RouterLink to="/product" @click="productStore.closeDialog()"
+            >Products</RouterLink
+          >
+          >
+          <RouterLink to="/product">{{
+            productStore.showProduct.category
+          }}</RouterLink>
+        </p>
       </div>
       <div class="w-1/6 flex justify-end pr-5">
         <span
@@ -73,6 +81,7 @@
 </template>
 <script setup>
 import { computed } from "vue";
+import { RouterLink } from "vue-router";
 import { useProductStore } from "../stores/Productstore";
 
 const productStore = useProductStore();
