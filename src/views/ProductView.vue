@@ -4,7 +4,7 @@
       <div class="columns-2 text-center space-y-5">
         <div
           v-for="category in categories"
-          class="shadow-lg h-20 w-40 pt-5 bg-[url('')]"
+          class="shadow-md h-20 w-40 pt-5 bg-[url('')]"
           @click="productStore.viewProducts(category)"
         >
           <p class="font-bold text-lg">{{ category }}</p>
@@ -12,10 +12,9 @@
       </div>
     </section>
     <section v-if="showProducts">
-      <div v-if="selectedCategory" class="p-5">
-        <p>Products / {{ selectedCategory }}</p>
+      <div class="p-5">
+        <p>All Products / {{ selectedCategory }}</p>
       </div>
-      <div v-else class="p-5"><p>All products</p></div>
       <Product></Product>
     </section>
   </div>
