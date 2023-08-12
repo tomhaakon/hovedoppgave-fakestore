@@ -10,6 +10,7 @@ export const useProductStore = defineStore("productStore", {
     showProducts: null,
     showCategory: null,
     apiLink: null,
+    selectedCategory: null,
   }),
   actions: {
     async getCategory(category) {
@@ -51,9 +52,9 @@ export const useProductStore = defineStore("productStore", {
         const apiLink = page;
         this.getProducts(apiLink);
         // category jewlery
-      } else if (page === "jewelery") {
-        this.apiLink = "products/category/" + page;
-        this.getProducts();
+      } else {
+        this.getProducts("products/category/" + page);
+        this.selectedCategory = page;
       }
     },
     getProducts(link) {
