@@ -3,7 +3,12 @@
   <ProductDialog />
   <div>
     <div class="drawer">
-      <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
+      <input
+        id="my-drawer-3"
+        type="checkbox"
+        class="drawer-toggle"
+        ref="drawerCheckbox"
+      />
       <div class="drawer-content flex flex-col">
         <!-- Navbar -->
         <div class="w-full navbar bg-base-100">
@@ -60,16 +65,22 @@
         <ul class="pl-10 space-y-2 p-4 w-80 h-full bg-base-200">
           <!-- Sidebar content here -->
           <li class="py-5 rounded-none bg-transparent">
-            <RouterLink to="/">LOGO</RouterLink>
-          </li>
-          <li class="text-2xl"><RouterLink to="/">Home</RouterLink></li>
-          <li class="text-2xl">
-            <RouterLink to="/product">Products</RouterLink>
+            <RouterLink to="/" @click="handleClick()">LOGO</RouterLink>
           </li>
           <li class="text-2xl">
-            <RouterLink to="/about">About us</RouterLink>
+            <RouterLink to="/" @click="handleClick()">Home</RouterLink>
           </li>
-          <li class="pt-10"><RouterLink to="/mypage">My page</RouterLink></li>
+          <li class="text-2xl">
+            <RouterLink to="/product" @click="handleClick()"
+              >Products</RouterLink
+            >
+          </li>
+          <li class="text-2xl">
+            <RouterLink to="/about" @click="handleClick()">About us</RouterLink>
+          </li>
+          <li class="pt-10">
+            <RouterLink to="/mypage" @click="handleClick()">My page</RouterLink>
+          </li>
         </ul>
       </div>
     </div>
@@ -77,14 +88,20 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import ProductDialog from "./components/ProductDialog.vue";
 import { useProductStore } from "./stores/Productstore";
 
 const productStore = useProductStore();
 const blurBg = computed(() => productStore.showDialog);
+const drawerCheckbox = ref(null);
+
+const handleClick = () => {
+  drawerCheckbox.value.checked = !drawerCheckbox.value.checked;
+};
 //console.log("blurBg=", blurBg);
+//<a on:click={() => {document.getElementById('my-drawer-3').click()}}  href='/test'>Test</a>
 </script>
 <style scoped>
 /* Style all font awesome icons */
