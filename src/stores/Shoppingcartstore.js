@@ -12,17 +12,8 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
     },
     // remove from cart
     removeFromCart(itemId, quantityToRemove = 1) {
-      console.log(
-        "Removing item with ID:",
-        itemId,
-        "Quantity:",
-        quantityToRemove
-      );
-      console.log("Current cart content:", this.cart); // Log the entire cart
-
       for (let i = 0; i < quantityToRemove; i++) {
         const index = this.cart.findIndex((item) => item.id === itemId);
-        console.log("Found item at index:", index);
 
         if (index !== -1) {
           this.cart.splice(index, 1);
