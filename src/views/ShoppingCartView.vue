@@ -1,5 +1,5 @@
 <template>
-  <div class="m-5">
+  <div class="">
     <div class="flex h-10 w-full mb-5">
       <p class="font-bold text-xl p-1">Shopping cart</p>
     </div>
