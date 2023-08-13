@@ -43,7 +43,7 @@
           </div>
         </div>
         <!-- Page content here -->
-        <div class="flex justify-center" :class="{ fixed: blurBg }">
+        <div :class="{ fixed: blurBg }">
           <RouterView />
         </div>
         <div class="text-center pb-28 pt-14">
