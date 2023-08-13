@@ -15,17 +15,12 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useShoppingCartStore } from "@/stores/Shoppingcartstore.js";
 
 const shoppingCartStore = useShoppingCartStore();
-
-//refs
-const cart = ref(shoppingCartStore.cart);
-const products = ref([
-  { id: 1, title: "Product 1" },
-  // ... more products
-]);
+const cart = computed(() => shoppingCartStore.cart);
+const products = ref([{ id: 1, title: "Product 1" }]);
 
 const addToCart = (product) => shoppingCartStore.addToCart(product);
 const removeFromCart = (product) => shoppingCartStore.removeFromCart(product);

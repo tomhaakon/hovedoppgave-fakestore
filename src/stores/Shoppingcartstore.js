@@ -21,7 +21,5 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
       localStorage.removeItem("cart");
     },
   },
-  getters: {
-    // You can add getters if needed
-  },
+  getters: {},
 });
