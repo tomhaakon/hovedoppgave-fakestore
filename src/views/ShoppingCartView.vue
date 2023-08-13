@@ -7,24 +7,24 @@
       </div>
       <div class="w-1/4"></div>
     </div>
+    <!-- sd -->
     <div class="">
       <div class="flex">
-        <div class="w-10 flex justify-center">x</div>
-        <div class="w-5/8">title</div>
-        <div class="w-1/8"></div>
+        <div class="w-10 flex justify-center"></div>
+        <div class="w-full">title</div>
         <div class="w-30"></div>
       </div>
       <div
         v-for="item in cart"
         :key="item.id"
         v-if="cart"
-        class="bg-purple-500 flex"
+        class="bg-purple-500 flex shadow-md"
       >
         <div class="w-10 flex justify-center">x</div>
-        <div class="bg-orange-500 w-full">{{ item.title }}</div>
-        <div></div>
-        <div class="w-1/8">
-          <button class="w-1/8" @click="removeFromCart(item.id)">remove</button>
+        <div class="bg-orange-500 w-full px-5">{{ item.title }}</div>
+
+        <div class="w-30">
+          <button class="" @click="removeFromCart(item.id)">remove</button>
         </div>
       </div>
     </div>
