@@ -11,7 +11,7 @@
         </div>
       </div>
     </section>
-    <section v-if="showProducts">
+    <section>
       <div class="p-5">
         <p>All Products / {{ selectedCategory }}</p>
       </div>
@@ -32,33 +32,18 @@ productStore.getCategories();
 //variabler
 const categories = ref();
 const selectedCategory = ref();
-//const products = ref();
-//const getImg = ref();
+const loading = ref(false);
+const showCategories = ref(true);
 
 //funksjoner
-onMounted(async () => {
-  categories.value = await productStore.getCategories();
-});
 watch(
   () => productStore.selectedCategory,
-  (newValue) => {
+  async (newValue) => {
+    categories.value = await productStore.getCategories();
     selectedCategory.value = newValue;
-  }
+  },
+  { immediate: true }
 );
-
-// const getCategoryImage = () => {
-//   console.log("getCategoryImage triggered");
-
-//   let productData = null;
-//   for (productData in getImg.value) {
-//     console.log("s");
-//   }
-// };
-//getCategoryImage();
-
-// refs
-const showProducts = ref(true);
-const showCategories = ref(true);
 
 //onMounted(() => {});
 //const isTriggered = computed(() => triggerStore.state.triggered);
