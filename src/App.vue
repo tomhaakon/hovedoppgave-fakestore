@@ -38,7 +38,7 @@
             </div>
             <div class="w-1/4 justify-end flex">
               <RouterLink to="/shoppingcart">
-                <span class=""
+                <span class="uppercase font-bold text-sm"
                   >cart({{ shoppingCartStore.cartItemCount }})</span
                 >
               </RouterLink>

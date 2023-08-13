@@ -58,7 +58,10 @@
             </div>
             <div class="">
               <button
-                @click="productStore.closeDialog()"
+                @click="
+                  shoppingCartStore.addToCart(productStore.showSingleProduct) &
+                    productStore.closeDialog()
+                "
                 class="btn btn-primary w-full rounded-none"
               >
                 Kjøp
@@ -84,8 +87,10 @@
 import { computed } from "vue";
 import { RouterLink } from "vue-router";
 import { useProductStore } from "../stores/Productstore";
+import { useShoppingCartStore } from "../stores/Shoppingcartstore";
 
 const productStore = useProductStore();
+const shoppingCartStore = useShoppingCartStore();
 const isOpen = computed(() => productStore.showDialog);
 //console.log("productdialog: productstore.showDialog=", isOpen);
 </script>
