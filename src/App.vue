@@ -29,9 +29,20 @@
               </svg>
             </label>
           </div>
-          <div class="flex-1 px-2 mx-2">
-            <span class="px-2"><RouterLink to="/">L0G0</RouterLink> </span>
-            <p class="font-bold">NETTBUTIKK</p>
+          <div class="flex-1 px-2 mx-2 w-full">
+            <div class="w-1/4">
+              <span class="px-2"><RouterLink to="/">L0G0</RouterLink> </span>
+            </div>
+            <div class="w-2/4">
+              <p class="font-bold">NETTBUTIKK</p>
+            </div>
+            <div class="w-1/4 justify-end flex">
+              <RouterLink to="/shoppingcart">
+                <span class=""
+                  >cart({{ shoppingCartStore.cartItemCount }})</span
+                >
+              </RouterLink>
+            </div>
           </div>
           <div class="flex-none hidden lg:block">
             <ul class="menu menu-horizontal">
@@ -92,7 +103,9 @@ import { computed, ref } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import ProductDialog from "./components/ProductDialog.vue";
 import { useProductStore } from "./stores/Productstore";
+import { useShoppingCartStore } from "./stores/Shoppingcartstore";
 
+const shoppingCartStore = useShoppingCartStore();
 const productStore = useProductStore();
 const blurBg = computed(() => productStore.showDialog);
 const drawerCheckbox = ref(null);

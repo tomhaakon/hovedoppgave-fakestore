@@ -27,7 +27,7 @@
             <div class="w-2/5 justify-end flex pr-5">
               <button
                 class="btn-primary drop-shadow-md right-5 bottom-3 btn rounded-lg border-0"
-                @click="productStore.addToCart(product.id)"
+                @click="addToCart(product)"
               >
                 + Kjøp
               </button>
@@ -40,15 +40,18 @@
 </template>
 <script setup>
 import { useProductStore } from "@/stores/Productstore.js";
+import { useShoppingCartStore } from "../stores/Shoppingcartstore";
 import { ref, watch, onMounted, computed } from "vue";
 
 // store
 const productStore = useProductStore();
-
+const shoppingCartStore = useShoppingCartStore();
 // refs
 const products = ref();
 const loading = ref(false);
 
+// functions
+const addToCart = (product) => shoppingCartStore.addToCart(product);
 watch(
   () => productStore.showProducts,
   (newValue) => {
