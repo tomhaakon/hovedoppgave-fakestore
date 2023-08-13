@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-red-500">
+  <div class="">
     <div class="flex h-10">
       <div class="w-1/4"></div>
-      <div class="bg-green-500 w-2/4">
+      <div class="w-2/4">
         <p class="text-center font-bold text-xl p-1">Shopping cart</p>
       </div>
       <div class="w-1/4"></div>
@@ -11,24 +11,23 @@
     <div class="">
       <div class="flex">
         <div class="w-10 flex justify-center"></div>
-        <div class="w-full">title</div>
+        <div class="w-full px-5">title</div>
         <div class="w-30"></div>
       </div>
       <div
-        v-for="item in cart"
+        v-for="item in groupedCart"
         :key="item.id"
-        v-if="cart"
-        class="bg-purple-500 flex shadow-md"
+        v-if="groupedCart"
+        class="flex shadow-md"
       >
-        <div class="w-10 flex justify-center">x</div>
-        <div class="bg-orange-500 w-full px-5">{{ item.title }}</div>
-
+        <div class="w-10 flex justify-center">{{ item.count }}x</div>
+        <div class="w-full px-5">{{ item.title }}</div>
         <div class="w-30">
           <button class="" @click="removeFromCart(item.id)">remove</button>
         </div>
       </div>
     </div>
-    <div class="bg-blue-500 flex w-full pt-5">
+    <div class="flex w-full pt-5">
       <div class="w-full">
         <button class="" @click="clearCart">
           <p class="pl-10">Clear Cart</p>
@@ -47,10 +46,20 @@ import { useShoppingCartStore } from "@/stores/Shoppingcartstore.js";
 
 const shoppingCartStore = useShoppingCartStore();
 const cart = computed(() => shoppingCartStore.cart);
-const products = ref([{ id: 1, title: "Product 1" }]);
-
-const addToCart = (product) => shoppingCartStore.addToCart(product);
-const removeFromCart = (product) => shoppingCartStore.removeFromCart(product);
+// count same items
+const groupedCart = computed(() => {
+  const counts = {};
+  cart.value.forEach((item) => {
+    counts[item.id] = (counts[item.id] || 0) + 1;
+  });
+  return Object.keys(counts).map((id) => ({
+    id: +id, // Convert the id back to a number
+    title: cart.value.find((item) => item.id == id).title,
+    count: counts[id],
+  }));
+});
+// consts
+const removeFromCart = (id) => shoppingCartStore.removeFromCart(id);
 const clearCart = () => {
   shoppingCartStore.clearCart();
 };
