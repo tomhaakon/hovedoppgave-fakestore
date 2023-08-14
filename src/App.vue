@@ -89,12 +89,28 @@
           <li class="text-2xl">
             <RouterLink to="/about" @click="handleClick()">About us</RouterLink>
           </li>
-          <li class="pt-10" v-if="userStore.user">
-            <RouterLink to="/mypage" @click="handleClick()">My page</RouterLink>
-          </li>
-          <li class="pt-10" v-else>
-            <RouterLink to="/login" @click="handleClick()">Login</RouterLink>
-          </li>
+          <ul class="pt-10 space-y-3" v-if="userStore.user">
+            <li>
+              <RouterLink to="/mypage" @click="handleClick()">
+                My page
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/" @click="handleClick(), userStore.logout()">
+                Logout
+              </RouterLink>
+            </li>
+          </ul>
+          <ul class="pt-10 space-y-3" v-else>
+            <li>
+              <RouterLink to="/login" @click="handleClick()">Login</RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/register" @click="handleClick()"
+                >Register</RouterLink
+              >
+            </li>
+          </ul>
         </ul>
       </div>
     </div>

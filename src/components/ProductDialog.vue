@@ -54,7 +54,7 @@
                   Kr
                 </p>
               </div>
-              <div class="h-1/3"><p>fri frakt!</p></div>
+              <div class="h-1/3"><p>free shipping!</p></div>
             </div>
             <div class="">
               <button
@@ -64,14 +64,14 @@
                 "
                 class="btn btn-primary w-full rounded-none"
               >
-                Kjøp
+                Buy
               </button>
 
               <button
                 @click="productStore.closeDialog()"
                 class="btn btn-sm w-full rounded-none"
               >
-                Avbryt
+                Cancel
               </button>
             </div>
           </div>

@@ -26,14 +26,15 @@
 <script setup>
 import { ref } from "vue";
 import { useUserStore } from "@/stores/UserStore.js";
-import router from "@/router";
+import router from "../router";
 
 const userStore = useUserStore();
 const username = ref("");
 const password = ref("");
 
 const register = () => {
+  router.push("/");
+  console.log("register triggered");
   userStore.register(username.value, password.value);
-  router.push("/mypage");
 };
 </script>

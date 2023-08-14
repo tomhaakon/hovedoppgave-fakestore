@@ -22,14 +22,14 @@
               <p class="text-red-700 text-2xl font-bold py-2">
                 {{ Math.round(product.price * 10) }},- kr
               </p>
-              <p class="text-sm">Fri frakt</p>
+              <p class="text-sm">Free shipping!</p>
             </div>
             <div class="w-2/5 justify-end flex pr-5">
               <button
                 class="btn-primary drop-shadow-md right-5 bottom-3 btn rounded-lg border-0"
                 @click="addToCart(product)"
               >
-                + Kjøp
+                + Buy
               </button>
             </div>
           </div>
