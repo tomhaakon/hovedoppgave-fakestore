@@ -2,7 +2,7 @@
   <div class="px-5">
     <div v-if="viewParam === 'login'">
       <div class="">
-        <p class="font-bold text-xl p-1">Login</p>
+        <p class="font-bold text-xl p-1 pb-5">Login</p>
       </div>
       <Login />
       <div class="w-full text-center px-14">
@@ -14,7 +14,7 @@
     </div>
     <div v-if="viewParam === 'register'">
       <div class="">
-        <p class="font-bold text-xl p-1">Register</p>
+        <p class="font-bold text-xl p-1 pb-5">Register</p>
         <p class="p-5 text-red-600">
           This register form is for training purposes only so passwords are not
           encrypted and are stored in you browsers localStorage.

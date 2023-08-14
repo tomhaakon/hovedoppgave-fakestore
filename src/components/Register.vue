@@ -15,10 +15,7 @@
       </div>
     </div>
     <div class="bg-green-500"></div>
-    <div
-      v-if="error"
-      class="text-center font-bold text-red-500 py-5 animate-pulse"
-    >
+    <div v-if="error" class="text-center font-bold text-red-500 py-5">
       Invalid register details
     </div>
     <div class="w-full text-center pt-5">

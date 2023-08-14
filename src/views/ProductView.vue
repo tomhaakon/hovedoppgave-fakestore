@@ -4,7 +4,7 @@
       <div class="columns-2 text-center space-y-5">
         <div
           v-for="category in categories"
-          class="shadow-md h-20 w-40 pt-5 bg-[url('')]"
+          class="shadow-md h-20 w-40 pt-5 bg-[url('')] active:btn-active"
           @click="productStore.viewProducts(category)"
         >
           <p class="font-bold text-lg">{{ category }}</p>
