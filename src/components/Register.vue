@@ -15,6 +15,12 @@
       </div>
     </div>
     <div class="bg-green-500"></div>
+    <div
+      v-if="error"
+      class="text-center font-bold text-red-500 py-5 animate-pulse"
+    >
+      Invalid register details
+    </div>
     <div class="w-full text-center pt-5">
       <div class="w-full">
         <button @click="register" class="btn btn-primary w-32">Register</button>
@@ -31,10 +37,15 @@ import router from "../router";
 const userStore = useUserStore();
 const username = ref("");
 const password = ref("");
+const error = ref(false);
 
 const register = () => {
-  router.push("/");
-  console.log("register triggered");
-  userStore.register(username.value, password.value);
+  if (username.value === "" || password.value === "") {
+    error.value = true;
+  } else {
+    router.push("/");
+    console.log("register triggered");
+    userStore.register(username.value, password.value);
+  }
 };
 </script>

@@ -15,15 +15,14 @@
     </div>
     <div class="bg-green-500"></div>
     <div class="w-full text-center pt-5">
-      <div v-if="error" class="font-bold text-red-500 py-5 animate-pulse">
+      <div
+        v-if="error"
+        class="text-center font-bold text-red-500 py-5 animate-pulse"
+      >
         Invalid login details
       </div>
       <div class="w-full">
-        <RouterLink to="/mypage">
-          <button @click="login" class="btn btn-primary w-32">
-            Login
-          </button></RouterLink
-        >
+        <button @click="login" class="btn btn-primary w-32">Login</button>
       </div>
     </div>
   </div>
