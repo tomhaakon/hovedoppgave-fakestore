@@ -64,7 +64,7 @@
               follow us on sosial media!
             </p>
           </div>
-          <div class="pt-5">
+          <div class="pt-14">
             <a href="#" class="fa fa-facebook invert px-3"></a>
             <a href="#" class="fa fa-twitter invert px-3"></a>
             <a href="#" class="fa fa-instagram invert px-3"></a>
