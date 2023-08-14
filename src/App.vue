@@ -89,8 +89,11 @@
           <li class="text-2xl">
             <RouterLink to="/about" @click="handleClick()">About us</RouterLink>
           </li>
-          <li class="pt-10">
+          <li class="pt-10" v-if="userStore.user">
             <RouterLink to="/mypage" @click="handleClick()">My page</RouterLink>
+          </li>
+          <li class="pt-10" v-else>
+            <RouterLink to="/login" @click="handleClick()">Login</RouterLink>
           </li>
         </ul>
       </div>
@@ -104,7 +107,9 @@ import { RouterLink, RouterView } from "vue-router";
 import ProductDialog from "./components/ProductDialog.vue";
 import { useProductStore } from "./stores/Productstore";
 import { useShoppingCartStore } from "./stores/Shoppingcartstore";
+import { useUserStore } from "@/stores/UserStore";
 
+const userStore = useUserStore();
 const shoppingCartStore = useShoppingCartStore();
 const productStore = useProductStore();
 const blurBg = computed(() => productStore.showDialog);
