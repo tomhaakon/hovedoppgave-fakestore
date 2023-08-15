@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="">
-      <div class="flex h-10 w-full mb-5 px-5">
+      <div class="flex h-10 w-full mb-5">
         <p class="font-bold text-xl p-1">Shopping cart</p>
       </div>
       <!-- sd -->
@@ -47,7 +47,7 @@
         <div class="flex justify-end px-5">
           <button
             class="btn btn-primary mt-5"
-            @click="useShoppingCartStore().checkout()"
+            @click="shoppingCartStore.checkout()"
           >
             To payment
           </button>
@@ -59,10 +59,10 @@
 
 <script setup>
 import { computed, ref } from "vue";
-import { useShoppingCartStore } from "@/stores/Shoppingcartstore.js";
+import { useShoppingCartStore } from "../stores/Shoppingcartstore";
 import { useUserStore } from "../stores/UserStore";
 const shoppingCartStore = useShoppingCartStore();
-const cart = computed(() => shoppingCartStore.cart);
+//const cart = computed(() => shoppingCartStore.cart);
 // count same items
 const groupedCart = computed(() => shoppingCartStore.groupedCart);
 const totalPrice = computed(() => shoppingCartStore.totalPrice);

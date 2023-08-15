@@ -17,7 +17,7 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
 
       const userStore = useUserStore();
       if (userStore.isLoggedIn) {
-        userStore.addToUserCart(item);
+        this.addToUserCart(item);
       }
     },
     // remove from cart
@@ -37,43 +37,44 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
     checkout() {
       const userStore = useUserStore();
 
-      console.log("Before checkout, user's cart:", userStore.user.cart);
-
       // If the user is not logged in, redirect to the login page
       if (!userStore.user) {
         console.error("User is not logged in. Redirecting to login page.");
         router.push("/login"); // Assuming your login route is named "/login"
         return;
-      } else {
-        if (!Array.isArray(userStore.user.purchaseHistory)) {
-          // Handle the error appropriately
-          console.error("purchaseHistory is not defined");
-          return;
-        }
-
-        // Save the cart as purchase history entry
-        userStore.user.purchaseHistory.push({
-          date: new Date(),
-          items: [...userStore.user.cart],
-        });
-
-        console.log(
-          "After saving to purchase history, user's cart:",
-          userStore.user.cart
-        );
-
-        // Empty the user's cart
-        userStore.user.cart = [];
-        userStore.updateUser();
-
-        console.log("After emptying cart, user's cart:", userStore.user.cart);
-
-        // Redirect to a confirmation or thanks page, if desired
-        router.push("/thanks");
-
-        // Clear the shopping cart
-        this.clearCart();
       }
+
+      console.log("checkout triggered");
+      console.log(userStore.user);
+      console.log("Before checkout, user's cart:", userStore.user.cart);
+
+      if (!Array.isArray(userStore.user.purchaseHistory)) {
+        // Handle the error appropriately
+        console.error("purchaseHistory is not defined");
+        return;
+      }
+
+      // Save the cart as purchase history entry
+      userStore.user.purchaseHistory.push({
+        date: new Date(),
+        items: [...userStore.user.cart],
+      });
+      console.log(
+        "After saving to purchase history, user's cart:",
+        userStore.user.cart
+      );
+
+      // Empty the user's cart
+      userStore.user.cart = [];
+      userStore.updateUser();
+
+      console.log("After emptying cart, user's cart:", userStore.user.cart);
+
+      // Redirect to a confirmation or thanks page, if desired
+      router.push("/thanks");
+
+      // Clear the shopping cart
+      this.clearCart();
     },
 
     // empty cart
