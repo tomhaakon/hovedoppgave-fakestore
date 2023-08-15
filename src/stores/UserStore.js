@@ -33,16 +33,22 @@ export const useUserStore = defineStore("userStore", {
       router.push("/");
     },
     login(username, password) {
+      // Save the current cart before login
+      const shoppingCartStore = useShoppingCartStore();
+      const tempCart = [...shoppingCartStore.cart]; // Store the cart temporarily
+
       const users = JSON.parse(localStorage.getItem("users")) || [];
       const user = users.find(
         (user) => user.username === username && user.password === password
       );
       if (user) {
-        // Load the user's cart if it exists
-        const shoppingCartStore = useShoppingCartStore();
-        shoppingCartStore.loadCart(user.cart);
+        // Load the user's cart if it exists and combine it with the temporary cart
+        shoppingCartStore.loadCart([...user.cart, ...tempCart]);
 
         this.user = user;
+        this.user.cart = [...user.cart, ...tempCart]; // Combine the carts
+        this.updateUser();
+
         sessionStorage.setItem("authenticated", JSON.stringify(user.username));
         this.sessionAuth = user.username;
         router.push("/");
@@ -76,12 +82,16 @@ export const useUserStore = defineStore("userStore", {
       }
     },
     checkout() {
-      console.log(this.user.purchaseHistory);
-      if (!this.user || !Array.isArray(this.user.purchaseHistory)) {
+      // If the user is not logged in, redirect to the login page
+      if (!this.user) {
+        console.error("User is not logged in. Redirecting to login page.");
+        router.push("/login"); // Assuming your login route is named "/login"
+        return;
+      }
+
+      if (!Array.isArray(this.user.purchaseHistory)) {
         // Handle the error appropriately
-        console.error(
-          "User is not logged in or purchaseHistory is not defined"
-        );
+        console.error("purchaseHistory is not defined");
         return;
       }
 
