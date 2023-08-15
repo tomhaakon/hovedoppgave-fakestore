@@ -82,14 +82,14 @@
             <RouterLink to="/" @click="handleClick()">Home</RouterLink>
           </li>
           <li class="text-2xl">
-            <RouterLink to="/product" @click="handleClick()"
-              >Products</RouterLink
-            >
+            <RouterLink to="/product" @click="handleClick()">
+              Products
+            </RouterLink>
           </li>
           <li class="text-2xl">
             <RouterLink to="/about" @click="handleClick()">About us</RouterLink>
           </li>
-          <ul class="pt-10 space-y-3" v-if="userStore.user">
+          <ul class="pt-10 space-y-3" v-if="userStore.sessionAuth !== null">
             <li>
               <RouterLink to="/mypage" @click="handleClick()">
                 My page
@@ -118,7 +118,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import ProductDialog from "./components/ProductDialog.vue";
 import { useProductStore } from "./stores/Productstore";
@@ -134,8 +134,7 @@ const drawerCheckbox = ref(null);
 const handleClick = () => {
   drawerCheckbox.value.checked = !drawerCheckbox.value.checked;
 };
-//console.log("blurBg=", blurBg);
-//<a on:click={() => {document.getElementById('my-drawer-3').click()}}  href='/test'>Test</a>
+console.log(userStore.sessionAuth);
 </script>
 <style scoped>
 /* Style all font awesome icons */

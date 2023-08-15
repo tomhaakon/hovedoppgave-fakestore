@@ -40,8 +40,6 @@ const register = () => {
   if (username.value === "" || password.value === "") {
     error.value = true;
   } else {
-    router.push("/");
-    console.log("register triggered");
     userStore.register(username.value, password.value);
   }
 };

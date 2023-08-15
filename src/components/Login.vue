@@ -38,7 +38,6 @@ const login = () => {
   if (!userStore.login(username.value, password.value)) {
     error.value = true;
   } else {
-    router.push("/mypage");
   }
 };
 </script>
