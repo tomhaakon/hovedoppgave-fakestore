@@ -51,10 +51,6 @@ watch(
   () => router.currentRoute.value.name,
   (newParam) => {
     viewParam.value = newParam;
-    console.log("changed", newParam);
   }
 );
-
-console.log("testing: ", router.currentRoute.value.name);
-console.log("userview loaded");
 </script>

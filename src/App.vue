@@ -134,7 +134,6 @@ const drawerCheckbox = ref(null);
 const handleClick = () => {
   drawerCheckbox.value.checked = !drawerCheckbox.value.checked;
 };
-console.log(userStore.sessionAuth);
 </script>
 <style scoped>
 /* Style all font awesome icons */
