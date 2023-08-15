@@ -1,22 +1,25 @@
-// userStore.js
 import { defineStore } from "pinia";
 import router from "@/router";
 import { useShoppingCartStore } from "./Shoppingcartstore";
+
 export const useUserStore = defineStore("userStore", {
-  state: () => ({
-    user: JSON.parse(localStorage.getItem("users")) || null,
-    sessionAuth: JSON.parse(sessionStorage.getItem("authenticated")),
-    toggleRegister: false,
-  }),
+  state: () => {
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const sessionAuth = JSON.parse(sessionStorage.getItem("authenticated"));
+    const user = users.find((u) => u.username === sessionAuth);
+    return {
+      user: user || null,
+      sessionAuth,
+      toggleRegister: false,
+    };
+  },
   actions: {
     register(username, password) {
       const users = JSON.parse(localStorage.getItem("users")) || [];
 
-      // Check if the username already exists
       const usernameExists = users.some((user) => user.username === username);
 
       if (usernameExists) {
-        // Handle the error, e.g., notify the user that the username is taken
         alert("Username already exists!");
         return;
       }
@@ -33,20 +36,18 @@ export const useUserStore = defineStore("userStore", {
       router.push("/");
     },
     login(username, password) {
-      // Save the current cart before login
       const shoppingCartStore = useShoppingCartStore();
-      const tempCart = [...shoppingCartStore.cart]; // Store the cart temporarily
+      const tempCart = [...shoppingCartStore.cart];
 
       const users = JSON.parse(localStorage.getItem("users")) || [];
       const user = users.find(
         (user) => user.username === username && user.password === password
       );
       if (user) {
-        // Load the user's cart if it exists and combine it with the temporary cart
         shoppingCartStore.loadCart([...user.cart, ...tempCart]);
 
         this.user = user;
-        this.user.cart = [...user.cart, ...tempCart]; // Combine the carts
+        this.user.cart = [...user.cart, ...tempCart];
         this.updateUser();
 
         sessionStorage.setItem("authenticated", JSON.stringify(user.username));
