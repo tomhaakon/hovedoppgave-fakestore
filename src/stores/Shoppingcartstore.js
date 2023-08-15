@@ -39,5 +39,25 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
     cartItemCount() {
       return this.cart.length;
     },
+    groupedCart() {
+      const counts = {};
+      this.cart.forEach((item) => {
+        counts[item.id] = (counts[item.id] || 0) + 1;
+      });
+      return Object.keys(counts).map((id) => {
+        const item = this.cart.find((item) => item.id == id);
+        return {
+          id: +id,
+          title: item.title,
+          price: item.price, // Add the price here
+          count: counts[id],
+        };
+      });
+    },
+    totalPrice() {
+      return this.groupedCart.reduce((sum, item) => {
+        return sum + Math.round(item.price * 10 * item.count);
+      }, 0);
+    },
   },
 });

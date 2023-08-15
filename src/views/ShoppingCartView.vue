@@ -64,26 +64,8 @@ import { useUserStore } from "../stores/UserStore";
 const shoppingCartStore = useShoppingCartStore();
 const cart = computed(() => shoppingCartStore.cart);
 // count same items
-const groupedCart = computed(() => {
-  const counts = {};
-  cart.value.forEach((item) => {
-    counts[item.id] = (counts[item.id] || 0) + 1;
-  });
-  return Object.keys(counts).map((id) => {
-    const item = cart.value.find((item) => item.id == id);
-    return {
-      id: +id,
-      title: item.title,
-      price: item.price, // Add the price here
-      count: counts[id],
-    };
-  });
-});
-const totalPrice = computed(() => {
-  return groupedCart.value.reduce((sum, item) => {
-    return sum + Math.round(item.price * 10 * item.count);
-  }, 0);
-});
+const groupedCart = computed(() => shoppingCartStore.groupedCart);
+const totalPrice = computed(() => shoppingCartStore.totalPrice);
 
 // consts
 const removeFromCart = (id) => shoppingCartStore.removeFromCart(id);
