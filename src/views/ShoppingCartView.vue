@@ -45,7 +45,12 @@
       <div class="flex w-full">
         <div class="w-full"></div>
         <div class="flex justify-end px-5">
-          <button class="btn btn-primary mt-5">To payment</button>
+          <button
+            class="btn btn-primary mt-5"
+            @click="useUserStore().checkout()"
+          >
+            To payment
+          </button>
         </div>
       </div>
     </div>
@@ -55,7 +60,7 @@
 <script setup>
 import { computed, ref } from "vue";
 import { useShoppingCartStore } from "@/stores/Shoppingcartstore.js";
-
+import { useUserStore } from "../stores/UserStore";
 const shoppingCartStore = useShoppingCartStore();
 const cart = computed(() => shoppingCartStore.cart);
 // count same items

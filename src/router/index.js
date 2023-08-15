@@ -14,6 +14,11 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/thanks",
+    name: "thanks",
+    component: UserView,
+  },
+  {
     path: "/register",
     name: "register",
     component: UserView,
@@ -40,7 +45,7 @@ const routes = [
     beforeEnter: (to, from, next) => {
       const userStore = useUserStore();
 
-      if (userStore.user) {
+      if (userStore.isLoggedIn) {
         next(); // user is logged in, allow access
       } else {
         next("/login"); // user is not logged in, redirect to login

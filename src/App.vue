@@ -89,7 +89,7 @@
           <li class="text-2xl">
             <RouterLink to="/about" @click="handleClick()">About us</RouterLink>
           </li>
-          <ul class="pt-10 space-y-3" v-if="userStore.sessionAuth !== null">
+          <ul class="pt-10 space-y-3" v-if="userStore.isLoggedIn">
             <li>
               <RouterLink to="/mypage" @click="handleClick()">
                 My page

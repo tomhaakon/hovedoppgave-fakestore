@@ -5,6 +5,10 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
     cart: JSON.parse(localStorage.getItem("cart")) || [],
   }),
   actions: {
+    loadCart(cart) {
+      this.cart = cart || [];
+      localStorage.setItem("cart", JSON.stringify(this.cart));
+    },
     // add to cart
     addToCart(item) {
       this.cart.push(item);
