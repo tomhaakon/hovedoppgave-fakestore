@@ -47,7 +47,7 @@
         <div class="flex justify-end px-5">
           <button
             class="btn btn-primary mt-5"
-            @click="useUserStore().checkout()"
+            @click="useShoppingCartStore().checkout()"
           >
             To payment
           </button>

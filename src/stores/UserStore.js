@@ -38,28 +38,48 @@ export const useUserStore = defineStore("userStore", {
     login(username, password) {
       const shoppingCartStore = useShoppingCartStore();
       const tempCart = [...shoppingCartStore.cart];
-
+      if (this.user) {
+        shoppingCartStore.loadCart(this.user.cart);
+      }
       const users = JSON.parse(localStorage.getItem("users")) || [];
-      const user = users.find(
+      const userIndex = users.findIndex(
         (user) => user.username === username && user.password === password
       );
-      if (user) {
-        shoppingCartStore.loadCart([...user.cart, ...tempCart]);
 
+      if (userIndex !== -1) {
+        // Create a copy of the user object
+        const user = {
+          ...users[userIndex],
+          cart: [...users[userIndex].cart, ...tempCart],
+        };
+
+        // Update the user's cart in local storage
+        users[userIndex] = user;
+        localStorage.setItem("users", JSON.stringify(users));
+
+        // Update the user in the store
         this.user = user;
-        this.user.cart = [...user.cart, ...tempCart];
-        this.updateUser();
+
+        // Load the user's cart into the shopping cart store
+        shoppingCartStore.loadCart(user.cart);
+
+        // Update the user in the store
+        this.user = user;
+
+        console.log("login:user.cart", user.cart);
+        console.log("login:tempCart", tempCart);
 
         sessionStorage.setItem("authenticated", JSON.stringify(user.username));
         this.sessionAuth = user.username;
         router.push("/");
       }
-      return user != null;
+      return userIndex !== -1;
     },
 
     logout() {
       const shoppingCartStore = useShoppingCartStore();
       //      const tempCart = [...shoppingCartStore.cart]; // Store the cart temporarily
+      shoppingCartStore.loadCart(JSON.parse(localStorage.getItem("cart")));
 
       this.user = null;
       this.sessionAuth = null;
@@ -76,51 +96,60 @@ export const useUserStore = defineStore("userStore", {
       this.toggleRegister = !this.toggleRegister;
       console.log("toggleView triggered");
     },
-    addToCart(item) {
-      if (this.user) {
-        this.user.cart.push(item);
-        this.updateUser();
-      }
-    },
-    checkout() {
-      // If the user is not logged in, redirect to the login page
-      if (!this.user) {
-        console.error("User is not logged in. Redirecting to login page.");
-        router.push("/login"); // Assuming your login route is named "/login"
-        return;
-      }
 
-      if (!Array.isArray(this.user.purchaseHistory)) {
-        // Handle the error appropriately
-        console.error("purchaseHistory is not defined");
-        return;
-      }
+    // addToUserCart(item) {
+    //   if (this.user) {
+    //     this.user.cart.push(item);
+    //     this.updateUser();
+    //   }
+    // },
+    // checkout() {
+    //   console.log("Before checkout, user's cart:", this.user.cart);
 
-      // Save the cart as purchase history entry
-      this.user.purchaseHistory.push({
-        date: new Date(),
-        items: [...this.user.cart],
-      });
+    //   // If the user is not logged in, redirect to the login page
+    //   if (!this.user) {
+    //     console.error("User is not logged in. Redirecting to login page.");
+    //     router.push("/login"); // Assuming your login route is named "/login"
+    //     return;
+    //   } else {
+    //     const shoppingCartStore = useShoppingCartStore();
 
-      // Empty the cart
-      this.user.cart = [];
-      this.updateUser();
+    //     if (!Array.isArray(this.user.purchaseHistory)) {
+    //       // Handle the error appropriately
+    //       console.error("purchaseHistory is not defined");
+    //       return;
+    //     }
+    //     // Save the cart as purchase history entry
+    //     this.user.purchaseHistory.push({
+    //       date: new Date(),
+    //       items: [...this.user.cart],
+    //     });
+    //     console.log(
+    //       "After saving to purchase history, user's cart:",
+    //       this.user.cart
+    //     );
 
-      // Redirect to a confirmation or thanks page, if desired
-      router.push("/thanks");
+    //     // Empty the cart
+    //     this.user.cart = [];
+    //     this.updateUser();
+    //     console.log("After emptying cart, user's cart:", this.user.cart);
 
-      const shoppingCartStore = useShoppingCartStore();
+    //     // Redirect to a confirmation or thanks page, if desired
+    //     router.push("/thanks");
 
-      // Clear the shopping cart
-      shoppingCartStore.clearCart();
-    },
+    //     // Clear the shopping cart
+    //     shoppingCartStore.clearCart();
+    //   }
+    // },
 
     updateUser() {
       const users = JSON.parse(localStorage.getItem("users")) || [];
       const userIndex = users.findIndex((u) => u.id === this.user.id);
       if (userIndex > -1) {
+        console.log("Before updating user in local storage:", users[userIndex]);
         users[userIndex] = this.user;
         localStorage.setItem("users", JSON.stringify(users));
+        console.log("After updating user in local storage:", users[userIndex]);
       }
     },
   },
