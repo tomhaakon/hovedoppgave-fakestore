@@ -114,22 +114,21 @@ const nextPage = () => {
 
 const prevPage = () => {
   if (currentPage.value > 1) {
-    if (currentPage.value < totalPages.value) {
-      if (productList.value) {
-        const offset = 500; // Adjust as needed
-        const topPosition =
-          productList.value.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({ top: topPosition - offset, behavior: "smooth" });
-      }
-      currentPage.value -= 1;
-      productStore.viewProducts(
-        selectedCategory.value || "products",
-        currentPage.value,
-        limit
-      );
+    if (productList.value) {
+      const offset = 500; // Adjust as needed
+      const topPosition =
+        productList.value.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({ top: topPosition - offset, behavior: "smooth" });
     }
+    currentPage.value -= 1;
+    productStore.viewProducts(
+      selectedCategory.value || "products",
+      currentPage.value,
+      limit
+    );
   }
 };
+
 const changeCategory = (category) => {
   if (category === "products") {
     productStore.selectedCategory = "";
