@@ -1,9 +1,9 @@
 <template>
-  <div class="">
-    <div class="">
-      <div class="flex h-10 w-full mb-5">
-        <p class="font-bold text-xl p-1">Shopping cart</p>
-      </div>
+  <div class="px-5">
+    <div class="flex h-10 w-full mb-5">
+      <p class="font-bold text-xl p-1">Shopping cart</p>
+    </div>
+    <div class="" v-if="totalPrice > 0">
       <!-- sd -->
       <div class="px-5">
         <div class="flex pb-2">
@@ -54,6 +54,7 @@
         </div>
       </div>
     </div>
+    <div v-else>Your cart is empty.</div>
   </div>
 </template>
 
@@ -72,4 +73,5 @@ const removeFromCart = (id) => shoppingCartStore.removeFromCart(id);
 const clearCart = () => {
   shoppingCartStore.clearCart();
 };
+console.log(groupedCart.value);
 </script>
