@@ -2,7 +2,7 @@
   <div :class="{ overlay: blurBg }" class="z-40 backdrop-blur-sm"></div>
   <Notification />
   <ProductDialog />
-  <div>
+  <div class="mt-5">
     <div class="drawer">
       <input
         id="my-drawer-3"
