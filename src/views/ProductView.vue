@@ -1,11 +1,15 @@
 <template>
   <div class="w-full">
-    <section v-if="showCategories" class="flex justify-center">
+    <section v-if="showCategories" class="flex justify-center pt-5">
       <div class="columns-2 text-center space-y-5">
         <div
           v-for="category in categories"
-          class="shadow-md h-20 w-40 pt-5 bg-[url('')] active:btn-active"
+          class="shadow-md h-20 w-40 pt-5"
           @click="productStore.viewProducts(category)"
+          :class="[
+            'shadow-md h-20 w-40 pt-5',
+            category === selectedCategory ? ' btn-active' : '',
+          ]"
         >
           <p class="font-bold text-lg">{{ category }}</p>
         </div>
@@ -34,6 +38,7 @@ const categories = ref();
 const selectedCategory = ref();
 const loading = ref(false);
 const showCategories = ref(true);
+const isActive = ref(false);
 
 //funksjoner
 watch(
@@ -45,7 +50,9 @@ watch(
   { immediate: true }
 );
 
-//onMounted(() => {});
+onMounted(() => {
+  selectedCategory.value = "";
+});
 //const isTriggered = computed(() => triggerStore.state.triggered);
 
 // functions
