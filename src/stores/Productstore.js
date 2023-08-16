@@ -43,7 +43,7 @@ export const useProductStore = defineStore("productStore", {
     viewProducts(page, pageNumber = 1, limit = 5) {
       console.log("viewProducts(", page, ")");
       if (page === "new-products") {
-        const apiLink = "products?sort=desc&limit=" + limit; // Use passed limit
+        const apiLink = "products?sort=desc&limit=" + 3; // Use passed limit
         this.getProducts(apiLink, pageNumber, limit);
       } else if (page === "products") {
         this.getProducts(page, pageNumber, limit);

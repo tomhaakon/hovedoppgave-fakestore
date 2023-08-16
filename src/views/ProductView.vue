@@ -7,7 +7,7 @@
           class="shadow-md h-20 w-40 pt-5"
           @click="changeCategory(category)"
           :class="[
-            'shadow-md h-20 w-40 pt-5',
+            'shadow-md h-20 w-40 pt-5 cursor-pointer',
             category === selectedCategory ? ' btn-active' : '',
           ]"
         >
@@ -20,14 +20,26 @@
         <p>All Products / {{ selectedCategory }}</p>
       </div>
       <Product></Product>
-      <div class="pagination">
-        <button @click="prevPage" :disabled="currentPage === 1">
-          Previous
-        </button>
-        <span>Page {{ currentPage }} of {{ totalPages }}</span>
-        <button @click="nextPage" :disabled="currentPage === totalPages">
-          Next
-        </button>
+      <div class="pagination flex text-center pt-5" :hidden="totalPages === 1">
+        <div class="join w-full justify-center">
+          <button
+            class="join-item btn"
+            @click="prevPage"
+            :disabled="currentPage === 1"
+          >
+            «
+          </button>
+          <button class="join-item btn" :disabled="totalPages === 1">
+            {{ currentPage }} / {{ totalPages }}
+          </button>
+          <button
+            class="join-item btn"
+            :disabled="currentPage === totalPages"
+            @click="nextPage"
+          >
+            »
+          </button>
+        </div>
       </div>
     </section>
   </div>
