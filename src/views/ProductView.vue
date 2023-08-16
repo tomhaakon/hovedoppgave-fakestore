@@ -25,7 +25,9 @@
           <div>{{ selectedCategory }}</div>
         </div>
       </div>
-      <Product></Product>
+      <div ref="productList" class="product-list">
+        <Product></Product>
+      </div>
       <div class="pagination flex text-center pt-5" :hidden="totalPages === 1">
         <div class="join w-full justify-center">
           <button
@@ -66,7 +68,7 @@ const selectedCategory = ref();
 const showCategories = ref(true);
 const currentPage = ref(1); // added
 const limit = 5; // items per page
-
+const productList = ref(null);
 // total pages calculated from total products divided by limit
 const totalPages = computed(() => {
   return Math.ceil(productStore.totalProducts?.length / limit);
@@ -95,6 +97,12 @@ onMounted(() => {
 // pagination functions
 const nextPage = () => {
   if (currentPage.value < totalPages.value) {
+    if (productList.value) {
+      const offset = 500; // Adjust as needed
+      const topPosition =
+        productList.value.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({ top: topPosition - offset, behavior: "smooth" });
+    }
     currentPage.value += 1;
     productStore.viewProducts(
       selectedCategory.value || "products",
@@ -106,12 +114,20 @@ const nextPage = () => {
 
 const prevPage = () => {
   if (currentPage.value > 1) {
-    currentPage.value -= 1;
-    productStore.viewProducts(
-      selectedCategory.value || "products",
-      currentPage.value,
-      limit
-    );
+    if (currentPage.value < totalPages.value) {
+      if (productList.value) {
+        const offset = 500; // Adjust as needed
+        const topPosition =
+          productList.value.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({ top: topPosition - offset, behavior: "smooth" });
+      }
+      currentPage.value -= 1;
+      productStore.viewProducts(
+        selectedCategory.value || "products",
+        currentPage.value,
+        limit
+      );
+    }
   }
 };
 const changeCategory = (category) => {
