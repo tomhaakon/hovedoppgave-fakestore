@@ -1,11 +1,11 @@
 <template>
-  <div class="px-5">
+  <div class="">
     <div class="flex h-10 w-full mb-5">
       <p class="font-bold text-xl p-1">Shopping cart</p>
     </div>
     <div class="" v-if="totalPrice > 0">
       <!-- sd -->
-      <div class="px-5">
+      <div class="">
         <div class="flex pb-2">
           <div class="w-5 flex justify-center"></div>
           <div class="w-full px-5"><p class="font-bold text-sm">Title</p></div>
