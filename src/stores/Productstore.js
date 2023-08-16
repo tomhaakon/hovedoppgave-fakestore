@@ -11,6 +11,7 @@ export const useProductStore = defineStore("productStore", {
     showCategory: null,
     apiLink: null,
     selectedCategory: null,
+    totalProducts: null,
   }),
   actions: {
     async getCategory(category) {
@@ -39,40 +40,54 @@ export const useProductStore = defineStore("productStore", {
         }
       });
     },
-    viewProducts(page) {
+    viewProducts(page, pageNumber = 1, limit = 5) {
       console.log("viewProducts(", page, ")");
-      // new products
       if (page === "new-products") {
-        const apiLink = "products?sort=desc&limit=3";
-        console.log("loading new-products");
-        this.getProducts(apiLink);
-      }
-      // all products
-      else if (page === "products") {
-        const apiLink = page;
-        this.getProducts(apiLink);
-        // category jewlery
+        const apiLink = "products?sort=desc&limit=" + limit; // Use passed limit
+        this.getProducts(apiLink, pageNumber, limit);
+      } else if (page === "products") {
+        this.getProducts(page, pageNumber, limit);
       } else {
-        this.getProducts("products/category/" + page);
+        this.getProducts("products/category/" + page, pageNumber, limit);
         this.selectedCategory = page;
       }
     },
-    getProducts(link) {
+
+    getProducts(link, pageNumber = 1, limit) {
       return new Promise(async (resolve, reject) => {
         try {
-          //console.log("apilink:", this.apiLink);
+          console.log("link", link);
           const apiCall = await fetch("https://fakestoreapi.com/" + link);
-          console.log("data fetched");
+          //console.log("data fetched");
           const response = await apiCall.json();
-          this.showProducts = response;
+          // Determine the starting index for the current page
+          const startIndex = (pageNumber - 1) * limit;
+          // Determine the ending index for the current page
+          const endIndex = pageNumber * limit;
+
+          this.totalProducts = response; // Save the total products
+          // Slice the products to get only the products for the current page
+
+          this.showProducts = response.slice(startIndex, endIndex);
+
           resolve(this.showProducts);
-          console.log("oppdaterte this.ShowProducts:", this.showProducts);
+
+          console.log("this.showPridocts", this.showProducts);
+          console.log("Page Number:", pageNumber);
+          console.log("Limit:", limit);
+          console.log("Start Index:", startIndex);
+          console.log("End Index:", endIndex);
+          console.log("Fetched Products:", response);
+          console.log("Sliced Products:", this.showProducts);
+
+          // console.log("Updated this.ShowProducts:", this.showProducts);
         } catch (error) {
           console.error("API call failed", error);
           reject(error);
         }
       });
     },
+
     openDialog(item) {
       this.showDialog = true;
       this.showSingleProduct = item;
