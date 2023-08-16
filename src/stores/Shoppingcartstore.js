@@ -88,11 +88,7 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
       this.cart = [];
       localStorage.removeItem("cart");
 
-      this.notify.addNotification(
-        "Cleared all items in cart.",
-        "success",
-        3000
-      );
+      this.notify.addNotification("Cleared all items in cart.", "error", 3000);
     },
     addToUserCart(item) {
       const userStore = useUserStore();

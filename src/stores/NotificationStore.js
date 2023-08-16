@@ -6,7 +6,8 @@ export const useNotificationStore = defineStore("notificationStore", {
     notifications: [],
   }),
   actions: {
-    addNotification(message, type = "info", duration = 3000) {
+    addNotification(message, type, duration = 3000) {
+      console.log("type", type);
       const id = new Date().getTime();
       this.notifications.push({ id, message, type });
 

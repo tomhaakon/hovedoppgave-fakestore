@@ -1,10 +1,21 @@
 <template>
   <transition name="fade" appear>
-    <div class="fixed top-0 right-0 z-50 p-4">
+    <div class="fixed top-0 right-0 z-50 w-full">
       <div
         v-for="notification in store.notifications"
         :key="notification.id"
-        class="bg-blue-500 text-white p-2 rounded shadow mb-2 cursor-pointer"
+        :class="[
+          notification.type === 'success'
+            ? 'bg-success'
+            : notification.type === 'error'
+            ? 'bg-error'
+            : '',
+          'text-white',
+          'p-2',
+          'shadow',
+          'mb-2',
+          'cursor-pointer',
+        ]"
         @click="removeNotification(notification.id)"
       >
         {{ notification.message }}
