@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import router from "@/router";
 import { useShoppingCartStore } from "./Shoppingcartstore";
+import { useNotificationStore } from "./NotificationStore";
 
 export const useUserStore = defineStore("userStore", {
   state: () => {
@@ -15,6 +16,7 @@ export const useUserStore = defineStore("userStore", {
   },
   actions: {
     register(username, password) {
+      const notify = useNotificationStore();
       const users = JSON.parse(localStorage.getItem("users")) || [];
 
       const usernameExists = users.some((user) => user.username === username);
@@ -33,9 +35,13 @@ export const useUserStore = defineStore("userStore", {
       };
       users.push(user);
       localStorage.setItem("users", JSON.stringify(users));
+      const msg = "Successfully registered user " + user.username;
+      notify.addNotification(msg, "success", 5000);
+
       router.push("/");
     },
     login(username, password) {
+      const notify = useNotificationStore();
       const shoppingCartStore = useShoppingCartStore();
       const tempCart = [...shoppingCartStore.cart];
       if (this.user) {
@@ -72,11 +78,14 @@ export const useUserStore = defineStore("userStore", {
         sessionStorage.setItem("authenticated", JSON.stringify(user.username));
         this.sessionAuth = user.username;
         router.push("/");
+        const msg = "Successfully logged in";
+        notify.addNotification(msg, "success", 5000);
       }
       return userIndex !== -1;
     },
 
     logout() {
+      const notify = useNotificationStore();
       const shoppingCartStore = useShoppingCartStore();
       //      const tempCart = [...shoppingCartStore.cart]; // Store the cart temporarily
       shoppingCartStore.loadCart(JSON.parse(localStorage.getItem("cart")));
@@ -88,8 +97,11 @@ export const useUserStore = defineStore("userStore", {
       // Here you would update the logged-out user's cart in the local storage if needed
       // You would typically do this by updating the corresponding user object in the 'users' array
 
+      const msg = "Successfully logged out";
+      notify.addNotification(msg, "success", 5000);
       // Clear the shopping cart
-      shoppingCartStore.clearCart();
+      shoppingCartStore.cart = [];
+      localStorage.removeItem("cart");
     },
 
     toggleView() {

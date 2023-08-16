@@ -1,5 +1,6 @@
 <template>
   <div :class="{ overlay: blurBg }" class="z-40 backdrop-blur-sm"></div>
+  <Notification />
   <ProductDialog />
   <div>
     <div class="drawer">
@@ -124,6 +125,7 @@ import ProductDialog from "./components/ProductDialog.vue";
 import { useProductStore } from "./stores/Productstore";
 import { useShoppingCartStore } from "./stores/Shoppingcartstore";
 import { useUserStore } from "@/stores/UserStore";
+import Notification from "./components/Notification.vue";
 
 const userStore = useUserStore();
 const shoppingCartStore = useShoppingCartStore();

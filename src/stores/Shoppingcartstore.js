@@ -1,10 +1,12 @@
 import { defineStore } from "pinia";
 import router from "@/router"; // Import router if you want to use it in checkout method
 import { useUserStore } from "./UserStore";
+import { useNotificationStore } from "./NotificationStore";
 
 export const useShoppingCartStore = defineStore("shoppingCartStore", {
   state: () => ({
     cart: JSON.parse(localStorage.getItem("cart")) || [],
+    notify: useNotificationStore(),
   }),
   actions: {
     loadCart(cart) {
@@ -19,6 +21,8 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
       if (userStore.isLoggedIn) {
         this.addToUserCart(item);
       }
+      const msg = "Added " + item.title + " to cart";
+      this.notify.addNotification(msg, "success", 3000);
     },
     // remove from cart
     removeFromCart(itemId, quantityToRemove = 1) {
@@ -28,6 +32,7 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
         if (index !== -1) {
           this.cart.splice(index, 1);
           localStorage.setItem("cart", JSON.stringify(this.cart));
+          this.notify.addNotification("Removed item from cart", "error", 2000);
         } else {
           console.log("No more items with this ID found");
           break;
@@ -67,20 +72,27 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
       // Empty the user's cart
       userStore.user.cart = [];
       userStore.updateUser();
-
+      this.notify.addNotification("Checkout successfull!", "success", 3000);
       console.log("After emptying cart, user's cart:", userStore.user.cart);
-
       // Redirect to a confirmation or thanks page, if desired
       router.push("/thanks");
 
       // Clear the shopping cart
-      this.clearCart();
+
+      this.cart = [];
+      localStorage.removeItem("cart");
     },
 
     // empty cart
     clearCart() {
       this.cart = [];
       localStorage.removeItem("cart");
+
+      this.notify.addNotification(
+        "Cleared all items in cart.",
+        "success",
+        3000
+      );
     },
     addToUserCart(item) {
       const userStore = useUserStore();
