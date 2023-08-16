@@ -1,9 +1,9 @@
 <template>
   <div class="">
-    <div class="flex h-10 w-full mb-5">
+    <div class="flex h-10 w-full mb-5 px-5">
       <p class="font-bold text-xl p-1">Shopping cart</p>
     </div>
-    <div class="" v-if="totalPrice > 0">
+    <div class="px-5" v-if="totalPrice > 0">
       <!-- sd -->
       <div class="">
         <div class="flex pb-2">
@@ -54,7 +54,7 @@
         </div>
       </div>
     </div>
-    <div v-else>Your cart is empty.</div>
+    <div v-else class="px-5">Your cart is empty.</div>
   </div>
 </template>
 
