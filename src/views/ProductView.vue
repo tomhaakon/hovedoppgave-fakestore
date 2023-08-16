@@ -20,6 +20,15 @@
         <p>All Products / {{ selectedCategory }}</p>
       </div>
       <Product></Product>
+      <div class="pagination">
+        <button @click="prevPage" :disabled="currentPage === 1">
+          Previous
+        </button>
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <button @click="nextPage" :disabled="currentPage === totalPages">
+          Next
+        </button>
+      </div>
     </section>
   </div>
 </template>
