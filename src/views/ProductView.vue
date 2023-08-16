@@ -4,7 +4,7 @@
       <div class="columns-2 text-center space-y-5">
         <div
           v-for="category in categories"
-          class="shadow-md h-20 w-40 pt-5"
+          class="shadow-md h-20 w-40 pt-6"
           @click="changeCategory(category)"
           :class="[
             'shadow-md h-20 w-40 pt-5 cursor-pointer',
