@@ -16,8 +16,14 @@
       </div>
     </section>
     <section>
-      <div class="p-5">
-        <p>All Products / {{ selectedCategory }}</p>
+      <div class="flex p-5">
+        <div class="cursor-pointer pr-2" @click="changeCategory('products')">
+          All Products
+        </div>
+        <div v-if="selectedCategory" class="flex space-x-2">
+          <div>/</div>
+          <div>{{ selectedCategory }}</div>
+        </div>
       </div>
       <Product></Product>
       <div class="pagination flex text-center pt-5" :hidden="totalPages === 1">
@@ -49,6 +55,7 @@
 import { useProductStore } from "@/stores/Productstore.js";
 import { watch, ref, onMounted, computed } from "vue";
 import Product from "@/components/Product.vue";
+import { RouterLink } from "vue-router";
 
 // store
 const productStore = useProductStore();
@@ -108,6 +115,9 @@ const prevPage = () => {
   }
 };
 const changeCategory = (category) => {
+  if (category === "products") {
+    productStore.selectedCategory = "";
+  }
   currentPage.value = 1; // Reset to the first page
   productStore.viewProducts(category, currentPage.value, limit);
 };
