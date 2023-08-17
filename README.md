@@ -59,7 +59,7 @@
     - [ ] sortering
     - [ ] søke, slette.
     - [ ] kjøpe slett via bekreft dialog
-
+w
   - [ ] en side for om man ikke har kjøpt noe
 
 ### AboutView.vue - Om side
