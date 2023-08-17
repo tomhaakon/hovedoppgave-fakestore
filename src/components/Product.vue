@@ -20,13 +20,13 @@
           <div class="flex pb-5">
             <div class="w-3/5">
               <p class="text-red-700 text-2xl font-bold py-2">
-                {{ Math.round(product.price * 10) }},- kr
+                {{ (product.price * 10).toFixed(2) }},- kr
               </p>
               <p class="text-sm">Free shipping!</p>
             </div>
-            <div class="w-2/5 justify-end flex">
+            <div class="w-2/5 justify-end flex pt-3">
               <button
-                class="btn-primary drop-shadow-md bottom-3 btn rounded-none border-0"
+                class="btn-primary drop-shadow-md btn btn-sm rounded-none border-0 w-20"
                 @click="addToCart(product)"
               >
                 + Buy

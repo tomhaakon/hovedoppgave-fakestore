@@ -1,6 +1,12 @@
 <template>
   <div class="px-5">
-    <div v-if="viewParam === 'thanks'">Thank you for purchasing!</div>
+    <div v-if="viewParam === 'thanks'" class="text-center space-y-5">
+      <p class="pt-10">Thank you for purchasing!</p>
+      <p>
+        Your products will be shipped within the next 2 years, so do not hold
+        your breath.
+      </p>
+    </div>
     <div v-else-if="userStore.sessionAuth">you are allready logged in</div>
     <div v-else>
       <div v-if="viewParam === 'login'">

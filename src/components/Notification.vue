@@ -1,6 +1,6 @@
 <template>
   <transition name="fade" appear>
-    <div class="fixed top-0 right-0 z-50 w-full">
+    <div class="fixed bottom-0 right-0 z-50 w-full">
       <div
         v-for="notification in store.notifications"
         :key="notification.id"
@@ -13,7 +13,7 @@
           'text-white',
           'p-2',
           'shadow',
-          'mb-2',
+          '',
           'cursor-pointer',
         ]"
         @click="removeNotification(notification.id)"
