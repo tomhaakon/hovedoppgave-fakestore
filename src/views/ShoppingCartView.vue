@@ -33,10 +33,10 @@
             </div>
           </div>
         </div>
-        <div class="pt-3">
+        <div class="">
           <div class="">
             <button
-              class=""
+              class="pt-5"
               @click="clearCart"
               v-if="shoppingCartStore.cartItemCount > 0"
             >

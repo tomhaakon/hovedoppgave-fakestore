@@ -1,13 +1,13 @@
 <template>
   <div class="w-full">
     <section v-if="showCategories" class="flex justify-center pt-5">
-      <div class="columns-2 text-center space-y-5">
+      <div class="columns-2 text-center space-y-5 w-full px-5">
         <div
           v-for="category in categories"
-          class="shadow-md h-20 w-40 pt-6"
+          class="shadow-md h-20 w-full pt-6"
           @click="changeCategory(category)"
           :class="[
-            'shadow-md h-20 w-40 pt-5 cursor-pointer',
+            'shadow-md h-20 w-full pt-5 cursor-pointer',
             category === selectedCategory ? ' btn-active' : '',
           ]"
         >

@@ -2,7 +2,7 @@
   <div :class="{ overlay: blurBg }" class="z-40 backdrop-blur-sm"></div>
   <Notification />
   <ProductDialog />
-  <div class="mt-5">
+  <div class="">
     <div class="drawer">
       <input
         id="my-drawer-3"
@@ -55,20 +55,12 @@
           </div>
         </div>
         <!-- Page content here -->
-        <div :class="{ fixed: blurBg }">
-          <RouterView />
-        </div>
-        <div class="text-center pb-28 pt-14">
-          <div>
-            <p class="text-sm black">
-              this is a footer <br />
-              follow us on sosial media!
-            </p>
-          </div>
-          <div class="pt-14">
-            <a href="#" class="fa fa-facebook invert px-3"></a>
-            <a href="#" class="fa fa-twitter invert px-3"></a>
-            <a href="#" class="fa fa-instagram invert px-3"></a>
+        <div class="">
+          <div :class="{ fixed: blurBg }">
+            <SearchBar />
+            <RouterView class="min-h-[calc(100vh-260px)]" />
+            <!-- footer here -->
+            <Footer class="" />
           </div>
         </div>
       </div>
@@ -125,7 +117,9 @@ import ProductDialog from "./components/ProductDialog.vue";
 import { useProductStore } from "./stores/Productstore";
 import { useShoppingCartStore } from "./stores/Shoppingcartstore";
 import { useUserStore } from "@/stores/UserStore";
-import Notification from "./components/Notification.vue";
+import Notification from "@/components/Notification.vue";
+import SearchBar from "@/components/SearchBar.vue";
+import Footer from "@/components/Footer.vue";
 
 const userStore = useUserStore();
 const shoppingCartStore = useShoppingCartStore();

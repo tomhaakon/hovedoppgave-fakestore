@@ -11,7 +11,7 @@
             @click="productStore.openDialog(product)"
           />
         </div>
-        <div class="p-3">
+        <div class="p-5">
           <div class="cursor-pointer" @click="productStore.openDialog(product)">
             <p class="py-3">
               {{ product.title }}
@@ -24,9 +24,9 @@
               </p>
               <p class="text-sm">Free shipping!</p>
             </div>
-            <div class="w-2/5 justify-end flex pr-5">
+            <div class="w-2/5 justify-end flex">
               <button
-                class="btn-primary drop-shadow-md right-5 bottom-3 btn rounded-lg border-0"
+                class="btn-primary drop-shadow-md bottom-3 btn rounded-none border-0"
                 @click="addToCart(product)"
               >
                 + Buy

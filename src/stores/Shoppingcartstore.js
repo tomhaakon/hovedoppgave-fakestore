@@ -26,7 +26,7 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
     },
     // remove from cart
     removeFromCart(itemId, quantityToRemove = 1) {
-      for (let i = 0; i < quantityToRemove; i++) {
+      Array.from({ length: quantityToRemove }).map(() => {
         const index = this.cart.findIndex((item) => item.id === itemId);
 
         if (index !== -1) {
@@ -35,10 +35,10 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
           this.notify.addNotification("Removed item from cart", "error", 2000);
         } else {
           console.log("No more items with this ID found");
-          break;
         }
-      }
+      });
     },
+
     checkout() {
       const userStore = useUserStore();
 
