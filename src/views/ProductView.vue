@@ -1,18 +1,17 @@
 <template>
-  <div class="w-full">
+  <div class="container mx-auto px-4">
     <section v-if="showCategories" class="flex justify-center pt-5">
-      <div class="columns-2 text-center space-y-5 w-full px-5">
-        <div
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center w-full">
+        <button
           v-for="category in categories"
-          class="shadow-md h-20 w-full pt-6"
+          class="w-full btn rounded-none h-20"
           @click="changeCategory(category)"
-          :class="[
-            'shadow-md h-20 w-full pt-5 cursor-pointer',
-            category === selectedCategory ? ' btn-active' : '',
-          ]"
+          :class="
+            category === selectedCategory ? 'bg-primary' : 'btn-secondary'
+          "
         >
-          <p class="font-bold text-lg">{{ category }}</p>
-        </div>
+          {{ category }}
+        </button>
       </div>
     </section>
     <section>

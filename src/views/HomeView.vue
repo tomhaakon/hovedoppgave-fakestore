@@ -1,5 +1,5 @@
 <template class="">
-  <div class="">
+  <div class="container mx-auto px-4">
     <div class="p-5">
       <p class="text-md">Check out our newest items!</p>
     </div>

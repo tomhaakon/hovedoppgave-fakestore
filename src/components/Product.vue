@@ -1,35 +1,40 @@
 <template class="">
-  <div v-if="loading" class="text-9xl">Loading</div>
-  <div v-else>
-    <div v-for="product in products" class="">
-      <div class="w-full rounded-none shadow-lg">
-        <div class="w-full flex justify-center">
+  <div v-if="productStore.isLoading" class="flex justify-center">
+    <Loader />
+  </div>
+  <div
+    v-if="!productStore.isLoading"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+  >
+    <div v-for="product in productStore.totalProducts">
+      <div class="rounded-none border-2 border-slate-300 h-[550px] p-10">
+        <div class="flex justify-center">
           <img
             :alt="product.category"
             :src="product.image"
-            class="rounded-none h-80 cursor-pointer mt-10"
+            class="rounded-none cursor-pointer h-80"
             @click="productStore.openDialog(product)"
           />
         </div>
-        <div class="p-5">
+        <div>
           <div class="cursor-pointer" @click="productStore.openDialog(product)">
             <p class="py-3">
               {{ product.title }}
             </p>
           </div>
-          <div class="flex pb-5">
+          <div class="flex">
             <div class="w-3/5">
-              <p class="text-red-700 text-2xl font-bold py-2">
+              <p class="text-2xl font-bold py-2">
                 {{ (product.price * 10).toFixed(2) }},- kr
               </p>
               <p class="text-sm">Free shipping!</p>
             </div>
             <div class="w-2/5 justify-end flex pt-3">
               <button
-                class="btn-primary drop-shadow-md btn btn-sm rounded-none border-0 w-20"
+                class="btn-primary text-black drop-shadow-md btn btn-sm rounded-none border-0 w-20"
                 @click="addToCart(product)"
               >
-                + Buy
+                Buy
               </button>
             </div>
           </div>
@@ -43,22 +48,24 @@ import { useProductStore } from "@/stores/Productstore.js";
 import { useShoppingCartStore } from "../stores/Shoppingcartstore";
 import { ref, watch, onMounted, computed } from "vue";
 
+import Loader from "@/components/Loader.vue";
+
 // store
 const productStore = useProductStore();
 const shoppingCartStore = useShoppingCartStore();
 // refs
 const products = ref();
-const loading = ref(false);
+// const loading = ref(false);
 
 // functions
 const addToCart = (product) => shoppingCartStore.addToCart(product);
-watch(
-  () => productStore.showProducts,
-  (newValue) => {
-    loading.value = true;
-    products.value = newValue;
-    loading.value = false;
-  },
-  { immediate: true }
-);
+// watch(
+//   () => productStore.showProducts,
+//   (newValue) => {
+//     loading.value = true;
+//     products.value = newValue;
+//     loading.value = false;
+//   },
+//   { immediate: true }
+// );
 </script>

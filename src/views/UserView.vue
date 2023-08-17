@@ -1,5 +1,5 @@
 <template>
-  <div class="px-5">
+  <div class="container mx-auto px-4">
     <div v-if="viewParam === 'thanks'" class="text-center space-y-5">
       <p class="pt-10">Thank you for purchasing!</p>
       <p>

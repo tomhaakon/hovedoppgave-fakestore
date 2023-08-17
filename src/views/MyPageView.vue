@@ -1,5 +1,5 @@
 <template>
-  <div v-if="UserStore.isLoggedIn" class="px-5">
+  <div v-if="UserStore.isLoggedIn" class="container mx-auto px-4">
     <div class="">
       <p class="font-bold text-xl p-1 pb-5">MyPage</p>
     </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="container mx-auto px-4">
     <div class="px-5">
       <div class="flex h-10 w-full mb-5">
         <p class="font-bold text-xl p-1">Shopping cart</p>
@@ -36,23 +36,23 @@
         <div class="">
           <div class="">
             <button
-              class="pt-5"
+              class="btn-neutral btn rounded-none btn-sm mt-5"
               @click="clearCart"
               v-if="shoppingCartStore.cartItemCount > 0"
             >
-              <p class="text-gray-500">clear cart</p>
+              clear cart
             </button>
           </div>
           <div class="w-80 text-right">Total: {{ totalPrice }},-</div>
         </div>
         <div class="flex w-full">
           <div class="w-full"></div>
-          <div class="flex justify-end px-5">
+          <div class="flex justify-end">
             <button
-              class="btn btn-primary mt-5"
+              class="btn btn-primary mt-5 rounded-none"
               @click="shoppingCartStore.checkout()"
             >
-              To payment
+              Checkout
             </button>
           </div>
         </div>

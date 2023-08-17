@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ overlay: blurBg }" class="z-40 backdrop-blur-sm"></div>
+  <div :class="{ overlay: blurBg }" class="z-40 backdrop-blur-sm "></div>
   <Notification />
   <ProductDialog />
   <div class="">
@@ -53,6 +53,8 @@
               <li><a>My page</a></li>
             </ul>
           </div>
+          <!-- 
+            <button :disabled="isDisabled">asdasd</button> -->
         </div>
         <!-- Page content here -->
         <div class="">
