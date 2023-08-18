@@ -1,5 +1,5 @@
 <template>
-  <div v-if="UserStore.isLoggedIn" class="px-5">
+  <div v-if="UserStore.isLoggedIn" class="container mx-auto px-4">
     <div class="">
       <p class="font-bold text-xl p-1 pb-5">MyPage</p>
     </div>
@@ -34,7 +34,7 @@
           </div>
           <div class="flex pt-2">
             <div class="w-20">total</div>
-            <div class="w-full pb-5">
+            <div class="w-full">
               <p class="font-bold">
                 {{ calculateTotalPrice(purchase.items) }}
               </p>
@@ -57,7 +57,8 @@ const purchaseHistory = computed(() => UserStore.user?.purchaseHistory || []);
 console.log(purchaseHistory.value.length);
 
 const calculateTotalPrice = (items) => {
-  return items.reduce((total, item) => total + item.price * 10, 0);
+  const totalPrice = items.reduce((total, item) => total + item.price * 10, 0);
+  return totalPrice.toFixed(2);
 };
 
 const formatDate = (dateString) => {

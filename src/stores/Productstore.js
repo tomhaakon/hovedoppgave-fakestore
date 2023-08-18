@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 export const useProductStore = defineStore("productStore", {
   state: () => ({
     // variabler stores osv
+    isLoading: null,
     allProducts: null,
     allCategories: null,
     showDialog: false,
@@ -25,21 +26,19 @@ export const useProductStore = defineStore("productStore", {
         console.error("API call failed", error);
       }
     },
-    getCategories() {
-      return new Promise(async (resolve, reject) => {
-        try {
-          const apiCall = await fetch(
-            "https://fakestoreapi.com/products/categories"
-          );
-          const response = await apiCall.json();
-          this.allCategories = response;
-          resolve(this.allCategories);
-        } catch (error) {
-          console.error("API call failed", error);
-          reject(error);
-        }
-      });
+    async getCategories() {
+      try {
+        const apiCall = await fetch(
+          "https://fakestoreapi.com/products/categories"
+        );
+        const response = await apiCall.json();
+        this.allCategories = response;
+      } catch (error) {
+        console.error("API call failed", error);
+        throw error; // If you want to handle this error outside of this function
+      }
     },
+
     viewProducts(page, pageNumber = 1, limit = 5) {
       console.log("viewProducts(", page, ")");
       if (page === "new-products") {
@@ -53,39 +52,43 @@ export const useProductStore = defineStore("productStore", {
       }
     },
 
-    getProducts(link, pageNumber = 1, limit) {
-      return new Promise(async (resolve, reject) => {
-        try {
-          console.log("link", link);
-          const apiCall = await fetch("https://fakestoreapi.com/" + link);
-          //console.log("data fetched");
-          const response = await apiCall.json();
-          // Determine the starting index for the current page
-          const startIndex = (pageNumber - 1) * limit;
-          // Determine the ending index for the current page
-          const endIndex = pageNumber * limit;
+    async getProducts(link, pageNumber = 1, limit) {
+      // Make sure to provide a value for the limit parameter when calling this function
+      if (!limit) {
+        console.error("Limit must be provided");
+        return;
+      }
 
-          this.totalProducts = response; // Save the total products
-          // Slice the products to get only the products for the current page
+      try {
+        console.log("link", link);
+        this.isLoading = true;
+        const apiCall = await fetch("https://fakestoreapi.com/" + link);
+        const response = await apiCall.json();
 
-          this.showProducts = response.slice(startIndex, endIndex);
+        // Determine the starting index for the current page
+        const startIndex = (pageNumber - 1) * limit;
+        // Determine the ending index for the current page
+        const endIndex = pageNumber * limit;
 
-          resolve(this.showProducts);
+        this.totalProducts = response; // Save the total products
+        console.log(response);
+        this.isLoading = false;
+        // Slice the products to get only the products for the current page
+        this.showProducts = response.slice(startIndex, endIndex);
 
-          console.log("this.showPridocts", this.showProducts);
-          console.log("Page Number:", pageNumber);
-          console.log("Limit:", limit);
-          console.log("Start Index:", startIndex);
-          console.log("End Index:", endIndex);
-          console.log("Fetched Products:", response);
-          console.log("Sliced Products:", this.showProducts);
+        // console.log("this.showPridocts", this.showProducts);
+        // console.log("Page Number:", pageNumber);
+        // console.log("Limit:", limit);
+        // console.log("Start Index:", startIndex);
+        // console.log("End Index:", endIndex);
+        // console.log("Fetched Products:", response);
+        // console.log("Sliced Products:", this.showProducts);
 
-          // console.log("Updated this.ShowProducts:", this.showProducts);
-        } catch (error) {
-          console.error("API call failed", error);
-          reject(error);
-        }
-      });
+        // return this.showProducts; // Return the products for the current page
+      } catch (error) {
+        console.error("API call failed", error);
+        throw error; // If you want to handle this error outside of this function
+      }
     },
 
     openDialog(item) {

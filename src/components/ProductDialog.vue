@@ -1,7 +1,7 @@
 <template>
   <section
     v-if="isOpen"
-    class="bg-white w-full px-2 top-10 fixed shadow-xl z-50"
+    class="bg-white w-full px-5 top-10 fixed shadow-xl z-50"
   >
     <div class="flex pt-3">
       <div class="w-5/6 pb-2">
@@ -30,10 +30,11 @@
           {{ productStore.showSingleProduct.title }}
         </p>
       </div>
-      <div class="pb-5">
+      <div class="">
         <p class="text-sm">{{ productStore.showSingleProduct.description }}</p>
       </div>
-      <div class="flex w-full justify-center">
+
+      <div class="flex w-full justify-center pt-10">
         <div class="flex justify-center w-1/2">
           <div class="flex-row">
             <a :href="productStore.showSingleProduct.image" target="_blank">
@@ -49,35 +50,35 @@
           <div class="h-full space-y-4">
             <div class="pl-5">
               <div class="w-full">
-                <p class="text-2xl text-red-700 font-bold pt-5">
-                  {{ Math.round(productStore.showSingleProduct.price * 10) }},-
-                  Kr
+                <p class="text-2xl text-red-700 font-bold pt-16">
+                  {{ (productStore.showSingleProduct.price * 10).toFixed(2) }},-
+                  kr
                 </p>
               </div>
               <div class="h-1/3"><p>free shipping!</p></div>
-            </div>
-            <div class="">
-              <button
-                @click="
-                  shoppingCartStore.addToCart(productStore.showSingleProduct) &
-                    productStore.closeDialog()
-                "
-                class="btn btn-primary w-full rounded-none"
-              >
-                Buy
-              </button>
-
-              <button
-                @click="productStore.closeDialog()"
-                class="btn btn-sm w-full rounded-none"
-              >
-                Cancel
-              </button>
+              <div><p class="italic pb-5">(click on image to enlarge)</p></div>
             </div>
           </div>
         </div>
       </div>
-      <div><p class="italic pt-5">(click on image to enlarge)</p></div>
+      <div class="pt-5 space-y-5">
+        <button
+          @click="
+            shoppingCartStore.addToCart(productStore.showSingleProduct) &
+              productStore.closeDialog()
+          "
+          class="btn btn-primary w-full rounded-none"
+        >
+          Buy
+        </button>
+
+        <button
+          @click="productStore.closeDialog()"
+          class="btn btn-sm w-full rounded-none"
+        >
+          Cancel
+        </button>
+      </div>
     </div>
 
     <div class="w-full pb-5"></div>
