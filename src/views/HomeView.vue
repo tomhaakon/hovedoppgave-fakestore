@@ -1,7 +1,7 @@
 <template class="">
   <div class="container mx-auto px-4">
-    <div class="p-5">
-      <p class="text-md">Check out our newest items!</p>
+    <div class="">
+      <p class="font-bold text-xl pb-5">Home</p>
     </div>
     <div><Product></Product></div>
   </div>
