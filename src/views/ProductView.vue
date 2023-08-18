@@ -1,6 +1,19 @@
 <template>
   <div class="container mx-auto px-4">
-    <section v-if="showCategories" class="flex justify-center pt-5">
+    <section>
+      <div class="cursor-pointer pb-5" @click="changeCategory('products')">
+        <p class="font-bold text-xl pb-5">Products</p>
+      </div>
+      <div v-if="selectedCategory" class="flex space-x-2">
+        <div><p>/</p></div>
+        <div>
+          <p class="font-bold text-xl pb-5">
+            {{ selectedCategory }}
+          </p>
+        </div>
+      </div>
+    </section>
+    <section v-if="showCategories" class="flex justify-center">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center w-full">
         <button
           v-for="category in categories"
@@ -15,15 +28,7 @@
       </div>
     </section>
     <section>
-      <div class="flex p-5">
-        <div class="cursor-pointer pr-2" @click="changeCategory('products')">
-          All Products
-        </div>
-        <div v-if="selectedCategory" class="flex space-x-2">
-          <div>/</div>
-          <div>{{ selectedCategory }}</div>
-        </div>
-      </div>
+      <div class="flex"></div>
       <div ref="productList" class="product-list">
         <Product></Product>
       </div>
