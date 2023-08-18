@@ -73,7 +73,7 @@
           <!-- Sidebar content here -->
           <li class="py-5 rounded-none bg-transparent">
             <RouterLink to="/" @click="handleClick()">
-              <img src="@/assets/icon2.png" />
+              <img src="@/assets/logo-black.png" />
             </RouterLink>
           </li>
           <li class="text-2xl">
