@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ overlay: blurBg }" class="z-40 backdrop-blur-sm "></div>
+  <div :class="{ overlay: blurBg }" class="z-40 backdrop-blur-sm"></div>
   <Notification />
   <ProductDialog />
   <div class="">
@@ -12,36 +12,11 @@
       />
       <div class="drawer-content flex flex-col">
         <!-- Navbar -->
-        <div class="w-full navbar bg-base-100">
-          <div class="flex-none lg:hidden">
-            <label for="my-drawer-3" class="btn btn-square btn-ghost">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                class="inline-block w-6 h-6 stroke-current"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                ></path>
-              </svg>
-            </label>
-          </div>
-          <div class="flex-1 px-2 mx-2 w-full">
-            <div class="w-1/4">
-              <span class="px-2"><RouterLink to="/">L0G0</RouterLink> </span>
-            </div>
-            <div class="w-2/4">
-              <p class="font-bold">NETTBUTIKK</p>
-            </div>
-            <div class="w-1/4 justify-end flex">
-              <RouterLink to="/shoppingcart">
-                <span class="uppercase font-bold text-sm"
-                  >cart({{ shoppingCartStore.cartItemCount }})</span
-                >
+        <div class="navbar bg-base-100 p-4">
+          <div class="flex w-full">
+            <div class="w-full">
+              <RouterLink to="/">
+                <img src="@/assets/logo-black.png" class="w-40" />
               </RouterLink>
             </div>
           </div>
@@ -59,7 +34,33 @@
         <!-- Page content here -->
         <div class="">
           <div :class="{ fixed: blurBg }">
-            <SearchBar />
+            <div class="flex">
+              <div class="lg:hidden">
+                <label for="my-drawer-3" class="btn btn-square btn-ghost">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    class="w-6 h-6 stroke-current"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    ></path>
+                  </svg>
+                </label>
+              </div>
+              <SearchBar />
+            </div>
+            <div class="w-full flex justify-end px-4">
+              <RouterLink to="/shoppingcart">
+                <span class="uppercase font-bold text-sm"
+                  >cart({{ shoppingCartStore.cartItemCount }})</span
+                >
+              </RouterLink>
+            </div>
             <RouterView class="min-h-[calc(100vh-260px)]" />
             <!-- footer here -->
             <Footer class="" />
@@ -71,7 +72,9 @@
         <ul class="pl-10 space-y-2 p-4 w-80 h-full bg-base-200">
           <!-- Sidebar content here -->
           <li class="py-5 rounded-none bg-transparent">
-            <RouterLink to="/" @click="handleClick()">LOGO</RouterLink>
+            <RouterLink to="/" @click="handleClick()">
+              <img src="@/assets/icon2.png" />
+            </RouterLink>
           </li>
           <li class="text-2xl">
             <RouterLink to="/" @click="handleClick()">Home</RouterLink>

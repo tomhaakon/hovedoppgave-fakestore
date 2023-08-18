@@ -6,7 +6,7 @@
         follow us on sosial media!
       </p>
     </div>
-    <div class="">
+    <div class="text-2xl">
       <a href="#" class="fa fa-facebook px-3"></a>
       <a href="#" class="fa fa-twitter px-3"></a>
       <a href="#" class="fa fa-instagram px-3"></a>
