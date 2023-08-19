@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto px-4">
     <section>
-      <div class="cursor-pointer pb-5" @click="changeCategory('products')">
+      <div class="cursor-pointer" @click="changeCategory('products')">
         <p class="font-bold text-xl pb-5">Products</p>
       </div>
       <div v-if="selectedCategory" class="flex space-x-2">
