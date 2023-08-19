@@ -9,7 +9,7 @@
         </div>
         <div v-for="item in filteredItems" :key="item.id" class="pb-4">
           <div class="w-full flex border-2 p-4">
-            <div class="w-1/2 h-20 flex justify-center">
+            <div class="w-1/2 h-20 flex ">
               <img :src="item.image" class="object-fit pb-4 px-4" />
             </div>
             <div class="w-full" v-html="highlightSearchTerm(item.title)"></div>
