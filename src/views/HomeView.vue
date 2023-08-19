@@ -1,9 +1,12 @@
 <template class="">
   <div class="container mx-auto px-4">
-    <div class="">
-      <p class="font-bold text-xl pb-5">Home</p>
+    <div v-if="productStore.searching">{{ productStore.searching }}</div>
+    <div v-else>
+      <div class="">
+        <p class="font-bold text-xl pb-5">Home</p>
+      </div>
+      <div><Product></Product></div>
     </div>
-    <div><Product></Product></div>
   </div>
 </template>
 <script setup>

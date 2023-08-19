@@ -13,7 +13,7 @@
           'text-white',
           'p-2',
           'shadow',
-          '',
+          'py-6',
           'cursor-pointer',
         ]"
         @click="removeNotification(notification.id)"
@@ -33,7 +33,6 @@ const removeNotification = store.removeNotification;
 
 watchEffect(() => {
   const notifications = store.notifications;
-  // ... any additional logic you want to perform on change
 });
 </script>
 
