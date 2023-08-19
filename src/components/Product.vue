@@ -1,5 +1,5 @@
 <template class="">
-  <div v-if="productStore.isLoading" class="flex justify-center ">
+  <div v-if="productStore.isLoading" class="flex justify-center">
     <Loader />
   </div>
   <div
@@ -9,19 +9,27 @@
     <div v-for="product in productStore.totalProducts">
       <div class="rounded-none border-2 border-slate-300 h-[550px] p-10">
         <div class="flex justify-center">
-          <img
-            :alt="product.category"
-            :src="product.image"
-            class="rounded-none cursor-pointer h-80"
-            @click="productStore.openDialog(product)"
-          />
+          <RouterLink
+            to="/item"
+            class="cursor-pointer"
+            @click="productStore.showSingleProduct = product"
+          >
+            <img
+              :alt="product.category"
+              :src="product.image"
+              class="rounded-none cursor-pointer h-80"
+              @click="productStore.showSingleProduct = product"
+            />
+          </RouterLink>
         </div>
         <div>
-          <div class="cursor-pointer" @click="productStore.openDialog(product)">
-            <p class="py-3">
-              {{ product.title }}
-            </p>
-          </div>
+          <RouterLink
+            to="/item"
+            class="cursor-pointer"
+            @click="productStore.showSingleProduct = product"
+          >
+            {{ product.title }}
+          </RouterLink>
           <div class="flex">
             <div class="w-3/5">
               <p class="text-2xl font-bold py-2">
@@ -47,6 +55,7 @@
 import { useProductStore } from "@/stores/Productstore.js";
 import { useShoppingCartStore } from "../stores/Shoppingcartstore";
 import { ref, watch, onMounted, computed } from "vue";
+import { RouterLink } from "vue-router";
 
 import Loader from "@/components/Loader.vue";
 

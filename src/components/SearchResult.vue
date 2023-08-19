@@ -2,17 +2,27 @@
   <div class="container mx-auto px-4">
     <div v-if="productStore.searching">
       <div v-if="filteredItems.length > 0">
-        <div class="font-bold">
+        <div class="font-bold py-4">
           Found {{ filteredItems.length }} items containing the word "{{
             productStore.searching
           }}"
         </div>
         <div v-for="item in filteredItems" :key="item.id" class="pb-4">
-          <div class="w-full flex border-2 p-4">
-            <div class="w-1/2 h-20 flex ">
-              <img :src="item.image" class="object-fit pb-4 px-4" />
+          <div class="w-full flex border-2 pt-2">
+            <div class="w-1/4 flex justify-center h-20">
+              <img :src="item.image" class="" />
             </div>
-            <div class="w-full" v-html="highlightSearchTerm(item.title)"></div>
+            <div class="w-3/4 space-y-2">
+              <div
+                class="text-container w-full"
+                v-html="highlightSearchTerm(item.title)"
+              ></div>
+              <div class="flex w-full justify-end">
+                <button class="btn-primary btn btn-sm rounded-none">
+                  Add to cart
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -49,3 +59,15 @@ const highlightSearchTerm = (title) => {
     .join("");
 };
 </script>
+<style>
+/* Add this CSS class to control the text container */
+.text-container {
+  max-width: 200px; /* Adjust as needed */
+  max-height: 50px; /* Adjust as needed */
+  overflow: hidden; /* Hide overflowed content */
+  display: -webkit-box; /* Enable line clamping */
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis; /* Add ellipsis for truncated text */
+}
+</style>

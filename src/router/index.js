@@ -6,6 +6,7 @@ import AboutView from "../views/AboutView.vue";
 import MyPageView from "../views/MyPageView.vue";
 import ShoppingCartView from "../views/ShoppingCartView.vue";
 import UserView from "@/views/UserView.vue";
+import ShowSingleProduct from "@/views/ShowSingleProduct.vue";
 
 const routes = [
   {
@@ -18,6 +19,12 @@ const routes = [
     name: "thanks",
     component: UserView,
   },
+  {
+    path: "/item",
+    name: "showsingleproduct",
+    component: ShowSingleProduct,
+  },
+
   {
     path: "/register",
     name: "register",

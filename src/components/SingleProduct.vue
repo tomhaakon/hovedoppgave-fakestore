@@ -1,27 +1,14 @@
 <template>
-  <section
-    v-if="isOpen"
-    class="bg-white w-full px-5 top-10 fixed shadow-xl z-50"
-  >
+  <section v-if="productStore.showSingleProduct" class="mx-auto px-4">
     <div class="flex pt-3">
       <div class="w-5/6 pb-2">
         <p>
-          <RouterLink to="/product" @click="productStore.closeDialog()"
-            >Products</RouterLink
-          >
-          >
+          <RouterLink to="/product"></RouterLink>
+          Products /
           <RouterLink to="/product">{{
             productStore.showSingleProduct.category
           }}</RouterLink>
         </p>
-      </div>
-      <div class="w-1/6 flex justify-end pr-5">
-        <span
-          class="text-2xl cursor-pointer"
-          @click="productStore.closeDialog()"
-        >
-          x
-        </span>
       </div>
     </div>
     <div class="w-full pb-5">
@@ -30,7 +17,9 @@
           {{ productStore.showSingleProduct.title }}
         </p>
       </div>
-    
+      <div class="">
+        <p class="text-sm">{{ productStore.showSingleProduct.description }}</p>
+      </div>
 
       <div class="flex w-full justify-center pt-10">
         <div class="flex justify-center w-1/2">
@@ -69,13 +58,6 @@
         >
           Buy
         </button>
-
-        <button
-          @click="productStore.closeDialog()"
-          class="btn btn-sm w-full rounded-none"
-        >
-          Cancel
-        </button>
       </div>
     </div>
 
@@ -83,13 +65,10 @@
   </section>
 </template>
 <script setup>
-import { computed } from "vue";
 import { RouterLink } from "vue-router";
 import { useProductStore } from "../stores/Productstore";
 import { useShoppingCartStore } from "../stores/Shoppingcartstore";
 
 const productStore = useProductStore();
 const shoppingCartStore = useShoppingCartStore();
-const isOpen = computed(() => productStore.showDialog);
-//console.log("productdialog: productstore.showDialog=", isOpen);
 </script>
