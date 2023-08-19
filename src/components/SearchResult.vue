@@ -16,6 +16,9 @@
           </div>
         </div>
       </div>
+      <div v-else>
+        No matching result with the word "{{ productStore.searching }}"
+      </div>
     </div>
   </div>
 </template>
