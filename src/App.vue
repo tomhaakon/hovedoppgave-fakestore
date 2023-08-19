@@ -165,7 +165,14 @@
                 >
               </RouterLink>
             </div>
-            <RouterView class="min-h-[calc(100vh-260px)]" />
+            <div class="min-h-[calc(100vh-260px)]">
+              <div v-if="productStore.searching">
+                <SearchResult />
+              </div>
+              <div v-else>
+                <RouterView />
+              </div>
+            </div>
             <!-- footer here -->
             <Footer class="" />
           </div>
@@ -336,6 +343,7 @@ import { useUserStore } from "@/stores/UserStore";
 import Notification from "@/components/Notification.vue";
 import SearchBar from "@/components/SearchBar.vue";
 import Footer from "@/components/Footer.vue";
+import SearchResult from "./components/SearchResult.vue";
 
 const userStore = useUserStore();
 const shoppingCartStore = useShoppingCartStore();

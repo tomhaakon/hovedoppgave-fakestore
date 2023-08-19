@@ -1,5 +1,5 @@
 <template class="">
-  <div v-if="productStore.isLoading" class="flex justify-center">
+  <div v-if="productStore.isLoading" class="flex justify-center ">
     <Loader />
   </div>
   <div

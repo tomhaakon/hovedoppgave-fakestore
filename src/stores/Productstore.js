@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 export const useProductStore = defineStore("productStore", {
   state: () => ({
     // variabler stores osv
+    searchResult: null,
     searching: null,
     isLoading: null,
     allProducts: null,
@@ -61,7 +62,6 @@ export const useProductStore = defineStore("productStore", {
       }
 
       try {
-        console.log("link", link);
         this.isLoading = true;
         const apiCall = await fetch("https://fakestoreapi.com/" + link);
         const response = await apiCall.json();
@@ -76,34 +76,29 @@ export const useProductStore = defineStore("productStore", {
         this.isLoading = false;
         // Slice the products to get only the products for the current page
         this.showProducts = response.slice(startIndex, endIndex);
-
-        // console.log("this.showPridocts", this.showProducts);
-        // console.log("Page Number:", pageNumber);
-        // console.log("Limit:", limit);
-        // console.log("Start Index:", startIndex);
-        // console.log("End Index:", endIndex);
-        // console.log("Fetched Products:", response);
-        // console.log("Sliced Products:", this.showProducts);
-
-        // return this.showProducts; // Return the products for the current page
       } catch (error) {
         console.error("API call failed", error);
-        throw error; // If you want to handle this error outside of this function
+        throw error;
       }
     },
+    async searchProducts() {
+      try {
+        this.isLoading = true;
+        const apiCall = await fetch("https://fakestoreapi.com/products");
+        const response = await apiCall.json();
 
+        console.log("searchProducts response: ", response);
+        this.searchResult = response; // Save the total products
+
+        this.isLoading = false;
+      } catch (error) {}
+    },
     openDialog(item) {
       this.showDialog = true;
       this.showSingleProduct = item;
-      // console.log("dialog open", item);
-      //console.log("showDialog:", this.showDialog);
     },
     closeDialog() {
       this.showDialog = false;
-      // console.log("dialog closed");
-    },
-    addToCart(item) {
-      console.log("Added item ", item, " to cart");
     },
   },
   getters: {},
