@@ -5,9 +5,12 @@ export default {
   daisyui: {
     themes: [
       {
-        light: {
-          ...require("daisyui/src/theming/themes")["[data-theme=light]"],
-          primary: "#10b981",   
+        mytheme: {
+          primary: "#cdba81",
+          secondary: "#e3dbc4",
+          accent: "#37cdbe",
+          neutral: "#3d4451",
+          "base-100": "#ffffff",
         },
       },
     ],

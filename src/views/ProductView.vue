@@ -7,14 +7,14 @@
       <div v-if="selectedCategory" class="flex space-x-2">
         <div><p>/</p></div>
         <div>
-          <p class="font-bold text-xl pb-5">
+          <p class="font-bold text-xl">
             {{ selectedCategory }}
           </p>
         </div>
       </div>
     </section>
-    <section class="flex justify-center">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center w-full">
+    <section class="flex justify-center pb-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center w-full">
         <button
           v-for="category in productStore.allCategories"
           class="w-full btn rounded-none h-20"
