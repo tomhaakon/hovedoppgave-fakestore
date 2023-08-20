@@ -8,14 +8,16 @@
         <!-- sd -->
         <div class="">
           <div class="flex pb-5">
-            <div class="w-14 flex"></div>
-            <div class="w-full">
+            <div class="flex w-2/4 font-bold text-sm">
+              <p class="text-center w-full">Quantity</p>
+            </div>
+            <div class="w-full px-4">
               <p class="font-bold text-sm">Title</p>
             </div>
-            <div class="w-28">
+            <div class="w-1/4">
               <p class="font-bold text-sm">Price</p>
             </div>
-            <div class="w-5"></div>
+            <div class=""></div>
           </div>
           <div
             v-for="item in groupedCart"
@@ -23,13 +25,26 @@
             v-if="groupedCart"
             class="flex shadow-sm"
           >
-            <div class="w-14 flex">{{ item.count }}x</div>
-            <div class="w-full">{{ item.title }}</div>
-            <div class="w-28 text-left">
-              {{ Math.round(item.price * 10 * item.count) }},-
+            <div class="w 2/4 flex join">
+              <button
+                class="btn btn-sm btn-secondary rounded-none"
+                @click="removeFromCart(item.id)"
+              >
+                -
+              </button>
+              <button class="btn-ghost btn-sm btn rounded-none">
+                {{ item.count }}
+              </button>
+              <button
+                class="btn btn-sm btn-secondary rounded-none"
+                @click="useShoppingCartStore().addToCart(item)"
+              >
+                +
+              </button>
             </div>
-            <div class="w-10">
-              <button class="" @click="removeFromCart(item.id)">x</button>
+            <div class="w-full px-4">{{ item.title }}</div>
+            <div class="text-left w-1/4">
+              {{ Math.round(item.price * 10 * item.count) }},-
             </div>
           </div>
         </div>

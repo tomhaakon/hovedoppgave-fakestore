@@ -14,11 +14,14 @@
             </div>
             <div class="w-3/4 space-y-2">
               <div
-                class="text-container w-full"
+                class="text-container w-full h-full"
                 v-html="highlightSearchTerm(item.title)"
               ></div>
               <div class="flex w-full justify-end">
-                <button class="btn-primary btn btn-sm rounded-none">
+                <button
+                  class="btn-primary btn btn-sm rounded-none"
+                  @click="useShoppingCartStore().addToCart(item)"
+                >
                   Add to cart
                 </button>
               </div>
@@ -35,6 +38,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useProductStore } from "../stores/Productstore";
+import { useShoppingCartStore } from "../stores/Shoppingcartstore";
 
 const productStore = useProductStore();
 const searching = productStore.searching;
