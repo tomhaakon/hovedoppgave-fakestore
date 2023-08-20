@@ -12,32 +12,37 @@ export const useProductStore = defineStore("productStore", {
     showSingleProduct: null,
     showProducts: null,
     showCategory: null,
-    apiLink: null,
     selectedCategory: null,
     totalProducts: null,
   }),
   actions: {
     async getCategory(category) {
       try {
+        this.isLoading = true;
         const apiCall = await fetch(
           "https://fakestoreapi.com/products/category/" + category
         );
         const response = await apiCall.json();
         this.showCategory = response;
+        this.isLoading = false;
       } catch (error) {
         console.error("API call failed", error);
       }
     },
     async getCategories() {
       try {
+        console.log("getCategories triggeed");
+        this.isLoading = true;
         const apiCall = await fetch(
           "https://fakestoreapi.com/products/categories"
         );
         const response = await apiCall.json();
         this.allCategories = response;
+        this.isLoading = false;
+        console.log("stored ", this.allCategories, "in categories");
       } catch (error) {
         console.error("API call failed", error);
-        throw error; // If you want to handle this error outside of this function
+        throw error; //  handle this error outside of this function
       }
     },
 
@@ -92,13 +97,6 @@ export const useProductStore = defineStore("productStore", {
 
         this.isLoading = false;
       } catch (error) {}
-    },
-    openDialog(item) {
-      this.showDialog = true;
-      this.showSingleProduct = item;
-    },
-    closeDialog() {
-      this.showDialog = false;
     },
   },
   getters: {},

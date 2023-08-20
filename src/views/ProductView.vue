@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto px-4">
-    <section>
+    <section class="flex space-x-2">
       <div class="cursor-pointer" @click="changeCategory('products')">
         <p class="font-bold text-xl pb-5">Products</p>
       </div>
@@ -13,14 +13,14 @@
         </div>
       </div>
     </section>
-    <section v-if="showCategories" class="flex justify-center">
+    <section class="flex justify-center">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center w-full">
         <button
-          v-for="category in categories"
+          v-for="category in productStore.allCategories"
           class="w-full btn rounded-none h-20"
           @click="changeCategory(category)"
           :class="
-            category === selectedCategory ? 'bg-primary' : 'btn-secondary'
+            category === selectedCategory ? 'btn-primary' : 'btn-secondary'
           "
         >
           {{ category }}
@@ -65,14 +65,18 @@ import { RouterLink } from "vue-router";
 
 // store
 const productStore = useProductStore();
-// variables
-const categories = ref();
+
+// refs
 const selectedCategory = ref();
 
-const showCategories = ref(true);
+// variables
 const currentPage = ref(1); // added
 const limit = 5; // items per page
 const productList = ref(null);
+
+productStore.viewProducts("products", currentPage.value, limit);
+productStore.getCategories();
+
 // total pages calculated from total products divided by limit
 const totalPages = computed(() => {
   return Math.ceil(productStore.totalProducts?.length / limit);
@@ -80,14 +84,12 @@ const totalPages = computed(() => {
 
 console.log("totalPages: ", totalPages);
 // Call viewProducts with current page and limit
-productStore.viewProducts("products", currentPage.value, limit);
-productStore.getCategories();
 
 // watchers
 watch(
   () => productStore.selectedCategory,
   async (newValue) => {
-    categories.value = await productStore.getCategories();
+    await productStore.getCategories();
     selectedCategory.value = newValue;
   },
   { immediate: true }
@@ -136,6 +138,7 @@ const prevPage = () => {
 const changeCategory = (category) => {
   if (category === "products") {
     productStore.selectedCategory = "";
+    return;
   }
   currentPage.value = 1; // Reset to the first page
   productStore.viewProducts(category, currentPage.value, limit);
