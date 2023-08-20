@@ -1,6 +1,11 @@
 <template>
   <section v-if="productStore.showSingleProduct" class="mx-auto px-4">
-    <div class="flex pt-3">
+    <div class="">
+      <div>
+        <p class="font-bold text-xl ">
+          {{ productStore.showSingleProduct.title }}
+        </p>
+      </div>
       <div class="w-5/6 pb-2">
         <p>
           <RouterLink to="/product"></RouterLink>
@@ -12,12 +17,6 @@
       </div>
     </div>
     <div class="w-full pb-5">
-      <div>
-        <p class="font-bold text-xl pb-5">
-          {{ productStore.showSingleProduct.title }}
-        </p>
-      </div>
-
       <div class="w-full justify-center">
         <div class=" ">
           <a :href="productStore.showSingleProduct.image" target="_blank">
