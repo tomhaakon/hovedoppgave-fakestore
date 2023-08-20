@@ -19,12 +19,12 @@
       </div>
 
       <div class="w-full justify-center">
-        <div class="w-full h-full">
+        <div class=" ">
           <a :href="productStore.showSingleProduct.image" target="_blank">
             <img
               :src="productStore.showSingleProduct.image"
               :alt="productStore.showSingleProduct.title"
-              class=""
+              class="p-5"
           /></a>
 
           <div class="py-5">

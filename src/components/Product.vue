@@ -8,7 +8,7 @@
   >
     <div v-for="product in productStore.totalProducts">
       <div class="rounded-none border-2 border-slate-300 h-[550px] p-10">
-        <div class="flex justify-center">
+        <div class="flex justify-center ">
           <RouterLink
             to="/item"
             class="cursor-pointer"
