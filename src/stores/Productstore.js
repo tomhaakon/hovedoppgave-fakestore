@@ -47,7 +47,8 @@ export const useProductStore = defineStore("productStore", {
     },
 
     viewProducts(page, pageNumber = 1, limit = 5) {
-      console.log("viewProducts(", page, ")");
+      // ...
+
       if (page === "new-products") {
         const apiLink = "products?sort=desc&limit=" + 3; // Use passed limit
         this.getProducts(apiLink, pageNumber, limit);
@@ -60,6 +61,7 @@ export const useProductStore = defineStore("productStore", {
     },
 
     async getProducts(link, pageNumber = 1, limit) {
+      console.log("look here", this.showProducts);
       // Make sure to provide a value for the limit parameter when calling this function
       if (!limit) {
         console.error("Limit must be provided");
@@ -77,10 +79,12 @@ export const useProductStore = defineStore("productStore", {
         const endIndex = pageNumber * limit;
 
         this.totalProducts = response; // Save the total products
-        console.log(response);
+        console.log("before slice", response);
         this.isLoading = false;
         // Slice the products to get only the products for the current page
         this.showProducts = response.slice(startIndex, endIndex);
+        console.warn("after slice", this.showProducts);
+        console.log("Link:", link, "Page Number:", pageNumber, "Limit:", limit);
       } catch (error) {
         console.error("API call failed", error);
         throw error;

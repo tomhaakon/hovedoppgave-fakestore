@@ -80,6 +80,7 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
 
       this.cart = [];
       localStorage.removeItem("cart");
+      useNotificationStore().confirmDialog = false;
     },
 
     // empty cart

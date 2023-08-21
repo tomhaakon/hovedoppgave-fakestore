@@ -42,7 +42,7 @@
                 +
               </button>
             </div>
-            <div class="w-full px-4  pb-2">{{ item.title }}</div>
+            <div class="w-full px-4 pb-2">{{ item.title }}</div>
             <div class="text-left w-1/4">
               {{ Math.round(item.price * 10 * item.count) }},-
             </div>
@@ -104,14 +104,14 @@ const dialogTitle = ref("");
 const dialogFunction1 = ref(null);
 
 const setClearCartDialog = () => {
+  toggleDialog();
   dialogTitle.value = "Are you sure you want to clear the cart of all items?";
   dialogFunction1.value = clearCart;
-  toggleDialog();
 };
 const setCheckoutDialog = () => {
+  toggleDialog();
+
   dialogTitle.value = "Are you sure you want to proceed with the checkout?";
   dialogFunction1.value = checkout;
-
-  toggleDialog();
 };
 </script>

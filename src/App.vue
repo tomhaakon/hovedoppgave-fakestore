@@ -142,7 +142,7 @@
           <div>
             <!-- navbar -->
             <div class="flex w-full mx-auto mt-4">
-              <div class="h-full w-2/3 px-4 justify-end flex space-x-4">
+              <div class="h-full w-full px-4 justify-end flex space-x-4">
                 <!-- hamburger  -->
                 <div class="flex my-auto">
                   <div class="lg:hidden">
@@ -151,26 +151,32 @@
                     </label>
                   </div>
                 </div>
+                <!--  searchbar -->
+                <div class="w-full">
+                  <SearchBar class="" />
+                </div>
                 <!-- profil ikon -->
-                <button class="flex my-auto" @click="router.push('/mypage')">
-                  <span class="material-symbols-sharp"> account_circle </span>
-                </button>
-                <!-- shoppingcart icoon -->
-                <button
-                  class="flex my-auto"
-                  @click="router.push('/shoppingcart')"
-                >
-                  <span class="material-symbols-sharp my-auto">
-                    shopping_cart
-                  </span>
+                <div v-if="userStore.user">
+                  <button class="flex my-auto" @click="router.push('/mypage')">
+                    <span class="material-symbols-sharp"> account_circle </span>
+                  </button>
+                </div>
+                <div class="">
+                  <!-- shoppingcart icoon -->
+                  <button
+                    class="flex my-auto"
+                    @click="router.push('/shoppingcart')"
+                  >
+                    <span class="material-symbols-sharp my-auto">
+                      shopping_cart
+                    </span>
 
-                  <p>(</p>
-                  {{ shoppingCartStore.cartItemCount }}
-                  <p>)</p>
-                </button>
+                    <p>(</p>
+                    {{ shoppingCartStore.cartItemCount }}
+                    <p>)</p>
+                  </button>
+                </div>
               </div>
-              <!--  searchbar -->
-              <SearchBar class="" />
             </div>
             <!-- routerview -->
             <div class="min-h-[calc(100vh-260px)] mt-5">

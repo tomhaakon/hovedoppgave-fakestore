@@ -1,5 +1,6 @@
 <template>
   <div class="container mx-auto px-4">
+    <!-- categories -->
     <section class="flex space-x-2">
       <div class="cursor-pointer" @click="changeCategory('products')">
         <p class="font-bold text-xl pb-5">Products</p>
@@ -27,31 +28,39 @@
         </button>
       </div>
     </section>
-    <section>
-      <div class="flex"></div>
-      <div ref="productList" class="product-list">
-        <Product></Product>
-      </div>
-      <div class="pagination flex text-center pt-5" :hidden="totalPages === 1">
-        <div class="join w-full justify-center">
-          <button
-            class="join-item btn"
-            @click="prevPage"
-            :disabled="currentPage === 1"
-          >
-            «
-          </button>
-          <button class="join-item btn" :disabled="totalPages === 1">
-            {{ currentPage }} / {{ totalPages }}
-          </button>
-          <button
-            class="join-item btn"
-            :disabled="currentPage === totalPages"
-            @click="nextPage"
-          >
-            »
-          </button>
-        </div>
+    <!-- products -->
+    <div class="text-red-500 uppercase font-bold">
+      <p>!!!TESTING!!!</p>
+      <p>Total Pages: {{ totalPages }}</p>
+      <p>totalProducts: {{ productStore.totalProducts?.length }}</p>
+      <p>current page: {{ currentPage }}</p>
+    </div>
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {{ console.log(productStore.showProducts) }}
+
+      <Product />
+    </section>
+    <section class="flex justify-center pb-4">
+      <div class="join">
+        <button v-if="currentPage > 1" class="join-item btn" @click="prevPage">
+          Previous
+        </button>
+        <button
+          v-for="item in paginationItems"
+          :key="item"
+          class="join-item btn"
+          @click="goToPage(item)"
+          :disabled="item === '...'"
+        >
+          {{ item }}
+        </button>
+        <button
+          v-if="currentPage < totalPages"
+          class="join-item btn"
+          @click="nextPage"
+        >
+          Next
+        </button>
       </div>
     </section>
   </div>
@@ -99,15 +108,9 @@ watch(
 // lifecycle hooks
 
 // pagination functions
-const nextPage = () => {
-  if (currentPage.value < totalPages.value) {
-    if (productList.value) {
-      const offset = 500; // Adjust as needed
-      const topPosition =
-        productList.value.getBoundingClientRect().top + window.pageYOffset;
-      window.scrollTo({ top: topPosition - offset, behavior: "smooth" });
-    }
-    currentPage.value += 1;
+const goToPage = (page) => {
+  if (page !== "...") {
+    currentPage.value = page;
     productStore.viewProducts(
       selectedCategory.value || "products",
       currentPage.value,
@@ -115,16 +118,40 @@ const nextPage = () => {
     );
   }
 };
-
+const paginationItems = computed(() => {
+  const items = [];
+  for (let i = 1; i <= totalPages.value; i++) {
+    if (
+      i === 1 ||
+      i === 2 ||
+      i === totalPages.value - 1 ||
+      i === totalPages.value ||
+      i === currentPage.value
+    ) {
+      items.push(i);
+    } else if (
+      i === currentPage.value + 1 &&
+      i !== totalPages.value - 1 &&
+      i !== totalPages.value
+    ) {
+      items.push("...");
+    }
+  }
+  return items;
+});
 const prevPage = () => {
   if (currentPage.value > 1) {
-    if (productList.value) {
-      const offset = 500; // Adjust as needed
-      const topPosition =
-        productList.value.getBoundingClientRect().top + window.pageYOffset;
-      window.scrollTo({ top: topPosition - offset, behavior: "smooth" });
-    }
     currentPage.value -= 1;
+    productStore.viewProducts(
+      selectedCategory.value || "products",
+      currentPage.value,
+      limit
+    );
+  }
+};
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value += 1;
     productStore.viewProducts(
       selectedCategory.value || "products",
       currentPage.value,

@@ -6,7 +6,8 @@
     v-if="!productStore.isLoading"
     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
   >
-    <div v-for="product in productStore.totalProducts">
+    <!-- Use productStore.showProducts instead of productStore.totalProducts -->
+    <div v-for="product in productStore.showProducts">
       <div class="rounded-none border-2 border-slate-300 h-[550px] px-4">
         <div class="flex justify-center pb-6 p-10">
           <RouterLink
@@ -89,13 +90,4 @@ const getProductCountInCart = (productId) => {
 
 // functions
 const addToCart = (product) => shoppingCartStore.addToCart(product);
-// watch(
-//   () => productStore.showProducts,
-//   (newValue) => {
-//     loading.value = true;
-//     products.value = newValue;
-//     loading.value = false;
-//   },
-//   { immediate: true }
-// );
 </script>

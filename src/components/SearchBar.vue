@@ -1,5 +1,5 @@
 <template>
-  <div class="my-auto px-4 w-full">
+  <div class="my-auto w-full">
     <input
       v-model="searchVar"
       maxlength="15"
