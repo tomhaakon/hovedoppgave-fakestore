@@ -140,34 +140,40 @@
             :function1="userStore.logout"
           />
           <div>
-            <div class="flex">
-              <div class="lg:hidden">
-                <label for="my-drawer-3" class="btn btn-square btn-ghost">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    class="w-6 h-6 stroke-current"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4 6h16M4 12h16M4 18h16"
-                    ></path>
-                  </svg>
-                </label>
-              </div>
-              <SearchBar />
-            </div>
-            <div class="w-full flex justify-end px-4">
-              <RouterLink to="/shoppingcart">
-                <span class="uppercase font-bold text-sm"
-                  >cart({{ shoppingCartStore.cartItemCount }})</span
+            <!-- navbar -->
+            <div class="flex w-full mx-auto mt-4">
+              <div class="h-full w-2/3 px-4 justify-end flex space-x-4">
+                <!-- hamburger  -->
+                <div class="flex my-auto">
+                  <div class="lg:hidden">
+                    <label for="my-drawer-3" class="">
+                      <span class="material-symbols-sharp"> menu </span>
+                    </label>
+                  </div>
+                </div>
+                <!-- profil ikon -->
+                <button class="flex my-auto" @click="router.push('/mypage')">
+                  <span class="material-symbols-sharp"> account_circle </span>
+                </button>
+                <!-- shoppingcart icoon -->
+                <button
+                  class="flex my-auto"
+                  @click="router.push('/shoppingcart')"
                 >
-              </RouterLink>
+                  <span class="material-symbols-sharp my-auto">
+                    shopping_cart
+                  </span>
+
+                  <p>(</p>
+                  {{ shoppingCartStore.cartItemCount }}
+                  <p>)</p>
+                </button>
+              </div>
+              <!--  searchbar -->
+              <SearchBar class="" />
             </div>
-            <div class="min-h-[calc(100vh-260px)]">
+            <!-- routerview -->
+            <div class="min-h-[calc(100vh-260px)] mt-5">
               <div v-if="productStore.searching">
                 <SearchResult />
               </div>
@@ -336,6 +342,7 @@
 </template>
 
 <script setup>
+import router from "./router";
 import { computed, ref } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import { useProductStore } from "./stores/Productstore";
@@ -387,5 +394,9 @@ const confirmLogOut = () => {
 }
 .fa-instagram {
   color: white;
+}
+.material-symbols-sharp {
+  font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 48;
+  font-size: 32px;
 }
 </style>
