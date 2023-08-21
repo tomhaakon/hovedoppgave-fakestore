@@ -3,14 +3,18 @@
     <div class=""></div>
     <div class="w-full text-center">
       <div class="p-2">
-        <input v-model="username" placeholder="Username" class="input" />
+        <input
+          v-model="username"
+          placeholder="Username"
+          class="input rounded-none"
+        />
       </div>
       <div class="p-2">
         <input
           type="password"
           v-model="password"
           placeholder="Password"
-          class="input"
+          class="input rounded-none"
         />
       </div>
     </div>
@@ -20,7 +24,9 @@
     </div>
     <div class="w-full text-center pt-5">
       <div class="w-full">
-        <button @click="register" class="btn btn-primary w-32">Register</button>
+        <button @click="register" class="btn btn-primary w-32 rounded-none">
+          Register
+        </button>
       </div>
     </div>
   </div>
@@ -29,7 +35,6 @@
 <script setup>
 import { ref } from "vue";
 import { useUserStore } from "@/stores/UserStore.js";
-import router from "../router";
 
 const userStore = useUserStore();
 const username = ref("");

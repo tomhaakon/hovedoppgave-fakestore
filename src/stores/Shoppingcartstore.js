@@ -85,10 +85,21 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
 
     // empty cart
     clearCart() {
-      this.cart = [];
-      localStorage.removeItem("cart");
-
-      this.notify.addNotification("Cleared all items in cart.", "error", 3000);
+      console.warn("clearCart is triggered");
+      useNotificationStore()
+        .openConfirmDialog("Are you sure you want to clear the cart?")
+        .then((choice) => {
+          // Add the then method here
+          if (choice === "confirm") {
+            this.cart = [];
+            localStorage.removeItem("cart");
+            this.notify.addNotification(
+              "Cleared all items in cart.",
+              "success",
+              3000
+            );
+          }
+        });
     },
     addToUserCart(item) {
       const userStore = useUserStore();

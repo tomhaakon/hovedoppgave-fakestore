@@ -2,14 +2,18 @@
   <div class="w-full">
     <div class="w-full text-center">
       <div class="p-2">
-        <input v-model="username" placeholder="Username" class="input" />
+        <input
+          v-model="username"
+          placeholder="Username"
+          class="input rounded-none"
+        />
       </div>
       <div class="p-2">
         <input
           type="password"
           v-model="password"
           placeholder="Password"
-          class="input"
+          class="input rounded-none"
         />
       </div>
     </div>
@@ -19,7 +23,7 @@
         Invalid login details
       </div>
       <div class="w-full">
-        <button @click="login" class="btn btn-primary w-32">Login</button>
+        <button @click="login" class="btn btn-primary w-32 rounded-none">Login</button>
       </div>
     </div>
   </div>

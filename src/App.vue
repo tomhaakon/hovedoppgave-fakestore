@@ -1,7 +1,6 @@
 <template>
   <div :class="{ overlay: blurBg }" class="z-40 backdrop-blur-sm"></div>
   <Notification />
-  <ProductDialog />
   <div class="">
     <div class="drawer">
       <input
@@ -334,15 +333,14 @@
 <script setup>
 import { computed, ref, watch } from "vue";
 import { RouterLink, RouterView } from "vue-router";
-import ProductDialog from "./components/ProductDialog.vue";
 import { useProductStore } from "./stores/Productstore";
 import { useShoppingCartStore } from "./stores/Shoppingcartstore";
 import { useUserStore } from "@/stores/UserStore";
+import ConfirmationDialog from "@/components/ConfirmationDialog.vue";
 import Notification from "@/components/Notification.vue";
 import SearchBar from "@/components/SearchBar.vue";
 import Footer from "@/components/Footer.vue";
 import SearchResult from "./components/SearchResult.vue";
-import SingleProduct from "./components/SingleProduct.vue";
 
 const userStore = useUserStore();
 const shoppingCartStore = useShoppingCartStore();
