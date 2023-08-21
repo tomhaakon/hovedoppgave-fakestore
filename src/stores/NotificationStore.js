@@ -9,7 +9,7 @@ export const useNotificationStore = defineStore("notificationStore", {
     confirmChoice: null, // This ref will hold the user's choice
   }),
   actions: {
-    addNotification(message, type, duration = 3000) {
+    addNotification(message, type, duration = 1000) {
       console.log("type", type);
       const id = new Date().getTime();
       this.notifications.push({ id, message, type });

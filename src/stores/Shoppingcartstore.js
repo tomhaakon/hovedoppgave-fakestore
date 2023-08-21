@@ -25,7 +25,7 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
         this.addToUserCart(item);
       }
       const msg = "Added " + item.title + " to cart";
-      this.notify.addNotification(msg, "success", 3000);
+      this.notify.addNotification(msg, "success", 500);
     },
     // remove from cart
     removeFromCart(itemId, quantityToRemove = 1) {
@@ -35,7 +35,7 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
         if (index !== -1) {
           this.cart.splice(index, 1);
           localStorage.setItem("cart", JSON.stringify(this.cart));
-          this.notify.addNotification("Removed item from cart", "error", 2000);
+          this.notify.addNotification("Removed item from cart", "error", 500);
         } else {
           console.log("No more items with this ID found");
         }
