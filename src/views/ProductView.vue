@@ -29,12 +29,7 @@
       </div>
     </section>
     <!-- products -->
-    <div class="text-red-500 uppercase font-bold">
-      <p>!!!TESTING!!!</p>
-      <p>Total Pages: {{ totalPages }}</p>
-      <p>totalProducts: {{ productStore.totalProducts?.length }}</p>
-      <p>current page: {{ currentPage }}</p>
-    </div>
+
     <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
       {{ console.log(productStore.showProducts) }}
 

@@ -8,8 +8,8 @@
   >
     <!-- Use productStore.showProducts instead of productStore.totalProducts -->
     <div v-for="product in productStore.showProducts">
-      <div class="rounded-none border-2 border-slate-300 h-[550px] px-4">
-        <div class="flex justify-center pb-6 p-10">
+      <div class="rounded-none border-2 border-slate-300 px-4">
+        <div class="flex justify-center pb-6 p-14">
           <RouterLink
             to="/item"
             class="cursor-pointer"
@@ -18,7 +18,7 @@
             <img
               :alt="product.category"
               :src="product.image"
-              class="rounded-none cursor-pointer h-80"
+              class="rounded-none cursor-pointer"
               @click="productStore.showSingleProduct = product"
             />
           </RouterLink>
@@ -38,7 +38,7 @@
               </p>
               <p class="text-sm">Free shipping!</p>
             </div>
-            <div class="w-1/2 justify-end text-right pt-4">
+            <div class="w-1/2 justify-end text-right pt-4 pb-4">
               <p
                 v-if="product.id === 1"
                 class="text-xs font-bold uppercase pb-1"
