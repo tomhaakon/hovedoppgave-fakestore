@@ -41,11 +41,18 @@
           </div>
 
           <div class="py-5">
+            <p
+              v-if="productStore.showSingleProduct.id === 1"
+              class="text-right font-bold py-2 text-xl"
+            >
+              out of stock
+            </p>
             <button
               @click="
                 shoppingCartStore.addToCart(productStore.showSingleProduct)
               "
               class="btn btn-primary w-full rounded-none"
+              :disabled="productStore.showSingleProduct.id === 1"
             >
               Buy
             </button>

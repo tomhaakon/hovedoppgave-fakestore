@@ -37,7 +37,7 @@
 
       <Product />
     </section>
-    <section class="flex justify-center pt-10">
+    <section class="flex justify-center pt-4">
       <div class="join">
         <button v-if="currentPage > 1" class="join-item btn" @click="prevPage">
           Previous

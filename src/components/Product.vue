@@ -4,12 +4,14 @@
   </div>
   <div
     v-if="!productStore.isLoading"
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 bg-red-500 w-full"
   >
     <!-- Use productStore.showProducts instead of productStore.totalProducts -->
     <div v-for="product in productStore.showProducts">
-      <div class="rounded-none border-2 border-slate-300 px-4">
-        <div class="flex justify-center pb-6 p-14">
+      <div
+        class="rounded-none border-2 border-slate-300 w-full px-4 md:h-[550px]"
+      >
+        <div class="flex justify-center w-full">
           <RouterLink
             to="/item"
             class="cursor-pointer"
