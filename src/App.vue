@@ -135,6 +135,10 @@
         </div>
         <!-- Page content here -->
         <div class="">
+          <ConfirmDialog
+            :title="'Are you sure you want to log out?'"
+            :function1="userStore.logout"
+          />
           <div>
             <div class="flex">
               <div class="lg:hidden">
@@ -167,7 +171,9 @@
               <div v-if="productStore.searching">
                 <SearchResult />
               </div>
-              <div v-else><RouterView /></div>
+              <div v-else>
+                <RouterView />
+              </div>
             </div>
             <!-- footer here -->
             <Footer class="" />
@@ -308,7 +314,7 @@
               </RouterLink>
             </li>
             <li>
-              <RouterLink to="/" @click="handleClick(), userStore.logout()">
+              <RouterLink to="/" @click="handleClick(), confirmLogOut()">
                 Logout
               </RouterLink>
             </li>
@@ -337,6 +343,8 @@ import { useShoppingCartStore } from "./stores/Shoppingcartstore";
 import { useUserStore } from "@/stores/UserStore";
 import { useNotificationStore } from "./stores/NotificationStore";
 
+import ConfirmDialog from "./components/ConfirmationDialog.vue";
+
 import Notification from "@/components/Notification.vue";
 import SearchBar from "@/components/SearchBar.vue";
 import Footer from "@/components/Footer.vue";
@@ -351,6 +359,9 @@ const drawerCheckbox = ref(null);
 const svgColor = ref("#19202e");
 const handleClick = () => {
   drawerCheckbox.value.checked = !drawerCheckbox.value.checked;
+};
+const confirmLogOut = () => {
+  notifictionStore.toggleDialog();
 };
 </script>
 <style scoped>

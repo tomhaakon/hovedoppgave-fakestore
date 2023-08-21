@@ -9,6 +9,9 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
     notify: useNotificationStore(),
   }),
   actions: {
+    isProductInCart(productId) {
+      return this.cart.some((item) => item.id === productId);
+    },
     loadCart(cart) {
       this.cart = cart || [];
       localStorage.setItem("cart", JSON.stringify(this.cart));

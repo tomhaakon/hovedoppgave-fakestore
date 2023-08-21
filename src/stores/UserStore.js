@@ -102,6 +102,8 @@ export const useUserStore = defineStore("userStore", {
       // Clear the shopping cart
       shoppingCartStore.cart = [];
       localStorage.removeItem("cart");
+      useNotificationStore().confirmDialog = false;
+      router.push("/");
     },
 
     toggleView() {
