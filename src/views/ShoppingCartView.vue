@@ -1,9 +1,11 @@
 <template>
   <div class="container mx-auto px-4">
     <ConfirmDialog
-      @confirm="clearCart"
-      @cancel="cancelClearCart"
-    ></ConfirmDialog>
+      title="Are you sure you want to clear the cart of all items? "
+      :function1="() => clearCart()"
+      :function2="() => notifictionStore.toggleDialog()"
+    />
+
     <div class="">
       <div class="flex h-10 w-full">
         <p class="font-bold text-xl">Shopping cart</p>
@@ -27,9 +29,9 @@
             v-for="item in groupedCart"
             :key="item.id"
             v-if="groupedCart"
-            class="flex shadow-sm"
+            class="flex border"
           >
-            <div class="w 2/4 flex join">
+            <div class="w-2/4 flex join p-1.5">
               <button
                 class="btn btn-sm btn-secondary rounded-none"
                 @click="removeFromCart(item.id)"
@@ -56,7 +58,12 @@
         <div class="text-right pt-5">Total: {{ totalPrice }},-</div>
         <div class="flex w-full pt-5">
           <div class="w-1/2 text-left">
-            <button @click="attemptClearCart">Clear Cart</button>
+            <button
+              @click="notifictionStore.toggleDialog()"
+              class="btn btn-neutral btn-sm rounded-none"
+            >
+              Clear Cart
+            </button>
           </div>
           <div class="w-1/2 text-right">
             <button
@@ -76,27 +83,14 @@
 <script setup>
 import { computed, ref } from "vue";
 import { useShoppingCartStore } from "../stores/Shoppingcartstore";
-import { useUserStore } from "../stores/UserStore";
+import { useNotificationStore } from "../stores/NotificationStore";
 
 import ConfirmDialog from "@/components/ConfirmationDialog.vue";
-const { removeFromCart, addToCart } = useShoppingCartStore();
+const { removeFromCart, addToCart, clearCart } = useShoppingCartStore();
+const notifictionStore = useNotificationStore();
 
 const shoppingCartStore = useShoppingCartStore();
-//const cart = computed(() => shoppingCartStore.cart);
-// count same items
+
 const groupedCart = computed(() => shoppingCartStore.groupedCart);
 const totalPrice = computed(() => shoppingCartStore.totalPrice);
-
-// consts
-
-const attemptClearCart = () => {
-  shoppingCartStore.clearCart(); // This will open the confirmation dialog
-};
-const clearCart = () => {
-  shoppingCartStore.clearCart();
-};
-const cancelClearCart = () => {
-  // Logic if needed when user cancels
-};
-console.log(groupedCart.value);
 </script>

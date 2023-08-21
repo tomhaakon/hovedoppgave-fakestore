@@ -1,5 +1,4 @@
 <template>
-  <div :class="{ overlay: blurBg }" class="z-40 backdrop-blur-sm"></div>
   <Notification />
   <div class="">
     <div class="drawer">
@@ -136,7 +135,7 @@
         </div>
         <!-- Page content here -->
         <div class="">
-          <div :class="{ fixed: blurBg }">
+          <div>
             <div class="flex">
               <div class="lg:hidden">
                 <label for="my-drawer-3" class="btn btn-square btn-ghost">
@@ -331,21 +330,23 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import { useProductStore } from "./stores/Productstore";
 import { useShoppingCartStore } from "./stores/Shoppingcartstore";
 import { useUserStore } from "@/stores/UserStore";
-import ConfirmationDialog from "@/components/ConfirmationDialog.vue";
+import { useNotificationStore } from "./stores/NotificationStore";
+
 import Notification from "@/components/Notification.vue";
 import SearchBar from "@/components/SearchBar.vue";
 import Footer from "@/components/Footer.vue";
 import SearchResult from "./components/SearchResult.vue";
 
+const notifictionStore = useNotificationStore();
 const userStore = useUserStore();
 const shoppingCartStore = useShoppingCartStore();
 const productStore = useProductStore();
-const blurBg = computed(() => productStore.showDialog);
+//const blurBg = computed(() => notifictionStore.confirmDialog);
 const drawerCheckbox = ref(null);
 const svgColor = ref("#19202e");
 const handleClick = () => {
@@ -375,13 +376,5 @@ const handleClick = () => {
 }
 .fa-instagram {
   color: white;
-}
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
 }
 </style>

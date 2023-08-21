@@ -1,6 +1,5 @@
 // notificationStore.js
 import { defineStore } from "pinia";
-import { watch, watchEffect } from "vue";
 
 export const useNotificationStore = defineStore("notificationStore", {
   state: () => ({
@@ -27,51 +26,8 @@ export const useNotificationStore = defineStore("notificationStore", {
       );
       console.log("After removing:", this.notifications);
     },
-    async openConfirmDialog(message) {
-      this.confirmDialog = true;
-      this.confirmMessage = message;
-
-      const check =
-        (this.confirmChoice,
-        (value) => {
-          if (value !== null) {
-            this.confirmChoice = null;
-            this.confirmDialog = false;
-          }
-        });
-
-      check();
-    },
-    // openConfirmDialog(message) {
-    //   return new Promise(async (resolve) => {
-    //     this.confirmDialog = true;
-    //     this.confirmMessage = message;
-
-    //     await watchEffect(async (onInvalidate) => {
-    //       onInvalidate(() => {
-    //         this.confirmDialog = false; // Reset the dialog state when done
-    //       });
-
-    //       const unwatch = watch(
-    //         () => this.confirmChoice,
-    //         (value) => {
-    //           if (value !== null) {
-    //             unwatch();
-    //             resolve(value);
-    //             this.confirmChoice = null;
-    //           }
-    //         }
-    //       );
-    //     });
-    //   });
-    // },
-    confirm() {
-      this.confirmChoice = "confirm";
-      this.confirmDialog = false; // Close the dialog
-    },
-    cancel() {
-      this.confirmChoice = "cancel";
-      this.confirmDialog = false; // Close the dialog
+    toggleDialog() {
+      this.confirmDialog = !this.confirmDialog;
     },
   },
 });
