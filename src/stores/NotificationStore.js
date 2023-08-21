@@ -39,6 +39,8 @@ export const useNotificationStore = defineStore("notificationStore", {
             this.confirmDialog = false;
           }
         });
+
+      check();
     },
     // openConfirmDialog(message) {
     //   return new Promise(async (resolve) => {
