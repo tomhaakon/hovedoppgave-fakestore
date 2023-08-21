@@ -17,10 +17,10 @@ productStore.viewProducts("new-products");
 console.log("trying to load products");
 
 // refs
-const products = ref([]);
+//const products = ref([]);
 // functions
 
-productStore.searchProducts();
+//productStore.searchProducts();
 
 // const filteredItems = computed(() => {
 //   return productStore.searchResult.filter((item) =>

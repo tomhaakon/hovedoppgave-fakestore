@@ -10,8 +10,13 @@
       <!-- <div>{{ notifictionStore.confirmMessage }}</div> -->
       <div class="pb-4 h-1/2">{{ title }}</div>
       <div class="flex justify-evenly h-1/2">
-        <button class="btn btn-ghost" @click="function1">Yes</button>
-        <button class="btn btn-primary" @click="function2">No</button>
+        <button class="btn rounded-none" @click="function1">Yes</button>
+        <button
+          class="btn rounded-none"
+          @click="notifictionStore.confirmDialog = false"
+        >
+          No
+        </button>
       </div>
     </div>
   </div>
@@ -33,11 +38,6 @@ const props = defineProps({
   // v-if="showButton"
   function1: {
     type: Function,
-    required: true,
-  },
-  function2: {
-    type: Function,
-    required: true,
   },
 });
 </script>

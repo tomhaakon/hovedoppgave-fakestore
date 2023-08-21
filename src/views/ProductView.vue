@@ -76,6 +76,7 @@ const productList = ref(null);
 
 productStore.viewProducts("products", currentPage.value, limit);
 productStore.getCategories();
+productStore.selectedCategory = "";
 
 // total pages calculated from total products divided by limit
 const totalPages = computed(() => {
@@ -96,9 +97,6 @@ watch(
 );
 
 // lifecycle hooks
-onMounted(() => {
-  selectedCategory.value = "";
-});
 
 // pagination functions
 const nextPage = () => {

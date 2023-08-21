@@ -22,6 +22,7 @@ import { useProductStore } from "@/stores/Productstore";
 const productStore = useProductStore();
 const searchVar = ref("");
 productStore.searching = searchVar;
+productStore.searchProducts();
 
 const searchButton = () => {
   console.log(searchVar.value);

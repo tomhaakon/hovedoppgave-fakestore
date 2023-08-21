@@ -49,10 +49,6 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
         return;
       }
 
-      console.log("checkout triggered");
-      console.log(userStore.user);
-      console.log("Before checkout, user's cart:", userStore.user.cart);
-
       if (!Array.isArray(userStore.user.purchaseHistory)) {
         // Handle the error appropriately
         console.error("purchaseHistory is not defined");

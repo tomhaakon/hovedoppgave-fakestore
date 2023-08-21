@@ -1,11 +1,5 @@
 <template>
   <div class="container mx-auto px-4">
-    <ConfirmDialog
-      title="Are you sure you want to clear the cart of all items? "
-      :function1="() => clearCart()"
-      :function2="() => notifictionStore.toggleDialog()"
-    />
-
     <div class="">
       <div class="flex h-10 w-full">
         <p class="font-bold text-xl">Shopping cart</p>
@@ -48,7 +42,7 @@
                 +
               </button>
             </div>
-            <div class="w-full px-4">{{ item.title }}</div>
+            <div class="w-full px-4  pb-2">{{ item.title }}</div>
             <div class="text-left w-1/4">
               {{ Math.round(item.price * 10 * item.count) }},-
             </div>
@@ -57,18 +51,24 @@
 
         <div class="text-right pt-5">Total: {{ totalPrice }},-</div>
         <div class="flex w-full pt-5">
-          <div class="w-1/2 text-left">
-            <button
-              @click="notifictionStore.toggleDialog()"
-              class="btn btn-neutral btn-sm rounded-none"
-            >
+          <div class="">
+            <ConfirmDialog :title="dialogTitle" :function1="dialogFunction1" />
+          </div>
+          <div class="ml-auto">
+            <button @click="setClearCartDialog" class="btn rounded-none">
               Clear Cart
             </button>
-          </div>
-          <div class="w-1/2 text-right">
+            <button
+              class="btn btn-primary rounded-none ml-4"
+              @click="setCheckoutDialog"
+              v-if="userStore.user"
+            >
+              Checkout
+            </button>
             <button
               class="btn btn-primary rounded-none"
               @click="shoppingCartStore.checkout()"
+              v-if="!userStore.user"
             >
               Checkout
             </button>
@@ -84,13 +84,34 @@
 import { computed, ref } from "vue";
 import { useShoppingCartStore } from "../stores/Shoppingcartstore";
 import { useNotificationStore } from "../stores/NotificationStore";
+import { useUserStore } from "../stores/UserStore";
+const userStore = useUserStore();
 
+// If the user is not logged in, redirect to the login page
+// if (!userStore.user) {
+// }
 import ConfirmDialog from "@/components/ConfirmationDialog.vue";
-const { removeFromCart, addToCart, clearCart } = useShoppingCartStore();
-const notifictionStore = useNotificationStore();
+const { removeFromCart, addToCart, clearCart, checkout } =
+  useShoppingCartStore();
+const { toggleDialog } = useNotificationStore();
 
 const shoppingCartStore = useShoppingCartStore();
 
 const groupedCart = computed(() => shoppingCartStore.groupedCart);
 const totalPrice = computed(() => shoppingCartStore.totalPrice);
+
+const dialogTitle = ref("");
+const dialogFunction1 = ref(null);
+
+const setClearCartDialog = () => {
+  dialogTitle.value = "Are you sure you want to clear the cart of all items?";
+  dialogFunction1.value = clearCart;
+  toggleDialog();
+};
+const setCheckoutDialog = () => {
+  dialogTitle.value = "Are you sure you want to proceed with the checkout?";
+  dialogFunction1.value = checkout;
+
+  toggleDialog();
+};
 </script>

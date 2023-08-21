@@ -28,6 +28,7 @@ export const useNotificationStore = defineStore("notificationStore", {
     },
     toggleDialog() {
       this.confirmDialog = !this.confirmDialog;
+      console.log(this.confirmDialog);
     },
   },
 });
