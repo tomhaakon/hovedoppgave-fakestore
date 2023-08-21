@@ -35,7 +35,7 @@
 
       <Product />
     </section>
-    <section class="flex justify-center pb-4">
+    <section class="flex justify-center pt-10">
       <div class="join">
         <button v-if="currentPage > 1" class="join-item btn" @click="prevPage">
           Previous
@@ -46,6 +46,7 @@
           class="join-item btn"
           @click="goToPage(item)"
           :disabled="item === '...'"
+          :class="item === currentPage ? 'btn-secondary' : ''"
         >
           {{ item }}
         </button>
