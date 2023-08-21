@@ -21,7 +21,9 @@
           class="w-full btn rounded-none h-20"
           @click="changeCategory(category)"
           :class="
-            category === selectedCategory ? 'btn-primary' : 'btn-secondary'
+            productStore.selectedCategory === category
+              ? 'btn-primary'
+              : 'btn-secondary'
           "
         >
           {{ category }}
@@ -92,14 +94,14 @@ console.log("totalPages: ", totalPages);
 // Call viewProducts with current page and limit
 
 // watchers
-watch(
-  () => productStore.selectedCategory,
-  async (newValue) => {
-    await productStore.getCategories();
-    selectedCategory.value = newValue;
-  },
-  { immediate: true }
-);
+// watch(
+//   () => productStore.selectedCategory,
+//   async (newValue) => {
+//     await productStore.getCategories();
+//     selectedCategory.value = newValue;
+//   },
+//   { immediate: true }
+// );
 
 // lifecycle hooks
 

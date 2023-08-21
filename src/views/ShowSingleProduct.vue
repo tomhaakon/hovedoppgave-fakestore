@@ -2,17 +2,20 @@
   <section v-if="productStore.showSingleProduct" class="mx-auto px-4">
     <div class="">
       <div>
-        <p class="font-bold text-xl ">
+        <p class="font-bold text-xl">
           {{ productStore.showSingleProduct.title }}
         </p>
       </div>
       <div class="w-5/6 pb-2">
         <p>
-          <RouterLink to="/product"></RouterLink>
-          Products /
-          <RouterLink to="/product">{{
-            productStore.showSingleProduct.category
-          }}</RouterLink>
+          <button @click="goToProducts()">Products</button>
+
+          <!-- productStore.showSingleProduct.category" -->
+          <button
+            @click="changeCategory(productStore.showSingleProduct.category)"
+          >
+            {{ productStore.showSingleProduct.category }}
+          </button>
         </p>
       </div>
     </div>
@@ -71,7 +74,18 @@
 import { RouterLink } from "vue-router";
 import { useProductStore } from "../stores/Productstore";
 import { useShoppingCartStore } from "../stores/Shoppingcartstore";
-
+import router from "../router";
+import { computed } from "vue";
 const productStore = useProductStore();
 const shoppingCartStore = useShoppingCartStore();
+
+const changeCategory = () => {
+  productStore.selectedCategory = productStore.showSingleProduct.category;
+  productStore.viewProducts(productStore.showSingleProduct.category);
+  console.warn(productStore.showSingleProduct.category);
+  router.push("/product");
+};
+const goToProducts = () => {
+  router.push("/product");
+};
 </script>
