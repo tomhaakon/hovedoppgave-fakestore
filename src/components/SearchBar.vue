@@ -1,17 +1,26 @@
 <template>
   <div class="my-auto w-full">
-    <input
-      v-model="searchVar"
-      maxlength="15"
-      type="text"
-      placeholder="Search for item"
-      class="input input-bordered max-w-xs w-full input-sm rounded-none join-item"
-    />
+    <div class="search-container my-auto w-full">
+      <input
+        v-model="searchVar"
+        @focus="productStore.searchWindow = true"
+        maxlength="15"
+        type="text"
+        placeholder="Search for item"
+        class="input input-bordered max-w-xs w-full input-sm rounded-none search-input"
+      />
+      <span
+        class="material-symbols-outlined search-icon"
+        @click="openSearchWindow"
+      >
+        search
+      </span>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useProductStore } from "@/stores/Productstore";
 
 const productStore = useProductStore();
@@ -19,7 +28,36 @@ const searchVar = ref("");
 productStore.searching = searchVar;
 productStore.searchProducts();
 
-const searchButton = () => {
-  console.log(searchVar.value);
+if (searchVar.value) {
+  productStore.searchWindow = true;
+}
+const openSearchWindow = () => {
+  productStore.searchWindow = true;
 };
+console.log("searchVar.value", searchVar.value);
+
+console.log("SearchBar.vue: searchVar.value: ", searchVar.value);
+const searchButton = () => {};
 </script>
+<style scoped>
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 1000, "GRAD" 0, "opsz";
+}
+.search-container {
+  position: relative;
+}
+
+.search-input {
+  padding-right: 30px; /* Space for the search icon */
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: grey;
+  /* Add more styling as needed */
+}
+</style>

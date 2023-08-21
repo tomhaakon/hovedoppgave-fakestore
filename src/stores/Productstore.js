@@ -4,6 +4,7 @@ export const useProductStore = defineStore("productStore", {
   state: () => ({
     // variabler stores osv
     searchResult: null,
+    searchWindow: false,
     searching: null,
     isLoading: null,
     allProducts: null,

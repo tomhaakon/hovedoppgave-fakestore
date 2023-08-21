@@ -180,7 +180,11 @@
             </div>
             <!-- routerview -->
             <div class="min-h-[calc(100vh-260px)] mt-5">
-              <div v-if="productStore.searching">
+              <div
+                v-if="
+                  productStore.searching !== '' && productStore.searchWindow
+                "
+              >
                 <SearchResult />
               </div>
               <div v-else>

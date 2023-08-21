@@ -1,6 +1,14 @@
 <template>
   <div class="container mx-auto px-4">
-    <div v-if="productStore.searching">
+    <div v-if="productStore.searchWindow">
+      <div class="flex justify-end">
+        <button
+          class="btn btn-secondary rounded-none btn-sm"
+          @click="closeSearchWindow()"
+        >
+          close search window
+        </button>
+      </div>
       <div v-if="filteredItems.length > 0">
         <div class="font-bold py-4">
           Found {{ filteredItems.length }} items containing the word "{{
@@ -48,6 +56,9 @@ const filteredItems = computed(() => {
     item.title.toLowerCase().includes(productStore.searching.toLowerCase())
   );
 });
+const closeSearchWindow = () => {
+  productStore.searchWindow = false;
+};
 
 const highlightSearchTerm = (title) => {
   const searchTerm = productStore.searching.toLowerCase();
