@@ -80,7 +80,7 @@ import { useProductStore } from "@/stores/Productstore.js";
 import { useShoppingCartStore } from "../stores/Shoppingcartstore";
 import { ref, watch, onMounted, computed } from "vue";
 import { RouterLink } from "vue-router";
-
+import { useNotificationStore } from "@/stores/NotificationStore.js";
 import Loader from "@/components/Loader.vue";
 
 // store
@@ -98,5 +98,24 @@ const getProductCountInCart = (productId) => {
 };
 
 // functions
-const addToCart = (product) => shoppingCartStore.addToCart(product);
+const canAddToCart = ref(true);
+
+const addToCart = (product) => {
+  if (canAddToCart.value) {
+    // Notify user immediately
+    const msg = "Added " + product.title + " to cart";
+    useNotificationStore().addNotification(msg, "success");
+
+    // Add to cart immediately
+    shoppingCartStore.addToCart(product);
+
+    // Disable adding to cart for the next 1000ms
+    canAddToCart.value = false;
+    setTimeout(() => {
+      canAddToCart.value = true;
+    }, 2000);
+  }
+};
+
+//const addToCart = (product) => shoppingCartStore.addToCart(product);
 </script>

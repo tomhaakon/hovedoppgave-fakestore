@@ -64,6 +64,7 @@
 //imports
 import { useProductStore } from "@/stores/Productstore.js";
 import { ref, computed, onUnmounted } from "vue";
+
 import Product from "@/components/Product.vue";
 
 // store

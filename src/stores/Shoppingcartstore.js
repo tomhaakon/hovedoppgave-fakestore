@@ -24,8 +24,6 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
       if (userStore.isLoggedIn) {
         this.addToUserCart(item);
       }
-      const msg = "Added " + item.title + " to cart";
-      this.notify.addNotification(msg, "success", 500);
     },
     // remove from cart
     removeFromCart(itemId, quantityToRemove = 1) {
@@ -111,6 +109,18 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
 
       // Update the user's information
       userStore.updateUser();
+    },
+    debounce(func, delay) {
+      let timerId;
+
+      return (...args) => {
+        if (timerId) {
+          clearTimeout(timerId);
+        }
+        timerId = setTimeout(() => {
+          func(...args);
+        }, delay);
+      };
     },
   },
   getters: {
