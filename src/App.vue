@@ -183,7 +183,7 @@
                     class="flex my-auto"
                     @click="router.push('/shoppingcart')"
                   >
-                    <span class="material-symbols-sharp my-auto">
+                    <span class="material-symbols-sharp my-auto ml-2">
                       shopping_cart
                     </span>
 
