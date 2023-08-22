@@ -31,7 +31,7 @@
       </div>
     </section>
     <!-- products -->
-    <section class="bg-cyan-100">
+    <section>
       <Product />
     </section>
     <section class="flex justify-center pt-4">

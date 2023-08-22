@@ -4,15 +4,15 @@
   </div>
   <div
     v-if="!productStore.isLoading"
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 bg-red-500"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
   >
     <!-- Use productStore.showProducts instead of productStore.totalProducts -->
     <div v-for="product in productStore.showProducts" class="">
       <div
-        class="rounded-none border-2 border-slate-300 bg-yellow-200 px-4 md:h-[550px] pt-4"
+        class="rounded-none border-2 border-slate-300 p-4 h-full md:h-[480px]"
       >
         <div
-          class="flex justify-center w-full md:w-full bg-green-200 md:h-[250px]"
+          class="flex justify-center w-full mx-auto md:w-full md:h-[300px] p-10 md:p-4"
         >
           <RouterLink
             to="/item"
@@ -22,47 +22,52 @@
             <img
               :alt="product.category"
               :src="product.image"
-              class="rounded-none cursor-pointer md:h-full object-contain"
+              class="rounded-none cursor-pointer md:h-full h-11/12 mx-auto object-contain"
               @click="productStore.showSingleProduct = product"
             />
           </RouterLink>
         </div>
-        <div class="md:pt-4">
+        <div class="space-y-4">
           <RouterLink
             to="/item"
-            class="cursor-pointer"
+            class="cursor-pointer line-clamp-1"
             @click="productStore.showSingleProduct = product"
           >
             {{ product.title }}
           </RouterLink>
           <div class="flex">
-            <div class="w-1/2">
-              <p class="text-2xl font-bold">
+            <div class="w-2/3 lg:w-full">
+              <p class="text-2xl font-bold lg:text-lg">
                 {{ (product.price * 10).toFixed(2) }},- kr
               </p>
               <p class="text-sm">Free shipping!</p>
             </div>
-            <div class="w-1/2 justify-end text-right pt-4 pb-4">
-              <p
-                v-if="product.id === 1"
-                class="text-xs font-bold uppercase pb-1"
+            <div class="w-1/3 justify-end text-right lg:w-full">
+              <button
+                class="btn-primary text-black btn rounded-none border-0 w-full"
+                @click="addToCart(product)"
+                :disabled="product.id === 1"
+                :class="
+                  getProductCountInCart(product.id)
+                    ? 'btn-secondary'
+                    : 'btn-primary'
+                "
               >
-                Out of stock
-              </p>
+                Buy
+              </button>
               <p
-                class="text-xs font-bold uppercase pb-1 mr-3"
+                class="text-xs font-bold uppercase pt-2 text-center"
                 :hidden="product.id === 1"
                 v-if="getProductCountInCart(product.id) > 0"
               >
                 {{ getProductCountInCart(product.id) }} in cart
               </p>
-              <button
-                class="btn-primary text-black btn rounded-none border-0 w-20"
-                @click="addToCart(product)"
-                :disabled="product.id === 1"
+              <p
+                v-if="product.id === 1"
+                class="text-xs font-bold uppercase pt-2 text-center"
               >
-                Buy
-              </button>
+                Out of stock
+              </p>
             </div>
           </div>
         </div>
