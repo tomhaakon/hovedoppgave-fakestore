@@ -31,7 +31,6 @@
       </div>
     </section>
     <!-- products -->
-
     <section class="bg-cyan-100">
       <Product />
     </section>
@@ -70,23 +69,52 @@ import Product from "@/components/Product.vue";
 // store
 const productStore = useProductStore();
 
+const setLimitBasedOnScreenSize = () => {
+  const width = window.innerWidth;
+
+  if (width <= 768) {
+    return 5; // Mobile screens
+  } else if (width <= 1024) {
+    return 8; // Medium screens
+  } else {
+    return 12; // Large screens
+  }
+};
+
 // refs
 const selectedCategory = ref();
-
-// variables
 const currentPage = ref(1); // added
-const limit = 5; // items per page
+const limit = ref(setLimitBasedOnScreenSize());
 
-productStore.viewProducts("products", currentPage.value, limit);
+productStore.viewProducts(
+  "products",
+  Number(currentPage.value),
+  Number(limit.value)
+);
+
 productStore.getCategories();
-
-onUnmounted(() => (productStore.selectedCategory = ""));
 
 // total pages calculated from total products divided by limit
 const totalPages = computed(() => {
   console.log("Total products length:", productStore.totalProducts?.length);
-  return Math.ceil(productStore.totalProducts?.length / limit);
+  return Math.ceil(productStore.totalProducts?.length / limit.value);
 });
+
+// Function to set the limit based on screen size
+
+const updateLimit = () => {
+  limit.value = setLimitBasedOnScreenSize();
+};
+
+// Event listener for window resize
+window.addEventListener("resize", updateLimit);
+
+// Cleanup event listener on component unmount
+onUnmounted(() => {
+  window.removeEventListener("resize", updateLimit);
+  productStore.selectedCategory = "";
+});
+
 //console.log("totalPages: ", totalPages);
 // Call viewProducts with current page and limit
 
@@ -109,7 +137,7 @@ const goToPage = (page) => {
     productStore.viewProducts(
       selectedCategory.value || "products",
       currentPage.value,
-      limit
+      limit.value
     );
   }
 };
@@ -140,7 +168,7 @@ const prevPage = () => {
     productStore.viewProducts(
       selectedCategory.value || "products",
       currentPage.value,
-      limit
+      limit.value
     );
   }
 };
@@ -159,7 +187,7 @@ const nextPage = () => {
     productStore.viewProducts(
       selectedCategory.value || "products",
       currentPage.value,
-      limit
+      limit.value
     );
   }
 };
@@ -168,6 +196,6 @@ const changeCategory = (category) => {
   selectedCategory.value = category === "products" ? undefined : category; // Set the local ref
   productStore.selectedCategory = category === "products" ? "" : category; // Set the value in the store
   currentPage.value = 1; // Reset to the first page
-  productStore.viewProducts(category, currentPage.value, limit);
+  productStore.viewProducts(category, currentPage.value, limit.value);
 };
 </script>

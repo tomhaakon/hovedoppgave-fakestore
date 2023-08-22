@@ -3,6 +3,9 @@
     <div class="">
       <p class="font-bold text-xl pb-5">Home</p>
     </div>
+    <div class="">
+      <p class="font-bold text-xl pb-5">Check out our newest items!</p>
+    </div>
     <div><Product></Product></div>
   </div>
 </template>

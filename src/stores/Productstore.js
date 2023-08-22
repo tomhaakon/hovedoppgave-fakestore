@@ -49,7 +49,7 @@ export const useProductStore = defineStore("productStore", {
 
     viewProducts(category, pageNumber = 1, limit = 5) {
       if (category === "new-products") {
-        const apiLink = "products?sort=desc&limit=" + 3;
+        const apiLink = "products?sort=desc&limit=" + 4;
         this.getProducts(apiLink, pageNumber, limit);
       } else if (category === "products") {
         this.getProducts("products", pageNumber, limit); // Fetch all products
@@ -64,8 +64,8 @@ export const useProductStore = defineStore("productStore", {
         this.isLoading = true;
         const apiCall = await fetch("https://fakestoreapi.com/" + link);
         const response = await apiCall.json();
-        const startIndex = (pageNumber - 1) * limit;
-        const endIndex = pageNumber * limit;
+        const startIndex = (Number(pageNumber) - 1) * Number(limit);
+        const endIndex = Number(pageNumber) * Number(limit);
 
         console.log("Total products fetched:", response.length);
         console.log("Start index:", startIndex, "End index:", endIndex);
