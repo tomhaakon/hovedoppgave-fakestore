@@ -1,5 +1,10 @@
 <template>
   <Notification />
+  <div
+    v-if="productStore.searchWindow"
+    class="h-screen w-screen fixed z-10"
+    @click="productStore.searchWindow = false"
+  ></div>
   <div class="container mx-auto">
     <div class="drawer">
       <input
@@ -146,7 +151,7 @@
                 <!--  searchbar -->
                 <div class="flex-none hidden lg:block">
                   <ul
-                    class="menu-horizontal text-2xl p-0 m-0 uppercase font-bold space-x-7"
+                    class="menu-horizontal text-2xl p-0 m-0 uppercase font-bold space-x-7 tracking-widest"
                   >
                     <!-- Navbar LG menu content here -->
                     <li>
@@ -193,9 +198,10 @@
                   productStore.searching !== '' && productStore.searchWindow
                 "
               >
-                <SearchResult />
+                <SearchResult class="z-50 absolute" />
               </div>
-              <div v-else>
+              <div>
+                <!-- <SearchResult class="" /> -->
                 <RouterView />
               </div>
             </div>

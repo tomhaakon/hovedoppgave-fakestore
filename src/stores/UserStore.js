@@ -79,7 +79,7 @@ export const useUserStore = defineStore("userStore", {
         this.sessionAuth = user.username;
         router.push("/");
         const msg = "Successfully logged in";
-        notify.addNotification(msg, "success", 5000);
+        notify.addNotification(msg, "success");
       }
       return userIndex !== -1;
     },
@@ -98,7 +98,7 @@ export const useUserStore = defineStore("userStore", {
       // You would typically do this by updating the corresponding user object in the 'users' array
 
       const msg = "Successfully logged out";
-      notify.addNotification(msg, "success", 5000);
+      notify.addNotification(msg, "success");
       // Clear the shopping cart
       shoppingCartStore.cart = [];
       localStorage.removeItem("cart");

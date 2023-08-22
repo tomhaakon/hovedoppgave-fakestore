@@ -1,5 +1,7 @@
 <template>
-  <div class="container mx-auto px-4">
+  <div
+    class="container mx-auto px-4 md:w-[550px] md:absolute md:right-0 bg-white md:border-4"
+  >
     <div v-if="productStore.searchWindow">
       <div class="flex justify-end">
         <button
