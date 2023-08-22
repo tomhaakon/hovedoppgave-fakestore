@@ -6,7 +6,7 @@
     class="w-full h-full flex justify-center backdrop-blur-sm overlay"
     v-if="notifictionStore.confirmDialog"
   >
-    <div class="fixed bg-white w-5/6 h-1/6 border bottom-2/4 p-6">
+    <div class="fixed bg-white w-3/4 h-1/6 border bottom-2/4 p-6 md:w-[400px]">
       <!-- <div>{{ notifictionStore.confirmMessage }}</div> -->
       <div class="pb-4 h-1/2">{{ title }}</div>
       <div class="flex justify-evenly h-1/2">

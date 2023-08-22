@@ -1,5 +1,8 @@
 <template>
-  <div v-if="UserStore.isLoggedIn" class="container mx-auto px-4">
+  <div
+    v-if="UserStore.isLoggedIn"
+    class="container mx-auto px-4 md:py-5 max-w-[800px] md:flex-row"
+  >
     <div class="">
       <p class="font-bold text-xl pb-5">MyPage</p>
     </div>

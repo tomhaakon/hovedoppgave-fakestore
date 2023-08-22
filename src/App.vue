@@ -5,7 +5,7 @@
     class="h-screen w-screen fixed z-10"
     @click="productStore.searchWindow = false"
   ></div>
-  <div class="container mx-auto">
+  <div class="container mx-auto md:w-4/5 lg:w-3/4 xl:w-4/5 lg:max-w-[1200px]">
     <div class="drawer">
       <input
         id="my-drawer-3"
@@ -138,20 +138,20 @@
           />
           <div>
             <!-- navbar -->
-            <div class="flex w-full mx-auto mt-4">
-              <div class="h-full w-full justify-end flex space-x-4">
+            <div class="flex w-full mx-auto mt-4 px-4">
+              <div class="h-full w-full justify-end flex">
                 <!-- hamburger  -->
                 <div class="flex my-auto">
                   <div class="lg:hidden">
                     <label for="my-drawer-3" class="">
-                      <span class="material-symbols-sharp"> menu </span>
+                      <span class="material-symbols-sharp mr-2"> menu </span>
                     </label>
                   </div>
                 </div>
                 <!--  searchbar -->
                 <div class="flex-none hidden lg:block">
                   <ul
-                    class="menu-horizontal text-2xl p-0 m-0 uppercase font-bold space-x-7 tracking-widest"
+                    class="menu-horizontal text-xl p-0 pr-2 m-0 uppercase space-x-7 tracking-widest"
                   >
                     <!-- Navbar LG menu content here -->
                     <li>
@@ -170,11 +170,14 @@
                 </div>
                 <!-- profil ikon -->
                 <div v-if="userStore.user">
-                  <button class="flex my-auto" @click="router.push('/mypage')">
+                  <button
+                    class="flex my-auto px-2"
+                    @click="router.push('/mypage')"
+                  >
                     <span class="material-symbols-sharp"> account_circle </span>
                   </button>
                 </div>
-                <div class="">
+                <div class="pr-2">
                   <!-- shoppingcart icoon -->
                   <button
                     class="flex my-auto"

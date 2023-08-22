@@ -1,7 +1,7 @@
 <template>
   <section v-if="productStore.showSingleProduct" class="mx-auto px-4">
     <div class="flex pt-3">
-      <div class="w-5/6 pb-2">
+      <div class="w-5/6 py-5">
         <p>
           <RouterLink to="/product"></RouterLink>
           Products /

@@ -9,7 +9,7 @@
     <!-- Use productStore.showProducts instead of productStore.totalProducts -->
     <div v-for="product in productStore.showProducts" class="">
       <div
-        class="rounded-none border-2 border-slate-300 p-4 h-full md:h-[480px]"
+        class="rounded-none border-2 border-slate-300 p-4 lg:p-0 h-full md:h-[480px]"
       >
         <div
           class="flex justify-center w-full mx-auto md:w-full md:h-[300px] p-10 md:p-4"
