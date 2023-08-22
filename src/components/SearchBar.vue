@@ -1,6 +1,6 @@
 <template>
   <div class="my-auto w-full">
-    <div class="search-container my-auto w-full">
+    <div class="search-container my-auto w-full text-right">
       <input
         v-model="searchVar"
         @focus="productStore.searchWindow = true"
@@ -36,7 +36,7 @@ const openSearchWindow = () => {
 };
 //console.log("searchVar.value", searchVar.value);
 
-//console.log("SearchBar.vue: searchVar.value: ", searchVar.value);
+console.log("SearchBar.vue: searchVar.value: ", searchVar.value);
 const searchButton = () => {};
 </script>
 <style scoped>

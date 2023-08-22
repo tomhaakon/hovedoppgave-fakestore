@@ -1,6 +1,6 @@
 <template>
   <Notification />
-  <div class="">
+  <div class="container mx-auto">
     <div class="drawer">
       <input
         id="my-drawer-3"
@@ -9,8 +9,8 @@
         ref="drawerCheckbox"
       />
       <div class="drawer-content flex flex-col">
-        <!-- Navbar -->
-        <div class="navbar bg-base-100 p-4">
+        <!-- Navbar bg-base-100 -->
+        <div class="navbar p-4">
           <div class="flex w-full">
             <div class="w-full">
               <RouterLink to="/">
@@ -124,14 +124,6 @@
               </RouterLink>
             </div>
           </div>
-          <div class="flex-none hidden lg:block">
-            <ul class="menu menu-horizontal">
-              <!-- Navbar menu content here -->
-              <li><a>Products</a></li>
-              <li><a>About us</a></li>
-              <li><a>My page</a></li>
-            </ul>
-          </div>
         </div>
         <!-- Page content here -->
         <div class="">
@@ -142,7 +134,7 @@
           <div>
             <!-- navbar -->
             <div class="flex w-full mx-auto mt-4">
-              <div class="h-full w-full px-4 justify-end flex space-x-4">
+              <div class="h-full w-full justify-end flex space-x-4">
                 <!-- hamburger  -->
                 <div class="flex my-auto">
                   <div class="lg:hidden">
@@ -152,8 +144,24 @@
                   </div>
                 </div>
                 <!--  searchbar -->
+                <div class="flex-none hidden lg:block">
+                  <ul
+                    class="menu-horizontal text-2xl p-0 m-0 uppercase font-bold space-x-7"
+                  >
+                    <!-- Navbar LG menu content here -->
+                    <li>
+                      <RouterLink to="/product">Products</RouterLink>
+                    </li>
+                    <li>
+                      <RouterLink to="/about">About us</RouterLink>
+                    </li>
+                    <li>
+                      <RouterLink to="/mypage">My page</RouterLink>
+                    </li>
+                  </ul>
+                </div>
                 <div class="w-full">
-                  <SearchBar class="" />
+                  <SearchBar class="w-full" />
                 </div>
                 <!-- profil ikon -->
                 <div v-if="userStore.user">
