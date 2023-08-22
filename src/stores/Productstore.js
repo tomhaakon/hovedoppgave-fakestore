@@ -32,7 +32,7 @@ export const useProductStore = defineStore("productStore", {
     },
     async getCategories() {
       try {
-        console.log("getCategories triggeed");
+        //  console.log("getCategories triggeed");
         this.isLoading = true;
         const apiCall = await fetch(
           "https://fakestoreapi.com/products/categories"
@@ -40,52 +40,39 @@ export const useProductStore = defineStore("productStore", {
         const response = await apiCall.json();
         this.allCategories = response;
         this.isLoading = false;
-        console.log("stored ", this.allCategories, "in categories");
+        //  console.log("stored ", this.allCategories, "in categories");
       } catch (error) {
         console.error("API call failed", error);
         throw error; //  handle this error outside of this function
       }
     },
 
-    viewProducts(page, pageNumber = 1, limit = 5) {
-      // ...
-
-      if (page === "new-products") {
-        const apiLink = "products?sort=desc&limit=" + 3; // Use passed limit
+    viewProducts(category, pageNumber = 1, limit = 5) {
+      if (category === "new-products") {
+        const apiLink = "products?sort=desc&limit=" + 3;
         this.getProducts(apiLink, pageNumber, limit);
-      } else if (page === "products") {
-        this.getProducts(page, pageNumber, limit);
+      } else if (category === "products") {
+        this.getProducts("products", pageNumber, limit); // Fetch all products
       } else {
-        this.getProducts("products/category/" + page, pageNumber, limit);
-        this.selectedCategory = page;
+        this.getProducts("products/category/" + category, pageNumber, limit); // Fetch by specific category
+        this.selectedCategory = category;
       }
     },
 
     async getProducts(link, pageNumber = 1, limit) {
-      console.log("look here", this.showProducts);
-      // Make sure to provide a value for the limit parameter when calling this function
-      if (!limit) {
-        console.error("Limit must be provided");
-        return;
-      }
-
       try {
         this.isLoading = true;
         const apiCall = await fetch("https://fakestoreapi.com/" + link);
         const response = await apiCall.json();
-
-        // Determine the starting index for the current page
         const startIndex = (pageNumber - 1) * limit;
-        // Determine the ending index for the current page
         const endIndex = pageNumber * limit;
 
-        this.totalProducts = response; // Save the total products
-        console.log("before slice", response);
-        this.isLoading = false;
-        // Slice the products to get only the products for the current page
+        console.log("Total products fetched:", response.length);
+        console.log("Start index:", startIndex, "End index:", endIndex);
+
+        this.totalProducts = response;
         this.showProducts = response.slice(startIndex, endIndex);
-        console.warn("after slice", this.showProducts);
-        console.log("Link:", link, "Page Number:", pageNumber, "Limit:", limit);
+        this.isLoading = false;
       } catch (error) {
         console.error("API call failed", error);
         throw error;
@@ -97,7 +84,7 @@ export const useProductStore = defineStore("productStore", {
         const apiCall = await fetch("https://fakestoreapi.com/products");
         const response = await apiCall.json();
 
-        console.log("searchProducts response: ", response);
+        //   console.log("searchProducts response: ", response);
         this.searchResult = response; // Save the total products
 
         this.isLoading = false;

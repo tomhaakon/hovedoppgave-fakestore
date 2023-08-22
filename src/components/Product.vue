@@ -4,14 +4,16 @@
   </div>
   <div
     v-if="!productStore.isLoading"
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 bg-red-500 w-full"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 bg-red-500"
   >
     <!-- Use productStore.showProducts instead of productStore.totalProducts -->
-    <div v-for="product in productStore.showProducts">
+    <div v-for="product in productStore.showProducts" class="">
       <div
-        class="rounded-none border-2 border-slate-300 w-full px-4 md:h-[550px]"
+        class="rounded-none border-2 border-slate-300 bg-yellow-200 px-4 md:h-[550px] pt-4"
       >
-        <div class="flex justify-center w-full">
+        <div
+          class="flex justify-center w-full md:w-full bg-green-200 md:h-[250px]"
+        >
           <RouterLink
             to="/item"
             class="cursor-pointer"
@@ -20,12 +22,12 @@
             <img
               :alt="product.category"
               :src="product.image"
-              class="rounded-none cursor-pointer"
+              class="rounded-none cursor-pointer md:h-full object-contain"
               @click="productStore.showSingleProduct = product"
             />
           </RouterLink>
         </div>
-        <div>
+        <div class="md:pt-4">
           <RouterLink
             to="/item"
             class="cursor-pointer"
@@ -34,7 +36,7 @@
             {{ product.title }}
           </RouterLink>
           <div class="flex">
-            <div class="w-1/2 h-1/2">
+            <div class="w-1/2">
               <p class="text-2xl font-bold">
                 {{ (product.price * 10).toFixed(2) }},- kr
               </p>

@@ -34,9 +34,9 @@ if (searchVar.value) {
 const openSearchWindow = () => {
   productStore.searchWindow = true;
 };
-console.log("searchVar.value", searchVar.value);
+//console.log("searchVar.value", searchVar.value);
 
-console.log("SearchBar.vue: searchVar.value: ", searchVar.value);
+//console.log("SearchBar.vue: searchVar.value: ", searchVar.value);
 const searchButton = () => {};
 </script>
 <style scoped>

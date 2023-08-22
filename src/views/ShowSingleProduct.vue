@@ -8,7 +8,7 @@
       </div>
       <div class="w-5/6 pb-2">
         <p>
-          <button @click="goToProducts()">Products</button>
+          <button @click="goToProducts()">Products</button> /
 
           <!-- productStore.showSingleProduct.category" -->
           <button
@@ -88,8 +88,9 @@ const shoppingCartStore = useShoppingCartStore();
 
 const changeCategory = () => {
   productStore.selectedCategory = productStore.showSingleProduct.category;
+  // console.log(productStore.selectedCategory);
   productStore.viewProducts(productStore.showSingleProduct.category);
-  console.warn(productStore.showSingleProduct.category);
+  // console.warn(productStore.showSingleProduct.category);
   router.push("/product");
 };
 const goToProducts = () => {
