@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 export const useProductStore = defineStore("productStore", {
   state: () => ({
     // variabler stores osv
+    showPictureWindow: null,
     searchResult: null,
     searchWindow: false,
     searching: null,
@@ -89,6 +90,10 @@ export const useProductStore = defineStore("productStore", {
 
         this.isLoading = false;
       } catch (error) {}
+    },
+    showBigPicture() {
+      console.log("showBigPicture triggered");
+      this.showPictureWindow = !this.showPictureWindow;
     },
   },
   getters: {},

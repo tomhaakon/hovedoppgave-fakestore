@@ -22,12 +22,12 @@
     <div class="w-full">
       <div class="w-full">
         <div class="mx-auto border-4 flex justify-center max-w-[800px]">
-          <a :href="productStore.showSingleProduct.image" target="_blank">
-            <img
-              :src="productStore.showSingleProduct.image"
-              :alt="productStore.showSingleProduct.title"
-              class="p-10 max-h-[600px]"
-          /></a>
+          <img
+            :src="productStore.showSingleProduct.image"
+            :alt="productStore.showSingleProduct.title"
+            class="p-10 max-h-[600px]"
+            @click="productStore.showBigPicture()"
+          />
         </div>
 
         <div class="py-5 max-w-[800px] flex mx-auto">

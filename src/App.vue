@@ -1,5 +1,6 @@
 <template>
   <Notification />
+  <pictureDialog />
   <div
     v-if="productStore.searchWindow"
     class="h-screen w-screen fixed z-10"
@@ -376,6 +377,7 @@ import { useProductStore } from "./stores/Productstore";
 import { useShoppingCartStore } from "./stores/Shoppingcartstore";
 import { useUserStore } from "@/stores/UserStore";
 import { useNotificationStore } from "./stores/NotificationStore";
+import pictureDialog from "./components/pictureDialog.vue";
 
 import ConfirmDialog from "./components/ConfirmationDialog.vue";
 
