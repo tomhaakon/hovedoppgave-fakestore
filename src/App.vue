@@ -6,7 +6,10 @@
     class="h-screen w-screen fixed z-10"
     @click="productStore.searchWindow = false"
   ></div>
-  <div class="container mx-auto md:w-4/5 lg:w-3/4 xl:w-4/5 lg:max-w-[1200px]">
+  <div
+    class="container mx-auto md:w-4/5 lg:w-3/4 xl:w-4/5 lg:max-w-[1200px]"
+    :class="productStore.showPictureWindow ? 'fixed' : ''"
+  >
     <div class="drawer">
       <input
         id="my-drawer-3"

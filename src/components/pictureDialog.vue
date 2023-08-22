@@ -7,7 +7,7 @@
     <div class="w-full flex justify-center mx-auto absolute">
       <img
         :src="store.showSingleProduct.image"
-        class="w-full h-full object-contain max-h-[800px]"
+        class="w-full h-full object-contain max-h-[800px] fixed"
       />
     </div>
   </div>
