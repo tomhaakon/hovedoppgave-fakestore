@@ -43,6 +43,8 @@ const store = useNotificationStore();
 
 //consts
 const removeNotification = store.removeNotification;
+
+//end
 </script>
 
 <style>

@@ -55,6 +55,7 @@
 </template>
 
 <script setup>
+//import
 import { ref } from "vue";
 import { useUserStore } from "@/stores/UserStore.js";
 
@@ -67,4 +68,6 @@ const password = ref("");
 
 //functions
 const register = () => userStore.register(username.value, password.value);
+
+  //end
 </script>

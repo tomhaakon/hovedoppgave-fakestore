@@ -1,5 +1,6 @@
+// imports
 import { defineStore } from "pinia";
-import router from "@/router"; // Import router if you want to use it in checkout method
+import router from "@/router";
 import { useUserStore } from "./UserStore";
 import { useNotificationStore } from "./NotificationStore";
 
@@ -63,7 +64,7 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
       });
       console.log(
         "After saving to purchase history, user's cart:",
-        userStore.user.cart
+        userStore.user.cart,
       );
 
       // Empty the user's cart
@@ -90,7 +91,7 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
       this.notify.addNotification(
         "Cleared all items in cart.",
         "success",
-        3000
+        3000,
       );
     },
 
@@ -99,7 +100,6 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
 
       // Ensure that the user is logged in
       if (!userStore.user) {
-        console.error("User is not logged in. Redirecting to login page.");
         router.push("/login"); // Assuming your login route is named "/login"
         return;
       }
@@ -110,6 +110,7 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
       // Update the user's information
       userStore.updateUser();
     },
+    // debounce function to handle double add to cart
     debounce(func, delay) {
       let timerId;
 

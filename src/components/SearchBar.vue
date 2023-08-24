@@ -30,7 +30,7 @@ const productStore = useProductStore();
 //refs
 const searchVar = ref("");
 
-productStore.searching = searchVar;
+//trigger searchProducts 
 productStore.searchProducts();
 
 //functions

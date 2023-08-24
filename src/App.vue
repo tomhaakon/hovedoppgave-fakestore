@@ -392,34 +392,41 @@
 </template>
 
 <script setup>
-import router from "./router";
+//import
 import { computed, ref } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import { useProductStore } from "./stores/Productstore";
 import { useShoppingCartStore } from "./stores/Shoppingcartstore";
 import { useUserStore } from "@/stores/UserStore";
 import { useNotificationStore } from "./stores/NotificationStore";
+import router from "./router";
+
+//dialogs etc
 import pictureDialog from "./components/pictureDialog.vue";
 import ConfirmDialog from "./components/ConfirmationDialog.vue";
-
 import Notification from "@/components/Notification.vue";
 import SearchBar from "@/components/SearchBar.vue";
 import Footer from "@/components/Footer.vue";
 import SearchResult from "./components/SearchResult.vue";
 
+//stores
 const notifictionStore = useNotificationStore();
 const userStore = useUserStore();
 const shoppingCartStore = useShoppingCartStore();
 const productStore = useProductStore();
-//const blurBg = computed(() => notifictionStore.confirmDialog);
+
+//refs
 const drawerCheckbox = ref(null);
 const svgColor = ref("#19202e");
+
+//functions
 const handleClick = () => {
   drawerCheckbox.value.checked = !drawerCheckbox.value.checked;
 };
 const confirmLogOut = () => {
   notifictionStore.toggleDialog();
 };
+//end
 </script>
 <style scoped>
 /* Style all font awesome icons */

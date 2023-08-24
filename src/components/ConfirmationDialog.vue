@@ -39,6 +39,7 @@ const props = defineProps({
     type: Function,
   },
 });
+//end
 </script>
 <style scoped>
 .overlay {

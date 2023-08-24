@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 export const useProductStore = defineStore("productStore", {
   state: () => ({
-    // variabler stores osv
+    //variables
     showPictureWindow: null,
     searchResult: null,
     isLoading: null,
@@ -13,11 +13,12 @@ export const useProductStore = defineStore("productStore", {
     totalProducts: null,
   }),
   actions: {
+    //get single category from API
     async getCategory(category) {
       try {
         this.isLoading = true;
         const apiCall = await fetch(
-          `https://fakestoreapi.com/products/category/${category}`
+          `https://fakestoreapi.com/products/category/${category}`,
         );
         const response = await apiCall.json();
         this.showCategory = response;
@@ -26,12 +27,13 @@ export const useProductStore = defineStore("productStore", {
         console.error("API call failed", error);
       }
     },
+    //get all categories from API
     async getCategories() {
       try {
         //  console.log("getCategories triggeed");
         this.isLoading = true;
         const apiCall = await fetch(
-          "https://fakestoreapi.com/products/categories"
+          "https://fakestoreapi.com/products/categories",
         );
         const response = await apiCall.json();
         this.allCategories = response;
@@ -42,19 +44,24 @@ export const useProductStore = defineStore("productStore", {
         throw error; //  handle this error outside of this function
       }
     },
-
+    //view products based on  4 new-products, all products or products in a category
     viewProducts(category, pageNumber = 1, limit = 5) {
+      //fetch 4 new products from API
       if (category === "new-products") {
         const apiLink = "products?sort=desc&limit=" + 4;
         this.getProducts(apiLink, pageNumber, limit);
-      } else if (category === "products") {
+      }
+      //fetch all products from API
+      else if (category === "products") {
         this.getProducts("products", pageNumber, limit); // Fetch all products
-      } else {
+      }
+      //fetch products in a category from API
+      else {
         this.getProducts("products/category/" + category, pageNumber, limit); // Fetch by specific category
         this.selectedCategory = category;
       }
     },
-
+    //get products fetch API
     async getProducts(link, pageNumber = 1, limit) {
       try {
         this.isLoading = true;
@@ -62,9 +69,6 @@ export const useProductStore = defineStore("productStore", {
         const response = await apiCall.json();
         const startIndex = (Number(pageNumber) - 1) * Number(limit);
         const endIndex = Number(pageNumber) * Number(limit);
-
-        console.log("Total products fetched:", response.length);
-        console.log("Start index:", startIndex, "End index:", endIndex);
 
         this.totalProducts = response;
         this.showProducts = response.slice(startIndex, endIndex);
@@ -80,14 +84,13 @@ export const useProductStore = defineStore("productStore", {
         const apiCall = await fetch("https://fakestoreapi.com/products");
         const response = await apiCall.json();
 
-        //   console.log("searchProducts response: ", response);
-        this.searchResult = response; // Save the total products
+        // Save the total products
+        this.searchResult = response;
 
         this.isLoading = false;
       } catch (error) {}
     },
     showBigPicture() {
-      console.log("showBigPicture triggered");
       this.showPictureWindow = !this.showPictureWindow;
     },
   },

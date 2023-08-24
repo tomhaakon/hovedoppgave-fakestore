@@ -1,7 +1,8 @@
+// import
 import { defineStore } from "pinia";
-import router from "@/router";
 import { useShoppingCartStore } from "./Shoppingcartstore";
 import { useNotificationStore } from "./NotificationStore";
+import router from "@/router";
 
 export const useUserStore = defineStore("userStore", {
   state: () => ({
@@ -32,22 +33,22 @@ export const useUserStore = defineStore("userStore", {
       };
 
       //error check
+        //if username is empty
       if (username === "") {
-        console.log("Username field is empty.");
         this.errorMsg.push("Username field is empty.");
         this.registerError = true;
       }
+        //if password is empty
       if (password === "") {
-        console.log("Password field is empty.");
         this.errorMsg.push("You need to set a password.");
         this.registerError = true;
       }
+        //if username exists
       if (this.users.some((user) => user.username === username)) {
-        console.log("Username allready exists.");
         this.errorMsg.push("Username allready exists.");
         this.registerError = true;
       }
-      // if no error push user
+        // if no error push user
       if (!this.registerError) {
         this.users.push(user);
         localStorage.setItem("users", JSON.stringify(this.users));
@@ -56,10 +57,10 @@ export const useUserStore = defineStore("userStore", {
           user.username +
           ". You can now log in.";
         this.notify.addNotification(msg, "success", 5000);
-
         router.push("/");
       }
     },
+    //login
     login(username, password) {
       const notify = useNotificationStore();
       const shoppingCartStore = useShoppingCartStore();
@@ -92,9 +93,6 @@ export const useUserStore = defineStore("userStore", {
         // Update the user in the store
         this.user = user;
 
-        console.log("login:user.cart", user.cart);
-        console.log("login:tempCart", tempCart);
-
         sessionStorage.setItem("authenticated", JSON.stringify(user.username));
         this.sessionAuth = user.username;
         router.push("/");
@@ -122,17 +120,13 @@ export const useUserStore = defineStore("userStore", {
 
     toggleView() {
       this.toggleRegister = !this.toggleRegister;
-      console.log("toggleView triggered");
     },
-
     updateUser() {
       const users = JSON.parse(localStorage.getItem("users")) || [];
       const userIndex = users.findIndex((u) => u.id === this.user.id);
       if (userIndex > -1) {
-        console.log("Before updating user in local storage:", users[userIndex]);
         users[userIndex] = this.user;
         localStorage.setItem("users", JSON.stringify(users));
-        console.log("After updating user in local storage:", users[userIndex]);
       }
     },
   },

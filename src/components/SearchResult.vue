@@ -2,6 +2,7 @@
   <div
     class="container mx-auto px-4 md:w-[550px] md:absolute md:right-0 bg-white md:border-4 pb-4"
   >
+
     <div v-if="productStore.searchWindow">
       <div class="flex justify-end pt-4">
         <button
@@ -46,22 +47,30 @@
   </div>
 </template>
 <script setup>
+//import 
 import { computed } from "vue";
 import { useProductStore } from "../stores/Productstore";
 import { RouterLink } from "vue-router";
 
+//stores
 const productStore = useProductStore();
+
+//consts
 const searching = productStore.searching;
 
+//functions
+
+//filter items that matched the item you searching for 
 const filteredItems = computed(() => {
   return productStore.searchResult.filter((item) =>
     item.title.toLowerCase().includes(productStore.searching.toLowerCase())
   );
 });
+//close searchwindow
 const closeSearchWindow = () => {
   productStore.searchWindow = false;
 };
-
+//function for marking your searced word
 const highlightSearchTerm = (title) => {
   const searchTerm = productStore.searching.toLowerCase();
   const parts = title.split(new RegExp(`(${searchTerm})`, "ig"));

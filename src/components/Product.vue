@@ -30,6 +30,7 @@
           </RouterLink>
         </div>
         <div class="space-y-4 lg:px-4">
+       <!-- view single product link -->
           <RouterLink
             to="/item"
             class="cursor-pointer line-clamp-1"
@@ -38,12 +39,14 @@
             {{ product.title }}
           </RouterLink>
           <div class="flex">
+            <!-- price -->
             <div class="w-2/3 lg:w-full">
               <p class="text-2xl font-bold lg:text-sm">
                 {{ (product.price * 10).toFixed(2) }},- kr
               </p>
               <p class="text-sm">Free shipping!</p>
             </div>
+            <!-- add to cart button --> 
             <div class="w-1/3 justify-end text-right lg:w-full">
               <button
                 class="btn-primary text-black btn rounded-none border-0 w-full"
@@ -57,6 +60,7 @@
               >
                 Buy
               </button>
+              <!-- products in cart --> 
               <p
                 class="text-xs font-bold uppercase pt-2 text-center"
                 :hidden="product.id === 1"
@@ -79,6 +83,7 @@
   </div>
 </template>
 <script setup>
+//imports
 import { useProductStore } from "@/stores/Productstore.js";
 import { useShoppingCartStore } from "../stores/Shoppingcartstore";
 import { ref, computed } from "vue";
@@ -118,4 +123,5 @@ const addToCart = (product) => {
     }, 1000);
   }
 };
+//end
 </script>

@@ -1,6 +1,8 @@
 <template>
+<!-- check if there is a single product seleceted --> 
   <section v-if="productStore.showSingleProduct" class="mx-auto px-4">
     <div class="flex pt-3">
+      <!-- breadcumbs --> 
       <div class="w-5/6 py-5">
         <p>
           <RouterLink to="/product"></RouterLink>
@@ -13,6 +15,7 @@
     </div>
     <div class="w-full pb-5">
       <div>
+
         <p class="font-bold text-xl pb-5">
           {{ productStore.showSingleProduct.title }}
         </p>

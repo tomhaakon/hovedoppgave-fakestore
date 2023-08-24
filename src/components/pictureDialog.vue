@@ -27,6 +27,8 @@ import { useProductStore } from "../stores/Productstore";
 
 //stores
 const store = useProductStore();
+
+//end
 </script>
 <style scoped>
 .material-symbols-outlined {
