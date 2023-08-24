@@ -21,7 +21,7 @@
             <input
               v-model="username"
               placeholder="Username"
-              class="input rounded-none"
+              class="input rounded-none bg-gray-200"
             />
           </div>
           <!-- password -->
@@ -30,7 +30,7 @@
               type="password"
               v-model="password"
               placeholder="Password"
-              class="input rounded-none"
+              class="input rounded-none bg-gray-200"
             />
           </div>
           <!-- error messages -->

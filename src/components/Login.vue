@@ -8,7 +8,7 @@
             <input
               v-model="username"
               placeholder="Username"
-              class="input rounded-none"
+              class="input rounded-none bg-gray-200"
             />
           </div>
           <div class="p-2">
@@ -16,7 +16,7 @@
               type="password"
               v-model="password"
               placeholder="Password"
-              class="input rounded-none"
+              class="input rounded-none bg-gray-200"
             />
             <div class="w-full text-center pt-5">
               <div v-if="error" class="text-center font-bold text-red-500 py-5">
