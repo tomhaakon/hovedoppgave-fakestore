@@ -1,5 +1,5 @@
 <template>
-  <div class="my-auto w-full">
+  <div class="my-auto w-full sm:py-5">
     <div class="search-container my-auto w-full text-right">
       <input
         v-model="searchVar"
@@ -7,7 +7,7 @@
         maxlength="15"
         type="text"
         placeholder="Search for item"
-        class="input input-bordered max-w-xs w-full input-sm rounded-none search-input"
+        class="input input-bordered sm:max-w-xs w-3/4 input-sm rounded-none search-input "
       />
       <span
         class="material-symbols-outlined search-icon"

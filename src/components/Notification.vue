@@ -2,7 +2,7 @@
   <transition-group
     name="fade"
     tag="div"
-    class="fixed top-4 right-0 z-50 px-4 w-full space-y-4"
+    class="fixed bottom-4 right-0 z-50 px-4 w-full space-y-4"
   >
     <div
       v-for="notification in store.notifications"

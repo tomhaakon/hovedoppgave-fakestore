@@ -1,9 +1,9 @@
 <template>
   <div
-    class="container mx-auto px-4 md:w-[550px] md:absolute md:right-0 bg-white md:border-4"
+    class="container mx-auto px-4 md:w-[550px] md:absolute md:right-0 bg-white md:border-4 pb-4"
   >
     <div v-if="productStore.searchWindow">
-      <div class="flex justify-end">
+      <div class="flex justify-end pt-4">
         <button
           class="btn btn-secondary rounded-none btn-sm"
           @click="closeSearchWindow()"
@@ -18,25 +18,33 @@
           }}"
         </div>
         <div v-for="item in filteredItems" :key="item.id" class="pb-4">
-          <div class="w-full flex border-2 pt-2">
-            <div class="w-1/4 flex justify-center h-20">
-              <img :src="item.image" class="" />
-            </div>
-            <div class="w-3/4 space-y-2">
-              <div
-                class="text-container w-full h-full"
-                v-html="highlightSearchTerm(item.title)"
-              ></div>
-              <div class="flex w-full justify-end">
+          <RouterLink
+            to="/item"
+            class="cursor-pointer"
+            @click="
+              (productStore.showSingleProduct = item), closeSearchWindow()
+            "
+          >
+            <div class="w-full flex border-2 py-2">
+              <div class="w-1/4 flex justify-center h-20">
+                <img :src="item.image" class="" />
+              </div>
+              <div class="w-3/4 space-y-2">
+                <div
+                  class="text-container w-full h-full"
+                  v-html="highlightSearchTerm(item.title)"
+                ></div>
+                <!-- <div class="flex w-full justify-end">
                 <button
                   class="btn-primary btn btn-sm rounded-none"
                   @click="useShoppingCartStore().addToCart(item)"
                 >
                   Add to cart
                 </button>
+              </div> -->
               </div>
             </div>
-          </div>
+          </RouterLink>
         </div>
       </div>
       <div v-else>
@@ -49,6 +57,7 @@
 import { ref, computed } from "vue";
 import { useProductStore } from "../stores/Productstore";
 import { useShoppingCartStore } from "../stores/Shoppingcartstore";
+import { RouterLink } from "vue-router";
 
 const productStore = useProductStore();
 const searching = productStore.searching;

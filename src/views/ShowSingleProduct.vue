@@ -50,8 +50,8 @@
           </p>
 
           <button
-            @click="shoppingCartStore.addToCart(productStore.showSingleProduct)"
-            class="btn btn-primary w-full rounded-none max-w-[250px] text-right"
+            class="btn-primary text-black btn rounded-none border-0 w-full"
+            @click="addToCart(productStore.showSingleProduct)"
             :disabled="productStore.showSingleProduct.id === 1"
           >
             Buy
@@ -87,10 +87,14 @@
 import { RouterLink } from "vue-router";
 import { useProductStore } from "../stores/Productstore";
 import { useShoppingCartStore } from "../stores/Shoppingcartstore";
+import { useNotificationStore } from "../stores/NotificationStore";
+
 import router from "../router";
-import { computed } from "vue";
+
+import { computed, ref } from "vue";
 const productStore = useProductStore();
 const shoppingCartStore = useShoppingCartStore();
+const canAddToCart = ref(true);
 
 const changeCategory = () => {
   productStore.selectedCategory = productStore.showSingleProduct.category;
@@ -109,5 +113,22 @@ const groupedCart = computed(() => shoppingCartStore.groupedCart);
 const getProductCountInCart = (productId) => {
   const item = groupedCart.value.find((product) => product.id === productId);
   return item ? item.count : 0;
+};
+
+const addToCart = (product) => {
+  if (canAddToCart.value) {
+    // Notify user immediately
+    const msg = "Added " + product.title + " to cart";
+    useNotificationStore().addNotification(msg, "success");
+
+    // Add to cart immediately
+    shoppingCartStore.addToCart(product);
+
+    // Disable adding to cart for the next 1000ms
+    canAddToCart.value = false;
+    setTimeout(() => {
+      canAddToCart.value = true;
+    }, 1000);
+  }
 };
 </script>

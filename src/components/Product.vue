@@ -27,7 +27,7 @@
             />
           </RouterLink>
         </div>
-        <div class="space-y-4">
+        <div class="space-y-4 lg:px-4">
           <RouterLink
             to="/item"
             class="cursor-pointer line-clamp-1"
@@ -37,7 +37,7 @@
           </RouterLink>
           <div class="flex">
             <div class="w-2/3 lg:w-full">
-              <p class="text-2xl font-bold lg:text-lg">
+              <p class="text-2xl font-bold lg:text-sm">
                 {{ (product.price * 10).toFixed(2) }},- kr
               </p>
               <p class="text-sm">Free shipping!</p>
@@ -113,7 +113,7 @@ const addToCart = (product) => {
     canAddToCart.value = false;
     setTimeout(() => {
       canAddToCart.value = true;
-    }, 2000);
+    }, 1000);
   }
 };
 

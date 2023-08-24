@@ -8,33 +8,12 @@
       </p>
     </div>
     <div v-else-if="userStore.sessionAuth">you are allready logged in</div>
-    <div v-else>
-      <div v-if="viewParam === 'login'">
-        <div class="">
-          <p class="font-bold text-xl">Login</p>
-        </div>
+    <div v-else class="">
+      <div v-if="viewParam === 'login'" class="pt-5">
         <Login />
-        <div class="w-full text-center">
-          <p class="py-5">or</p>
-          <RouterLink to="/register">
-            <p>click here to register new account</p>
-          </RouterLink>
-        </div>
       </div>
-      <div v-if="viewParam === 'register'">
-        <div class="">
-          <p class="font-bold text-xl pb-5">Register</p>
-          <p class="text-red-600">
-            This register form is for training purposes only so passwords are
-            not encrypted and are stored in you browsers localStorage.
-          </p>
-        </div>
+      <div v-if="viewParam === 'register'" class="pt-5">
         <Register />
-        <div class="w-full text-center py-5">
-          <RouterLink to="/login">
-            <p>return to log in section</p>
-          </RouterLink>
-        </div>
       </div>
     </div>
   </div>

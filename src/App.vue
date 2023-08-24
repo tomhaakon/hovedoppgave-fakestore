@@ -153,9 +153,10 @@
                   </div>
                 </div>
                 <!--  searchbar -->
+
                 <div class="flex-none hidden lg:block">
                   <ul
-                    class="menu-horizontal text-xl p-0 pr-2 m-0 uppercase space-x-7 tracking-widest"
+                    class="menu-horizontal text-xl p-0 pr-2 m-0 uppercase space-x-7 tracking-widest w-full"
                   >
                     <!-- Navbar LG menu content here -->
                     <li>
@@ -164,14 +165,27 @@
                     <li>
                       <RouterLink to="/about">About us</RouterLink>
                     </li>
-                    <li>
+
+                    <li v-if="userStore.user">
                       <RouterLink to="/mypage">My page</RouterLink>
+                    </li>
+                    <li
+                      v-if="userStore.user"
+                      @click="confirmLogOut()"
+                      class="cursor-pointer"
+                    >
+                      Logout
+                    </li>
+
+                    <li v-if="!userStore.user">
+                      <RouterLink to="/login">Login</RouterLink>
+                    </li>
+                    <li v-if="!userStore.user">
+                      <RouterLink to="/register">Register</RouterLink>
                     </li>
                   </ul>
                 </div>
-                <div class="w-full">
-                  <SearchBar class="w-full" />
-                </div>
+
                 <!-- profil ikon -->
                 <div v-if="userStore.user">
                   <button
@@ -198,8 +212,11 @@
                 </div>
               </div>
             </div>
+            <div class="w-full px-4">
+              <SearchBar class="w-full" />
+            </div>
             <!-- routerview -->
-            <div class="min-h-[calc(100vh-260px)] mt-5">
+            <div class="min-h-[calc(100vh-260px)] pt-5 md:pt-0">
               <div
                 v-if="
                   productStore.searching !== '' && productStore.searchWindow

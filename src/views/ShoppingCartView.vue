@@ -42,7 +42,14 @@
                 +
               </button>
             </div>
-            <div class="w-full px-4 pb-2">{{ item.title }}</div>
+            <div class="w-full px-4 pb-2">
+              <RouterLink
+                to="/item"
+                class="cursor-pointer"
+                @click="productStore.showSingleProduct = item"
+                >{{ item.title }}</RouterLink
+              >
+            </div>
             <div class="text-left w-1/4">
               {{ Math.round(item.price * 10 * item.count) }},-
             </div>
@@ -85,17 +92,17 @@ import { computed, ref } from "vue";
 import { useShoppingCartStore } from "../stores/Shoppingcartstore";
 import { useNotificationStore } from "../stores/NotificationStore";
 import { useUserStore } from "../stores/UserStore";
-const userStore = useUserStore();
+import { useProductStore } from "../stores/Productstore";
 
-// If the user is not logged in, redirect to the login page
-// if (!userStore.user) {
-// }
+import { RouterLink } from "vue-router";
+
 import ConfirmDialog from "@/components/ConfirmationDialog.vue";
-const { removeFromCart, addToCart, clearCart, checkout } =
-  useShoppingCartStore();
+const { removeFromCart, clearCart, checkout } = useShoppingCartStore();
+const userStore = useUserStore();
+const productStore = useProductStore();
 const { toggleDialog } = useNotificationStore();
-
 const shoppingCartStore = useShoppingCartStore();
+const canAddToCart = ref(true);
 
 const groupedCart = computed(() => shoppingCartStore.groupedCart);
 const totalPrice = computed(() => shoppingCartStore.totalPrice);
@@ -113,5 +120,21 @@ const setCheckoutDialog = () => {
 
   dialogTitle.value = "Are you sure you want to proceed with the checkout?";
   dialogFunction1.value = checkout;
+};
+const addToCart = (product) => {
+  if (canAddToCart.value) {
+    // Notify user immediately
+    const msg = "Added " + product.title + " to cart";
+    useNotificationStore().addNotification(msg, "success");
+
+    // Add to cart immediately
+    shoppingCartStore.addToCart(product);
+
+    // Disable adding to cart for the next 1000ms
+    canAddToCart.value = false;
+    setTimeout(() => {
+      canAddToCart.value = true;
+    }, 500);
+  }
 };
 </script>

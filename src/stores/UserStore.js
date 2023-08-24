@@ -4,41 +4,61 @@ import { useShoppingCartStore } from "./Shoppingcartstore";
 import { useNotificationStore } from "./NotificationStore";
 
 export const useUserStore = defineStore("userStore", {
-  state: () => {
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const sessionAuth = JSON.parse(sessionStorage.getItem("authenticated"));
-    const user = users.find((u) => u.username === sessionAuth);
-    return {
-      user: user || null,
-      sessionAuth,
-      toggleRegister: false,
-    };
-  },
+  state: () => ({
+    shoppingCartStore: useShoppingCartStore(),
+    user:
+      (JSON.parse(localStorage.getItem("users")) || []).find(
+        (u) =>
+          u.username === JSON.parse(sessionStorage.getItem("authenticated"))
+      ) || null,
+    users: JSON.parse(localStorage.getItem("users")) || [],
+    sessionAuth: JSON.parse(sessionStorage.getItem("authenticated")),
+    notify: useNotificationStore(),
+    toggleRegister: false,
+    registerError: false,
+    errorMsg: [],
+  }),
+
   actions: {
     register(username, password) {
-      const notify = useNotificationStore();
-      const users = JSON.parse(localStorage.getItem("users")) || [];
-
-      const usernameExists = users.some((user) => user.username === username);
-
-      if (usernameExists) {
-        alert("Username already exists!");
-        return;
-      }
-
+      this.registerError = false;
+      this.errorMsg = [];
       const user = {
-        id: users.length + 1,
+        id: this.users.length + 1,
         username,
         password,
         cart: [],
         purchaseHistory: [],
       };
-      users.push(user);
-      localStorage.setItem("users", JSON.stringify(users));
-      const msg = "Successfully registered user " + user.username;
-      notify.addNotification(msg, "success", 5000);
 
-      router.push("/");
+      //error check
+      if (username === "") {
+        console.log("Username field is empty.");
+        this.errorMsg.push("Username field is empty.");
+        this.registerError = true;
+      }
+      if (password === "") {
+        console.log("Password field is empty.");
+        this.errorMsg.push("You need to set a password.");
+        this.registerError = true;
+      }
+      if (this.users.some((user) => user.username === username)) {
+        console.log("Username allready exists.");
+        this.errorMsg.push("Username allready exists.");
+        this.registerError = true;
+      }
+      // if no error push user
+      if (!this.registerError) {
+        this.users.push(user);
+        localStorage.setItem("users", JSON.stringify(this.users));
+        const msg =
+          "Successfully registered user " +
+          user.username +
+          ". You can now log in.";
+        this.notify.addNotification(msg, "success", 5000);
+
+        router.push("/");
+      }
     },
     login(username, password) {
       const notify = useNotificationStore();
@@ -85,24 +105,18 @@ export const useUserStore = defineStore("userStore", {
     },
 
     logout() {
-      const notify = useNotificationStore();
-      const shoppingCartStore = useShoppingCartStore();
-      //      const tempCart = [...shoppingCartStore.cart]; // Store the cart temporarily
-      shoppingCartStore.loadCart(JSON.parse(localStorage.getItem("cart")));
+      this.shoppingCartStore.loadCart(JSON.parse(localStorage.getItem("cart")));
 
       this.user = null;
       this.sessionAuth = null;
       sessionStorage.clear();
 
-      // Here you would update the logged-out user's cart in the local storage if needed
-      // You would typically do this by updating the corresponding user object in the 'users' array
-
       const msg = "Successfully logged out";
-      notify.addNotification(msg, "success");
+      this.notify.addNotification(msg, "success");
       // Clear the shopping cart
-      shoppingCartStore.cart = [];
+      this.shoppingCartStore.cart = [];
       localStorage.removeItem("cart");
-      useNotificationStore().confirmDialog = false;
+      this.notify.confirmDialog = false;
       router.push("/");
     },
 
@@ -110,51 +124,6 @@ export const useUserStore = defineStore("userStore", {
       this.toggleRegister = !this.toggleRegister;
       console.log("toggleView triggered");
     },
-
-    // addToUserCart(item) {
-    //   if (this.user) {
-    //     this.user.cart.push(item);
-    //     this.updateUser();
-    //   }
-    // },
-    // checkout() {
-    //   console.log("Before checkout, user's cart:", this.user.cart);
-
-    //   // If the user is not logged in, redirect to the login page
-    //   if (!this.user) {
-    //     console.error("User is not logged in. Redirecting to login page.");
-    //     router.push("/login"); // Assuming your login route is named "/login"
-    //     return;
-    //   } else {
-    //     const shoppingCartStore = useShoppingCartStore();
-
-    //     if (!Array.isArray(this.user.purchaseHistory)) {
-    //       // Handle the error appropriately
-    //       console.error("purchaseHistory is not defined");
-    //       return;
-    //     }
-    //     // Save the cart as purchase history entry
-    //     this.user.purchaseHistory.push({
-    //       date: new Date(),
-    //       items: [...this.user.cart],
-    //     });
-    //     console.log(
-    //       "After saving to purchase history, user's cart:",
-    //       this.user.cart
-    //     );
-
-    //     // Empty the cart
-    //     this.user.cart = [];
-    //     this.updateUser();
-    //     console.log("After emptying cart, user's cart:", this.user.cart);
-
-    //     // Redirect to a confirmation or thanks page, if desired
-    //     router.push("/thanks");
-
-    //     // Clear the shopping cart
-    //     shoppingCartStore.clearCart();
-    //   }
-    // },
 
     updateUser() {
       const users = JSON.parse(localStorage.getItem("users")) || [];

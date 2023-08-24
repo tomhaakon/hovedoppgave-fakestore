@@ -1,29 +1,42 @@
 <template>
   <div class="w-full">
-    <div class="w-full text-center">
-      <div class="p-2">
-        <input
-          v-model="username"
-          placeholder="Username"
-          class="input rounded-none"
-        />
-      </div>
-      <div class="p-2">
-        <input
-          type="password"
-          v-model="password"
-          placeholder="Password"
-          class="input rounded-none"
-        />
-      </div>
-    </div>
-    <div class="bg-green-500"></div>
-    <div class="w-full text-center pt-5">
-      <div v-if="error" class="text-center font-bold text-red-500 py-5">
-        Invalid login details
-      </div>
-      <div class="w-full">
-        <button @click="login" class="btn btn-primary w-32 rounded-none">Login</button>
+    <div class="card w-full max-w-xl bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Login</h2>
+        <div class="w-full text-center">
+          <div class="p-2">
+            <input
+              v-model="username"
+              placeholder="Username"
+              class="input rounded-none"
+            />
+          </div>
+          <div class="p-2">
+            <input
+              type="password"
+              v-model="password"
+              placeholder="Password"
+              class="input rounded-none"
+            />
+            <div class="w-full text-center pt-5">
+              <div v-if="error" class="text-center font-bold text-red-500 py-5">
+                Invalid login details
+              </div>
+              <div class="w-full"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-actions justify-end">
+          <button @click="login" class="btn btn-primary w-32 rounded-none">
+            Login
+          </button>
+        </div>
+        <div class="w-full text-center pt-10">
+          <RouterLink to="/register">
+            <p>if you dont have an account click here to register a new user</p>
+          </RouterLink>
+        </div>
       </div>
     </div>
   </div>

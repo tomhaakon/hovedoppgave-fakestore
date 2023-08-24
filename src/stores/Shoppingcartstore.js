@@ -139,6 +139,7 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
           title: item.title,
           price: item.price, // Add the price here
           count: counts[id],
+          image: item.image,
         };
       });
     },
