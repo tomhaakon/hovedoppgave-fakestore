@@ -4,7 +4,6 @@
     <p class="pb-5">
       This is a simulated webstore that is made for learning purposes only.
     </p>
-
     <p>
       All items in the store are fetched trough https://fakestoreapi.com/ API.
     </p>

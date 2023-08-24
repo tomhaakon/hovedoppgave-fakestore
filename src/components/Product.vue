@@ -1,12 +1,14 @@
 <template class="">
+  <!-- if loading -->
   <div v-if="productStore.isLoading" class="flex justify-center">
     <Loader />
   </div>
+  <!-- if not loading -->
   <div
     v-if="!productStore.isLoading"
     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
   >
-    <!-- Use productStore.showProducts instead of productStore.totalProducts -->
+    <!--products   -->
     <div v-for="product in productStore.showProducts" class="">
       <div
         class="rounded-none border-2 border-slate-300 p-4 lg:p-0 h-full md:h-[480px]"
@@ -62,6 +64,7 @@
               >
                 {{ getProductCountInCart(product.id) }} in cart
               </p>
+              <!-- added out of stock for training purpose -->
               <p
                 v-if="product.id === 1"
                 class="text-xs font-bold uppercase pt-2 text-center"
@@ -78,7 +81,7 @@
 <script setup>
 import { useProductStore } from "@/stores/Productstore.js";
 import { useShoppingCartStore } from "../stores/Shoppingcartstore";
-import { ref, watch, onMounted, computed } from "vue";
+import { ref, computed } from "vue";
 import { RouterLink } from "vue-router";
 import { useNotificationStore } from "@/stores/NotificationStore.js";
 import Loader from "@/components/Loader.vue";
@@ -86,20 +89,19 @@ import Loader from "@/components/Loader.vue";
 // store
 const productStore = useProductStore();
 const shoppingCartStore = useShoppingCartStore();
-const productInCart = ref(false);
+
 // refs
-const isProductInCart = computed(
-  () => (productId) => shoppingCartStore.isProductInCart(productId)
-);
+const canAddToCart = ref(true);
+
+// functions
 const groupedCart = computed(() => shoppingCartStore.groupedCart);
+
+// count products in cart
 const getProductCountInCart = (productId) => {
   const item = groupedCart.value.find((product) => product.id === productId);
   return item ? item.count : 0;
 };
-
-// functions
-const canAddToCart = ref(true);
-
+// add to cart
 const addToCart = (product) => {
   if (canAddToCart.value) {
     // Notify user immediately
@@ -116,6 +118,4 @@ const addToCart = (product) => {
     }, 1000);
   }
 };
-
-//const addToCart = (product) => shoppingCartStore.addToCart(product);
 </script>

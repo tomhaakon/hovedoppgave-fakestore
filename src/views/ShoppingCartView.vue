@@ -4,8 +4,8 @@
       <div class="flex h-10 w-full">
         <p class="font-bold text-xl">Shopping cart</p>
       </div>
+      <!-- if there is something in cart -->
       <div class="pt-5" v-if="totalPrice > 0">
-        <!-- sd -->
         <div class="">
           <div class="flex pb-5">
             <div class="flex w-2/4 font-bold text-sm">
@@ -19,6 +19,7 @@
             </div>
             <div class=""></div>
           </div>
+          <!--  -->
           <div
             v-for="item in groupedCart"
             :key="item.id"
@@ -88,27 +89,30 @@
 </template>
 
 <script setup>
+//import
 import { computed, ref } from "vue";
 import { useShoppingCartStore } from "../stores/Shoppingcartstore";
 import { useNotificationStore } from "../stores/NotificationStore";
 import { useUserStore } from "../stores/UserStore";
 import { useProductStore } from "../stores/Productstore";
-
 import { RouterLink } from "vue-router";
-
 import ConfirmDialog from "@/components/ConfirmationDialog.vue";
+
+//stores
 const { removeFromCart, clearCart, checkout } = useShoppingCartStore();
 const userStore = useUserStore();
 const productStore = useProductStore();
-const { toggleDialog } = useNotificationStore();
 const shoppingCartStore = useShoppingCartStore();
+const { toggleDialog } = useNotificationStore();
+
+//refs
 const canAddToCart = ref(true);
-
-const groupedCart = computed(() => shoppingCartStore.groupedCart);
-const totalPrice = computed(() => shoppingCartStore.totalPrice);
-
 const dialogTitle = ref("");
 const dialogFunction1 = ref(null);
+
+//functions
+const groupedCart = computed(() => shoppingCartStore.groupedCart);
+const totalPrice = computed(() => shoppingCartStore.totalPrice);
 
 const setClearCartDialog = () => {
   toggleDialog();
@@ -117,7 +121,6 @@ const setClearCartDialog = () => {
 };
 const setCheckoutDialog = () => {
   toggleDialog();
-
   dialogTitle.value = "Are you sure you want to proceed with the checkout?";
   dialogFunction1.value = checkout;
 };

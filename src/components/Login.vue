@@ -43,14 +43,19 @@
 </template>
 
 <script setup>
+//import
 import { ref } from "vue";
-import router from "@/router";
 import { useUserStore } from "@/stores/UserStore.js";
+
+//stores
 const userStore = useUserStore();
+
+//refs
 const username = ref("");
 const password = ref("");
 const error = ref(false);
 
+//functions
 const login = () => {
   if (!userStore.login(username.value, password.value)) {
     error.value = true;

@@ -10,7 +10,6 @@
         <p class="md:text-xl">
           <button @click="goToProducts()">Products</button> /
 
-          <!-- productStore.showSingleProduct.category" -->
           <button
             @click="changeCategory(productStore.showSingleProduct.category)"
           >
@@ -84,23 +83,27 @@
   </section>
 </template>
 <script setup>
-import { RouterLink } from "vue-router";
+//import
+import { useRouter } from "vue-router";
 import { useProductStore } from "../stores/Productstore";
 import { useShoppingCartStore } from "../stores/Shoppingcartstore";
 import { useNotificationStore } from "../stores/NotificationStore";
 
-import router from "../router";
+//import router from "../router";
 
 import { computed, ref } from "vue";
+
+//stores
 const productStore = useProductStore();
 const shoppingCartStore = useShoppingCartStore();
 const canAddToCart = ref(true);
 
+//const
+const router = useRouter();
+
 const changeCategory = () => {
   productStore.selectedCategory = productStore.showSingleProduct.category;
-  // console.log(productStore.selectedCategory);
   productStore.viewProducts(productStore.showSingleProduct.category);
-  // console.warn(productStore.showSingleProduct.category);
   router.push("/product");
 };
 const goToProducts = () => {

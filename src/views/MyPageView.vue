@@ -1,4 +1,5 @@
 <template>
+  <!-- if user is logged in -->
   <div
     v-if="UserStore.isLoggedIn"
     class="container mx-auto px-4 md:py-5 max-w-[800px] md:flex-row"
@@ -7,6 +8,7 @@
       <p class="font-bold text-xl pb-5">MyPage</p>
     </div>
     <div class="pb-5">
+      <!-- hello username -->
       Hello <span class="font-bold">{{ loggedInUser }}</span>
       <p class="pt-5 font-bold">Purchase History</p>
     </div>
@@ -50,20 +52,25 @@
   </div>
 </template>
 <script setup>
-import { computed, ref } from "vue";
+//import
+import { computed } from "vue";
 import { useUserStore } from "@/stores/UserStore";
 
+//stores
 const UserStore = useUserStore();
+
+//functions
+
 const loggedInUser = computed(() => UserStore.sessionAuth);
+//have bought before
 const purchaseHistory = computed(() => UserStore.user?.purchaseHistory || []);
-
-console.log(purchaseHistory.value.length);
-
+//totalprice
 const calculateTotalPrice = (items) => {
   const totalPrice = items.reduce((total, item) => total + item.price * 10, 0);
   return totalPrice.toFixed(2);
 };
 
+//format date
 const formatDate = (dateString) => {
   const date = new Date(dateString);
   return date
@@ -73,24 +80,9 @@ const formatDate = (dateString) => {
       year: "numeric",
       hour: "2-digit",
       minute: "2-digit",
-      timeZone: "Europe/Oslo", // or any other European time zone
+      timeZone: "Europe/Oslo",
     })
     .replace(",", " at");
 };
-
-// Usage example:
-const formattedDate = formatDate("2023-08-16T12:00:52.753Z");
-console.log(formattedDate); // Output might be "August 16, 2023, 12:00:52 PM"
-
-//for ((purchase, index) in purchaseHistory) {
-// //console.log(index)
-// //}
-// console.log(purchaseHistory.value.index);
-
-// for (const [index, purchase] of purchaseHistory.value.entries()) {
-//   //  console.log(purchase.items);
-//   for (const [item] in purchase.items.entries()) {
-//     console.log(item.price.price);
-//   }
-// }
+//end
 </script>

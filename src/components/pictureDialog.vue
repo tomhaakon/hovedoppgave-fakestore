@@ -22,8 +22,10 @@
   </div>
 </template>
 <script setup>
+//import
 import { useProductStore } from "../stores/Productstore";
 
+//stores
 const store = useProductStore();
 </script>
 <style scoped>

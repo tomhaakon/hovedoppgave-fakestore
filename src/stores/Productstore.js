@@ -5,13 +5,8 @@ export const useProductStore = defineStore("productStore", {
     // variabler stores osv
     showPictureWindow: null,
     searchResult: null,
-    searchWindow: false,
-    searching: null,
     isLoading: null,
-    allProducts: null,
     allCategories: null,
-    showDialog: false,
-    showSingleProduct: null,
     showProducts: null,
     showCategory: null,
     selectedCategory: null,
@@ -22,7 +17,7 @@ export const useProductStore = defineStore("productStore", {
       try {
         this.isLoading = true;
         const apiCall = await fetch(
-          "https://fakestoreapi.com/products/category/" + category
+          `https://fakestoreapi.com/products/category/${category}`
         );
         const response = await apiCall.json();
         this.showCategory = response;
@@ -63,7 +58,7 @@ export const useProductStore = defineStore("productStore", {
     async getProducts(link, pageNumber = 1, limit) {
       try {
         this.isLoading = true;
-        const apiCall = await fetch("https://fakestoreapi.com/" + link);
+        const apiCall = await fetch(`https://fakestoreapi.com/${link}`);
         const response = await apiCall.json();
         const startIndex = (Number(pageNumber) - 1) * Number(limit);
         const endIndex = Number(pageNumber) * Number(limit);

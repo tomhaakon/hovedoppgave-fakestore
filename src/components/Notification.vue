@@ -35,9 +35,13 @@
 </template>
 
 <script setup>
+//import
 import { useNotificationStore } from "@/stores/NotificationStore.js";
 
+//stores
 const store = useNotificationStore();
+
+//consts
 const removeNotification = store.removeNotification;
 </script>
 

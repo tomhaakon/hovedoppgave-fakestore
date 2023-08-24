@@ -7,7 +7,7 @@
         maxlength="15"
         type="text"
         placeholder="Search for item"
-        class="input input-bordered sm:max-w-xs w-3/4 input-sm rounded-none search-input "
+        class="input input-bordered sm:max-w-xs w-3/4 input-sm rounded-none search-input"
       />
       <span
         class="material-symbols-outlined search-icon"
@@ -20,24 +20,27 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+//import
+import { ref } from "vue";
 import { useProductStore } from "@/stores/Productstore";
 
+//stores
 const productStore = useProductStore();
+
+//refs
 const searchVar = ref("");
+
 productStore.searching = searchVar;
 productStore.searchProducts();
 
+//functions
 if (searchVar.value) {
   productStore.searchWindow = true;
 }
 const openSearchWindow = () => {
   productStore.searchWindow = true;
 };
-//console.log("searchVar.value", searchVar.value);
-
-console.log("SearchBar.vue: searchVar.value: ", searchVar.value);
-const searchButton = () => {};
+//end
 </script>
 <style scoped>
 .material-symbols-outlined {

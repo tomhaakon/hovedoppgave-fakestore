@@ -144,14 +144,6 @@
             <!-- navbar -->
             <div class="flex w-full mx-auto mt-4 px-4">
               <div class="h-full w-full justify-end flex">
-                <!-- hamburger  -->
-                <div class="flex my-auto">
-                  <div class="lg:hidden">
-                    <label for="my-drawer-3" class="">
-                      <span class="material-symbols-sharp mr-2"> menu </span>
-                    </label>
-                  </div>
-                </div>
                 <!--  searchbar -->
 
                 <div class="flex-none hidden lg:block">
@@ -209,6 +201,14 @@
                     {{ shoppingCartStore.cartItemCount }}
                     <p>)</p>
                   </button>
+                </div>
+                <!-- hamburger  -->
+                <div class="flex my-auto">
+                  <div class="lg:hidden">
+                    <label for="my-drawer-3" class="">
+                      <span class="material-symbols-sharp mr-2"> menu </span>
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
@@ -367,10 +367,12 @@
                 My page
               </RouterLink>
             </li>
-            <li>
-              <RouterLink to="/" @click="handleClick(), confirmLogOut()">
-                Logout
-              </RouterLink>
+            <li
+              v-if="userStore.user"
+              @click="confirmLogOut(), handleClick()"
+              class="cursor-pointer"
+            >
+              Logout
             </li>
           </ul>
           <ul class="pt-10 space-y-3" v-else>
@@ -398,7 +400,6 @@ import { useShoppingCartStore } from "./stores/Shoppingcartstore";
 import { useUserStore } from "@/stores/UserStore";
 import { useNotificationStore } from "./stores/NotificationStore";
 import pictureDialog from "./components/pictureDialog.vue";
-
 import ConfirmDialog from "./components/ConfirmationDialog.vue";
 
 import Notification from "@/components/Notification.vue";

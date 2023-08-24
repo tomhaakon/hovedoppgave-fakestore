@@ -5,6 +5,7 @@
       <div class="cursor-pointer" @click="changeCategory('products')">
         <p class="font-bold text-xl pb-5">Products</p>
       </div>
+      <!-- navigation -->
       <div v-if="selectedCategory" class="flex space-x-2">
         <div><p>/</p></div>
         <div>
@@ -14,6 +15,7 @@
         </div>
       </div>
     </section>
+    <!-- if user has seleceted category -->
     <section class="flex justify-center pb-4">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center w-full">
         <button
@@ -34,6 +36,7 @@
     <section>
       <Product />
     </section>
+    <!-- pagnation -->
     <section class="flex justify-center pt-4">
       <div class="join">
         <button v-if="currentPage > 1" class="join-item btn" @click="prevPage">
@@ -64,12 +67,16 @@
 //imports
 import { useProductStore } from "@/stores/Productstore.js";
 import { ref, computed, onUnmounted } from "vue";
-
 import Product from "@/components/Product.vue";
 
 // store
 const productStore = useProductStore();
 
+//refs
+const selectedCategory = ref();
+const currentPage = ref(1); // added
+
+//functions
 const setLimitBasedOnScreenSize = () => {
   const width = window.innerWidth;
 
@@ -82,9 +89,7 @@ const setLimitBasedOnScreenSize = () => {
   }
 };
 
-// refs
-const selectedCategory = ref();
-const currentPage = ref(1); // added
+//refs2
 const limit = ref(setLimitBasedOnScreenSize());
 
 productStore.viewProducts(
@@ -97,12 +102,10 @@ productStore.getCategories();
 
 // total pages calculated from total products divided by limit
 const totalPages = computed(() => {
-  console.log("Total products length:", productStore.totalProducts?.length);
   return Math.ceil(productStore.totalProducts?.length / limit.value);
 });
 
 // Function to set the limit based on screen size
-
 const updateLimit = () => {
   limit.value = setLimitBasedOnScreenSize();
 };
@@ -116,22 +119,7 @@ onUnmounted(() => {
   productStore.selectedCategory = "";
 });
 
-//console.log("totalPages: ", totalPages);
-// Call viewProducts with current page and limit
-
-// watchers;
-// watch(
-//   () => productStore.selectedCategory,
-//   async (newValue) => {
-//     await productStore.getCategories();
-//     selectedCategory.value = newValue;
-//   },
-//   { immediate: true }
-// );
-
-// lifecycle hooks
-
-// pagination functions
+// goto button
 const goToPage = (page) => {
   if (page !== "...") {
     currentPage.value = page;
@@ -142,6 +130,7 @@ const goToPage = (page) => {
     );
   }
 };
+//items in pagnation
 const paginationItems = computed(() => {
   const items = [];
   for (let i = 1; i <= totalPages.value; i++) {
@@ -163,6 +152,7 @@ const paginationItems = computed(() => {
   }
   return items;
 });
+//prev button
 const prevPage = () => {
   if (currentPage.value > 1) {
     currentPage.value -= 1;
@@ -173,16 +163,8 @@ const prevPage = () => {
     );
   }
 };
+//nextpage button
 const nextPage = () => {
-  console.log(
-    "Next Page:",
-    "Selected Category:",
-    selectedCategory.value,
-    "Current Page:",
-    currentPage.value,
-    "Total Pages:",
-    totalPages.value
-  );
   if (currentPage.value < totalPages.value) {
     currentPage.value += 1;
     productStore.viewProducts(
@@ -192,11 +174,12 @@ const nextPage = () => {
     );
   }
 };
-
+//button for changing category
 const changeCategory = (category) => {
   selectedCategory.value = category === "products" ? undefined : category; // Set the local ref
   productStore.selectedCategory = category === "products" ? "" : category; // Set the value in the store
   currentPage.value = 1; // Reset to the first page
   productStore.viewProducts(category, currentPage.value, limit.value);
 };
+//end
 </script>

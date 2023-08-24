@@ -1,7 +1,4 @@
-<!-- ConfirmDialog.vue -->
 <template>
-  <div class=""></div>
-
   <div
     class="w-full h-full flex justify-center backdrop-blur-sm overlay"
     v-if="notifictionStore.confirmDialog"
@@ -9,7 +6,6 @@
     <div
       class="fixed bg-white w-3/4 min-h-[200px] border bottom-2/4 p-6 md:w-[400px]"
     >
-      <!-- <div>{{ notifictionStore.confirmMessage }}</div> -->
       <div class="pb-4 h-1/2">{{ title }}</div>
       <div class="flex justify-evenly h-1/2 py-5">
         <button class="btn btn-secondary rounded-none" @click="function1">
@@ -26,20 +22,19 @@
   </div>
 </template>
 <script setup>
+//import
 import { useNotificationStore } from "@/stores/NotificationStore";
+
+//stores
 const notifictionStore = useNotificationStore();
 
+// props
 const props = defineProps({
   title: {
     type: String,
     default: "You need to set prop text",
     required: true,
   },
-  // showButton: {
-  //   type: Boolean,
-  //   default: true,
-  // },
-  // v-if="showButton"
   function1: {
     type: Function,
   },

@@ -31,17 +31,9 @@
               </div>
               <div class="w-3/4 space-y-2">
                 <div
-                  class="text-container w-full h-full"
+                  class="line-clamp-2 w-full h-full"
                   v-html="highlightSearchTerm(item.title)"
                 ></div>
-                <!-- <div class="flex w-full justify-end">
-                <button
-                  class="btn-primary btn btn-sm rounded-none"
-                  @click="useShoppingCartStore().addToCart(item)"
-                >
-                  Add to cart
-                </button>
-              </div> -->
               </div>
             </div>
           </RouterLink>
@@ -54,9 +46,8 @@
   </div>
 </template>
 <script setup>
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import { useProductStore } from "../stores/Productstore";
-import { useShoppingCartStore } from "../stores/Shoppingcartstore";
 import { RouterLink } from "vue-router";
 
 const productStore = useProductStore();
@@ -85,15 +76,3 @@ const highlightSearchTerm = (title) => {
     .join("");
 };
 </script>
-<style>
-/* Add this CSS class to control the text container */
-.text-container {
-  max-width: 200px; /* Adjust as needed */
-  max-height: 50px; /* Adjust as needed */
-  overflow: hidden; /* Hide overflowed content */
-  display: -webkit-box; /* Enable line clamping */
-  -webkit-line-clamp: 2; /* Limit to 2 lines */
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis; /* Add ellipsis for truncated text */
-}
-</style>
