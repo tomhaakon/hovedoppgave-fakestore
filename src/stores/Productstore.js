@@ -3,6 +3,8 @@ import { defineStore } from "pinia";
 export const useProductStore = defineStore("productStore", {
   state: () => ({
     //variables
+    searchWindow: false,
+    searching: null,
     showPictureWindow: null,
     searchResult: null,
     isLoading: null,

@@ -29,8 +29,8 @@ const productStore = useProductStore();
 
 //refs
 const searchVar = ref("");
-
-//trigger searchProducts 
+productStore.searching = searchVar;
+//trigger searchProducts
 productStore.searchProducts();
 
 //functions
@@ -44,7 +44,11 @@ const openSearchWindow = () => {
 </script>
 <style scoped>
 .material-symbols-outlined {
-  font-variation-settings: "FILL" 0, "wght" 1000, "GRAD" 0, "opsz";
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 1000,
+    "GRAD" 0,
+    "opsz";
 }
 .search-container {
   position: relative;
