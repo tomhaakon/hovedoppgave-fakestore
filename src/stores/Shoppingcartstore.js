@@ -1,8 +1,8 @@
 // imports
 import { defineStore } from "pinia";
-import router from "@/router";
 import { useUserStore } from "./UserStore";
 import { useNotificationStore } from "./NotificationStore";
+import router from "@/router";
 
 export const useShoppingCartStore = defineStore("shoppingCartStore", {
   state: () => ({
@@ -46,8 +46,7 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
 
       // If the user is not logged in, redirect to the login page
       if (!userStore.user) {
-        console.error("User is not logged in. Redirecting to login page.");
-        router.push("/login"); // Assuming your login route is named "/login"
+        router.push("/login");
         return;
       }
 
@@ -62,21 +61,15 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
         date: new Date(),
         items: [...userStore.user.cart],
       });
-      console.log(
-        "After saving to purchase history, user's cart:",
-        userStore.user.cart,
-      );
 
       // Empty the user's cart
       userStore.user.cart = [];
       userStore.updateUser();
       this.notify.addNotification("Checkout successfull!", "success", 3000);
-      console.log("After emptying cart, user's cart:", userStore.user.cart);
-      // Redirect to a confirmation or thanks page, if desired
+
       router.push("/thanks");
 
       // Clear the shopping cart
-
       this.cart = [];
       localStorage.removeItem("cart");
       useNotificationStore().confirmDialog = false;
@@ -97,10 +90,9 @@ export const useShoppingCartStore = defineStore("shoppingCartStore", {
 
     addToUserCart(item) {
       const userStore = useUserStore();
-
       // Ensure that the user is logged in
       if (!userStore.user) {
-        router.push("/login"); // Assuming your login route is named "/login"
+        router.push("/login");
         return;
       }
 

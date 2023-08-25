@@ -88,9 +88,6 @@ import { useRouter } from "vue-router";
 import { useProductStore } from "../stores/Productstore";
 import { useShoppingCartStore } from "../stores/Shoppingcartstore";
 import { useNotificationStore } from "../stores/NotificationStore";
-
-//import router from "../router";
-
 import { computed, ref } from "vue";
 
 //stores
@@ -101,6 +98,7 @@ const canAddToCart = ref(true);
 //const
 const router = useRouter();
 
+//functions
 const changeCategory = () => {
   productStore.selectedCategory = productStore.showSingleProduct.category;
   productStore.viewProducts(productStore.showSingleProduct.category);
@@ -110,7 +108,7 @@ const goToProducts = () => {
   router.push("/product");
 };
 const isProductInCart = computed(
-  () => (productId) => shoppingCartStore.isProductInCart(productId)
+  () => (productId) => shoppingCartStore.isProductInCart(productId),
 );
 const groupedCart = computed(() => shoppingCartStore.groupedCart);
 const getProductCountInCart = (productId) => {
@@ -134,4 +132,5 @@ const addToCart = (product) => {
     }, 1000);
   }
 };
+//end
 </script>

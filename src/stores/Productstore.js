@@ -3,9 +3,9 @@ import { defineStore } from "pinia";
 export const useProductStore = defineStore("productStore", {
   state: () => ({
     //variables
+    showPictureWindow: null,
     searchWindow: false,
     searching: null,
-    showPictureWindow: null,
     searchResult: null,
     isLoading: null,
     allCategories: null,
@@ -32,7 +32,6 @@ export const useProductStore = defineStore("productStore", {
     //get all categories from API
     async getCategories() {
       try {
-        //  console.log("getCategories triggeed");
         this.isLoading = true;
         const apiCall = await fetch(
           "https://fakestoreapi.com/products/categories",
@@ -40,10 +39,8 @@ export const useProductStore = defineStore("productStore", {
         const response = await apiCall.json();
         this.allCategories = response;
         this.isLoading = false;
-        //  console.log("stored ", this.allCategories, "in categories");
       } catch (error) {
         console.error("API call failed", error);
-        throw error; //  handle this error outside of this function
       }
     },
     //view products based on  4 new-products, all products or products in a category
@@ -80,6 +77,7 @@ export const useProductStore = defineStore("productStore", {
         throw error;
       }
     },
+    //fetch all products for search array
     async searchProducts() {
       try {
         this.isLoading = true;
@@ -92,6 +90,7 @@ export const useProductStore = defineStore("productStore", {
         this.isLoading = false;
       } catch (error) {}
     },
+    //showing fullscreen picture of product image
     showBigPicture() {
       this.showPictureWindow = !this.showPictureWindow;
     },

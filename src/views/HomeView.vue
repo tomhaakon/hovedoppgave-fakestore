@@ -19,4 +19,6 @@ const productStore = useProductStore();
 
 //functions
 productStore.viewProducts("new-products");
+
+//end
 </script>

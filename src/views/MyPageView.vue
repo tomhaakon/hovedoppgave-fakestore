@@ -62,8 +62,10 @@ const UserStore = useUserStore();
 //functions
 
 const loggedInUser = computed(() => UserStore.sessionAuth);
+
 //have bought before
 const purchaseHistory = computed(() => UserStore.user?.purchaseHistory || []);
+
 //totalprice
 const calculateTotalPrice = (items) => {
   const totalPrice = items.reduce((total, item) => total + item.price * 10, 0);

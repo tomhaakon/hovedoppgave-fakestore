@@ -19,6 +19,7 @@
   </div>
 </template>
 <script setup>
+//imports
 import Login from "../components/Login.vue";
 import Register from "../components/Register.vue";
 import { ref, watch } from "vue";
@@ -26,9 +27,14 @@ import { useUserStore } from "@/stores/UserStore";
 import router from "../router";
 import { RouterLink } from "vue-router";
 
+//stores
 const userStore = useUserStore();
-const user = userStore.user;
+
+//refs
 const viewParam = ref();
+
+//consts
+const user = userStore.user;
 
 viewParam.value = router.currentRoute.value.name;
 
@@ -36,6 +42,7 @@ watch(
   () => router.currentRoute.value.name,
   (newParam) => {
     viewParam.value = newParam;
-  }
+  },
 );
+//end
 </script>
